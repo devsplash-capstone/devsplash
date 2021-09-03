@@ -26,14 +26,14 @@ export default function router(URI) {
             returnView: Error404,
             state: {},
             uri: location.pathname,
-            title: ' ERROR',
+            title: ' ERROR'
         },
         '/register' : {
             returnView: Register,
             state: {},
             uri: '/register',
             title: "Register",
-            viewEvent: RegisterEvent,
+            viewEvent: RegisterEvent
         }
     };
 
