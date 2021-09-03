@@ -14,11 +14,11 @@ export default function render(props, route) {
 
     // add view and navbar to DOM
     app.innerHTML = `${Navbar(null)} ${route.returnView(props)} ${Footer(null)}`;
-    // app.innerHTML = `${Footer(null)} ${route.returnView(props)}`;
+
 
     // add events AFTER view is added to DOM
-    // if (route.viewEvent){
-    //     route.viewEvent();
-    // }
+    if (route.viewEvent){
+        route.viewEvent();
+    }
 
 }
