@@ -8,7 +8,7 @@ import Footer from "./views/partials/Footer.js";
  */
 export default function render(props, route) {
     const app = document.querySelector('#app');
-    const title = `REST Blog - ${route.title}`;
+    const title = `Devsplash - ${route.title}`;
     history.pushState(props, title, route.uri);
     document.title = title;
 
