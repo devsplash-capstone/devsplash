@@ -1,6 +1,8 @@
 import Home from "./views/Home.js";
 import Loading from "./views/Loading.js";
 import Error404 from "./views/errors.js";
+import Login from "./views/Login.js";
+import LoginEvent from "./auth.js";
 import Register, {RegisterEvent} from "./views/Register.js";
 import Profile, {ProfileEvent} from "./views/Profile.js";
 
@@ -33,8 +35,15 @@ export default function router(URI) {
             returnView: Register,
             state: {},
             uri: '/register',
-            title: "Register",
+            title: 'Register',
             viewEvent: RegisterEvent
+        },
+        '/login' : {
+            returnView: Login,
+            state: {},
+            uri: '/login',
+            title: 'Login',
+            viewEvent: LoginEvent
         },
         '/profile' : {
             returnView: Profile,
