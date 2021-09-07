@@ -7,5 +7,4 @@ export default function Profile() {
 
 export function ProfileEvent() {
     console.log("inside profile event");
-    createView("/profile");
 }
