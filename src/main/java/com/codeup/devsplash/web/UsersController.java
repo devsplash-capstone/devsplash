@@ -2,6 +2,7 @@ package com.codeup.devsplash.web;
 
 import com.codeup.devsplash.data.user.User;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.web.bind.annotation.*;
 import com.codeup.devsplash.data.user.UsersRepository;
 @RestController
@@ -21,5 +22,10 @@ public class UsersController {
     private void createUser(@RequestBody User newUser){
         newUser.setPassword(passwordEncoder.encode(newUser.getPassword()));
         usersRepository.save(newUser);
+    }
+
+    @GetMapping("/me")
+    private User getLoggedInUser(OAuth2Authentication auth){
+        return usersRepository.findByEmail(auth.getName()).get();
     }
 }
