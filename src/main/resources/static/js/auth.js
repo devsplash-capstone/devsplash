@@ -9,15 +9,16 @@ export default function LoginEvent() {
     $("#login-btn").click(function () {
         let user = {
             email: $("#email").val(),
-            password: $("#password").val()
+            password: $("#password").val(),
+            grant_type: 'password'
         }
         let request = {
             method: "POST",
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
-                'Authorization': 'Basic ' + btoa('rest-blog-client:secret')
+                'Authorization': 'Basic ' + btoa('dev-splash-client:secret')
             },
-            body: `grant_type=${user.grant_type}&username=${user.email}&password=${user.password}&client_id=rest-blog-client`
+            body: `grant_type=${user.grant_type}&username=${user.email}&password=${user.password}&client_id=dev-splash-client`
         };
 
         fetchData(
