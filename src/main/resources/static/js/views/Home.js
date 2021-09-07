@@ -3,7 +3,7 @@ export default function Home(props) {
         <header>
             <h1>Combine your skills with others, today</h1>
 <!--            <img src="" alt="">-->
-            <a href="/register">Sign Up</a>
+            <a href="/register" data-link>Sign Up</a>
         </header>
         <main>
             <div id="about">
