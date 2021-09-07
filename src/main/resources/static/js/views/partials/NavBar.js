@@ -8,7 +8,7 @@ export default function Navbar(props) {
                     <nav id="nav">
                         <a class="a-tags" href="/" data-link>Home</a>
                         <a class="a-tags" href="/" data-link>${username}</a>
-                        <a class="a-tags" href="/" data-link>Sign out</a>
+                        <a class="a-tags" href="/logout" data-link>Sign out</a>
                     </nav>
     `;
         }else{

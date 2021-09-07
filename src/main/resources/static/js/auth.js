@@ -40,6 +40,12 @@ export default function LoginEvent() {
 
 }
 
+export function LogoutEvent() {
+        deleteTokens();
+        createView("/")
+}
+
+
 /**
  * Gets the Authorization header needed for making requests to protected endpoints
  * This function should be used only after the user is logged in
@@ -68,4 +74,16 @@ function setTokens(responseData) {
         localStorage.setItem("refresh_token", responseData.route['refresh_token']);
         console.log("Refresh token set")
     }
+}
+
+/**
+ * Attempts to delete the token on sign out
+ */
+
+function deleteTokens() {
+    console.log("Inside delete token")
+        localStorage.removeItem("access_token");
+        console.log("Access token deleted");
+        localStorage.removeItem("refresh_token");
+        console.log("Refresh token deleted")
 }
