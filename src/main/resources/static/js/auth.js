@@ -26,8 +26,15 @@ export default function LoginEvent() {
                 route: `/oauth/token`
             },
             request).then((data) => {
-            setTokens(data);
-            createView("/profile");
+            console.log(data)
+            if(data.route.error){
+                console.log(data.route.error_description)
+                $("#message").text(data.route.error_description);
+            }else{
+                setTokens(data);
+                createView("/profile");
+            }
+
         });
     });
 
