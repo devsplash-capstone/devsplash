@@ -51,6 +51,13 @@ export default function router(URI) {
             uri: '/profile',
             title: "Profile",
             viewEvent: ProfileEvent
+        },
+        '/viewproject' : {
+            returnView: ViewProject,
+            state: {},
+            uri: '/viewproject',
+            title: "View Project",
+            viewEvent: ViewProjectEvent
         }
     };
 
