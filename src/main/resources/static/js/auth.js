@@ -27,7 +27,7 @@ export default function LoginEvent() {
             },
             request).then((data) => {
             setTokens(data);
-            createView("/");
+            createView("/profile");
         });
     });
 
