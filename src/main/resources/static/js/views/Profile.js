@@ -6,27 +6,6 @@ export default function Profile() {
 }
 
 export function ProfileEvent() {
-    // $("#profile").click(function () {
-    //     let user = {
-    //         email: $("#email").val(),
-    //         firstname: $("#firstname").val(),
-    //         lastname: $("#lastname").val(),
-    //         displayName: $("#displayName").val(),
-    //         password: $("#password").val()
-    //     }
-    //
-    //     let request = {
-    //         method: "GET",
-    //         headers: {"Content-type": "application/json"},
-    //         body: JSON.stringify(user)
-    //     }
-    //     fetch("http://localhost:8080/api/users", request).then(
-    //         (response) => {
-    //         console.log(response.status);
-    //         createView("/");
-    //     }
-    //     )
-    // })
     console.log("inside profile event");
     createView("/profile");
 }

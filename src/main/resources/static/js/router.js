@@ -40,8 +40,8 @@ export default function router(URI) {
             returnView: Profile,
             state: {},
             uri: '/profile',
-            title: "Profile"
-            // viewEvent: ProfileEvent
+            title: "Profile",
+            viewEvent: ProfileEvent
         }
     };
 
