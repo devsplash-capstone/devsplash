@@ -18,10 +18,28 @@ export default function ViewProject(props) {
 <h3>PLACEHOLDER FOR GITHUB/GITLAB PREVIEW + INFO ABOUT PROJECT</h3>
 <br>
 <br>
-<button type="submit">Edit</button>
+<h3>LIST MEMBERS ASSOCIATED WITH PROJECT</h3>
+<br>
+<br>
+<button type="submit" id="edit-btn">Edit</button>
 </body>
    
-    </html>
-`
+    </html>`;
+}
 
-};
+export function ViewProject() {
+    $("#edit-btn").click(function () {
+        let request = {
+            method: "GET",
+            headers: {"Content-type": "application/json"},
+            body: JSON.stringify(user)
+        }
+        console.log(request);
+        fetch("http://localhost.8080/api/users", reqeust).then(
+            (response) => {
+                console.log(response.status);
+
+            });
+    })
+}
+
