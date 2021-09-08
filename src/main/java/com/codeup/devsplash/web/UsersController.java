@@ -29,8 +29,17 @@ public class UsersController {
         return usersRepository.findByEmail(auth.getName()).get();
     }
 
+    @PutMapping
+    private void updateUser(@RequestBody User user){
+        User oldUser = usersRepository.findById(user.getId()).get();
+        oldUser.setFirstname(user.getFirstname());
+        oldUser.setLastname(user.getLastname());
+        oldUser.setEmail(user.getEmail());
+        usersRepository.save(oldUser);
+    }
     @DeleteMapping("{id}")
     private void deleteById(@PathVariable Long id) {
         usersRepository.deleteById(id);
+
     }
-}
+
