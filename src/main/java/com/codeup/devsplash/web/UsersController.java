@@ -28,4 +28,9 @@ public class UsersController {
     private User getLoggedInUser(OAuth2Authentication auth){
         return usersRepository.findByEmail(auth.getName()).get();
     }
+
+    @DeleteMapping("{id}")
+    private void deleteById(@PathVariable Long id) {
+        usersRepository.deleteById(id);
+    }
 }
