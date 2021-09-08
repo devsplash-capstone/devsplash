@@ -28,4 +28,13 @@ public class UsersController {
     private User getLoggedInUser(OAuth2Authentication auth){
         return usersRepository.findByEmail(auth.getName()).get();
     }
+
+    @PutMapping
+    private void updateUser(@RequestBody User user){
+        User oldUser = usersRepository.findById(user.getId()).get();
+        oldUser.setFirstname(user.getFirstname());
+        oldUser.setLastname(user.getLastname());
+        oldUser.setEmail(user.getEmail());
+        usersRepository.save(oldUser);
+    }
 }
