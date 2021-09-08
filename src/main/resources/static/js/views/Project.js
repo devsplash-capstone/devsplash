@@ -41,7 +41,7 @@ export function ProjectEvent() {
         fetch(url, options)
             .then(data => {
                 console.log(data)
-                //createView("/project")
+                createView("/project")
             })
             .catch(error => console.error(error)); /* handle errors */
     });
