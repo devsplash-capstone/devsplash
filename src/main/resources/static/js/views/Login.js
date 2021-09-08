@@ -1,5 +1,6 @@
 export default function Login(props) {
     return `
+    <p id="message"></p>
     <h2>Log in</h2>
    <input id="email" name="email" type="email" placeholder="Enter Email"/>
      <input id="password" name="password" type="password" placeholder="Enter Password"/>
