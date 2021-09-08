@@ -35,7 +35,7 @@ export function ViewProject() {
             body: JSON.stringify(user)
         }
         console.log(request);
-        fetch("http://localhost.8080/api/users", reqeust).then(
+        fetch("http://localhost.8080/api/users", request).then(
             (response) => {
                 console.log(response.status);
 
