@@ -5,6 +5,7 @@ import Login from "./views/Login.js";
 import LoginEvent from "./auth.js";
 import Register, {RegisterEvent} from "./views/Register.js";
 import Profile, {ProfileEvent} from "./views/Profile.js";
+import ViewProject from "./views/viewProject.js";
 
 /**
  * Returns the route object for a specific route based on the given URI
@@ -57,7 +58,7 @@ export default function router(URI) {
             state: {},
             uri: '/viewproject',
             title: "View Project",
-            viewEvent: ViewProjectEvent
+            // viewEvent: ViewProjectEvent
         }
     };
 
