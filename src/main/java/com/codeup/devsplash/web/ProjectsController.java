@@ -32,4 +32,11 @@ public class ProjectsController {
         User loggedInUser = usersRepository.findByEmail(auth.getName()).get();
         return projectsRepository.findByUser_id(loggedInUser.getId());
     }
+
+    @GetMapping("findById/{id}")
+    private Project getProjectByID(@PathVariable Long id){
+        System.out.println(id);
+        return projectsRepository.findById(id).get();
+    }
+
 }

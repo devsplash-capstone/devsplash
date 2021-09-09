@@ -27,17 +27,23 @@ export default function ViewProject(props) {
     </html>`;
 }
 
-function ViewProjectEvent() {
+export function ViewProjectEvent() {
+    ViewProjectEdit();
+}
+
+
+function ViewProjectEdit() {
+    //TODO: pass in ID
     $("#edit-btn").click(function () {
+        let id = 1;
         let request = {
             method: "GET",
-            headers: {"Content-type": "application/json"},
-            body: JSON.stringify(user)
+            headers: {"Content-type": "application/json"}
         }
         console.log(request);
-        fetch("http://localhost.8080/api/users", request).then(
+        fetch(`http://localhost:8080/api/projects/findById/${id}`, request).then(
             (response) => {
-                console.log(response.status);
+                console.log(response);
 
             });
     })
