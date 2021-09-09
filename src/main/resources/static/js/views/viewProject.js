@@ -27,7 +27,7 @@ export default function ViewProject(props) {
     </html>`;
 }
 
-export function ViewProject() {
+function ViewProjectEvent() {
     $("#edit-btn").click(function () {
         let request = {
             method: "GET",

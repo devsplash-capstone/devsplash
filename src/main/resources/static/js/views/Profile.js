@@ -14,6 +14,7 @@ export default function Profile(props) {
             <h3 id="last-name" class="title-edit">${props.user.lastname}</h3> 
             <h3 id="email" class="title-edit">${props.user.email}</h3>
             <button type="button" class="edit" data-id="${props.user.id}">Edit Profile</button>
+             <button type="button" class="delete-btn" data-id="${props.user.id}">Delete Profile</button>
 `
 }
 
@@ -66,4 +67,28 @@ function editProfile() {
 export function ProfileEvent() {
     console.log("inside profile event");
     editProfile();
+    deleteEvent();
+}
+
+function deleteEvent() {
+    $(".delete-btn").click(function () {
+
+        let request = {
+            method: "DELETE",
+            headers: {"Content-Type": "application/json"},
+        }
+
+        let id = $(this)
+            .attr("data-id")
+
+        fetch(`http://localhost:8080/api/posts/${id}`, request)
+            .then(res => {
+                console.log(res.status);
+                createView("/");
+            })
+            .catch(error => {
+                console.log(error)
+                createView("/")
+            })
+    })
 }
