@@ -69,7 +69,7 @@ export default function router(URI) {
             uri: '/viewproject',
             title: "View Project",
             // viewEvent: ViewProjectEvent
-        }
+        },
         '/project': {
             returnView: ProjectComponent,
             state: {
