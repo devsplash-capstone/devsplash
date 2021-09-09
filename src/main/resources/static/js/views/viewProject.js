@@ -26,11 +26,11 @@ export default function ViewProject(props) {
     </html>`;
 }
 
-export function ViewProjectEvent() {
-    ViewProjectEdit();
+export function ViewProjects() {
+    ViewProjectEvent();
 }
 
-function ViewProjectEdit() {
+function ViewProjectEvent() {
     //TODO: pass in ID
     $("#edit-btn").click(function () {
         let id = 1;
@@ -43,6 +43,10 @@ function ViewProjectEdit() {
             (response) => {
                 console.log(response);
                 // display(id)
+
+                //TODO: 1. display project data on webpage **
+                //      2. include 'catch' error that routes to error 404 page
+                //      3. add BASIC bootstrap UI (make sure to match the wireframe!)
             })
     })
 }
