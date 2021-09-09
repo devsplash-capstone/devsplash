@@ -8,13 +8,49 @@ export default function Profile(props) {
     }
 
 
-    return `<a href="/project" data-link>Create Project</a>
-            <h1 class="title-edit">Welcome ${props.user.displayName}!</h1>
-            <h3 id="first-name" class="title-edit">${props.user.firstname}</h3>
-            <h3 id="last-name" class="title-edit">${props.user.lastname}</h3> 
-            <h3 id="email" class="title-edit">${props.user.email}</h3>
-            <button type="button" class="edit" data-id="${props.user.id}">Edit Profile</button>
-             <button type="button" class="delete-btn" data-id="${props.user.id}">Delete Profile</button>
+    //TODO: Remove delete button and implement into Edit
+    //TODO: Add sign out button
+    return `<div class="container mx-auto">
+            <h1 class="title-edit pt-2">Welcome ${props.user.displayName}!</h1>
+            <div class="row mx-auto">
+                <div class="col-3">
+                    <img src="https://www.pngfind.com/pngs/m/610-6104451_image-placeholder-png-user-profile-placeholder-image-png.png"
+                         alt="profilePic" width="75px">
+                </div>
+                <div class="col-6">
+                    <div class="full-name">
+                        <h3 id="display-name" class="title-edit">${props.user.displayName}</h3>
+                    </div>
+                    <h3 id="email" class="title-edit">${props.user.email}</h3>
+                </div>
+                <button type="button" class="edit mt-2 mb-2" data-id="${props.user.id}">Edit Profile</button>
+                <button type="button" class="delete-btn " data-id="${props.user.id}">Delete Profile</button>
+                <p class="p-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad atque blanditiis cupiditate
+                    et eveniet explicabo, ipsam iure laudantium minima minus molestias nulla odit optio ratione saepe
+                    sed, sequi, unde veritatis?</p>
+                <br>
+                <div class="m-2 ml-0">Languages I Know </div>
+                    <div class="border border-box rounded">
+                        <ul class="d-flex list-unstyled justify-content-around">
+                            <li class="border border-dark rounded-circle p-2 m-2 mb-0">JS</li>
+                            <li class="border border-dark rounded-circle p-2 m-2 mb-0">HTML</li>
+                            <li class="border border-dark rounded-circle p-2 m-2 mb-0">CSS</li>
+                            <li class="border border-dark rounded-circle p-2 m-2 mb-0">Java</li>
+                        </ul>
+                    </div>
+
+                <div class="m-2 mb-1">Looking For </div>
+                    <div class="border border-box rounded">
+                        <ul class="d-flex list-unstyled justify-content-around">
+                            <li class="border border-dark rounded-circle p-2 m-2 mb-0">PHP</li>
+                            <li class="border border-dark rounded-circle p-2 m-2 mb-0">C++</li>
+                            <li class="border border-dark rounded-circle p-2 m-2 mb-0">React</li>
+                        </ul>
+                    </div>
+
+                <button type="button" class="create-btn mt-5">Create Project</button>
+            </div>
+        </div>
 `
 }
 
