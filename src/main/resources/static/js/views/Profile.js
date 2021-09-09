@@ -7,6 +7,7 @@ export default function Profile(props) {
         createView("/login");
     }
 
+
     return `<a href="/project" data-link>Create Project</a>
             <h1 class="title-edit">Welcome ${props.user.displayName}!</h1>
             <h3 id="first-name" class="title-edit">${props.user.firstname}</h3>
@@ -21,7 +22,10 @@ function editProfile() {
 
         $(".content-edit, .title-edit").attr("contenteditable", true);
         $(".edit").text("Edit");
+        $(this).siblings(".title-edit, .content-edit").attr("contenteditable", true);
+        $(this).text("Save");
 
+        console.log("edit event fired off");
         $(this).siblings(".title-edit, .content-edit").attr("contenteditable", true);
         $(this).text("Save");
 
@@ -45,6 +49,15 @@ function editProfile() {
                 }).catch(error => {
                 console.log(error);
                 createView("/profile")
+
+                fetch(`http://localhost:8080/api/users/`, request)
+                    .then(res => {
+                        console.log(res.status);
+                        createView("/users")
+                    }).catch(error => {
+                    console.log(error);
+                    createView("/users")
+                })
             })
         })
     })
