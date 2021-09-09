@@ -5,6 +5,7 @@ import Login from "./views/Login.js";
 import LoginEvent, {LogoutEvent} from "./auth.js";
 import Register, {RegisterEvent} from "./views/Register.js";
 import Profile, {ProfileEvent} from "./views/Profile.js";
+import ProjectComponent, {ProjectEvent} from "./views/Project.js";
 
 /**
  * Returns the route object for a specific route based on the given URI
@@ -31,35 +32,45 @@ export default function router(URI) {
             uri: location.pathname,
             title: ' ERROR'
         },
-        '/register' : {
+        '/register': {
             returnView: Register,
             state: {},
             uri: '/register',
             title: 'Register',
             viewEvent: RegisterEvent
         },
-        '/login' : {
+        '/login': {
             returnView: Login,
             state: {},
             uri: '/login',
             title: 'Login',
             viewEvent: LoginEvent
         },
-        '/logout' : {
+        '/logout': {
             returnView: Home,
             state: {},
             uri: '/',
             title: 'Home',
             viewEvent: LogoutEvent
         },
-        '/profile' : {
+        '/profile': {
             returnView: Profile,
             state: {
-                user:"/api/users/me"
+                user: "/api/users/me"
             },
             uri: '/profile',
             title: "Profile",
             viewEvent: ProfileEvent
+        },
+        '/project': {
+            returnView: ProjectComponent,
+            state: {
+                user: "/api/users/me",
+                projects:"/api/projects"
+            },
+            uri: '/project',
+            title: "Project",
+            viewEvent: ProjectEvent
         }
     };
 
