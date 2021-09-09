@@ -73,22 +73,26 @@ export function ProfileEvent() {
 function deleteEvent() {
     $(".delete-btn").click(function () {
 
-        let request = {
-            method: "DELETE",
-            headers: {"Content-Type": "application/json"},
+        let youSure = confirm("Are you sure you would like to delete your account? This is permanent");
+        if (youSure === true){
+            let request = {
+                method: "DELETE",
+                headers: {"Content-Type": "application/json"},
+            }
+
+            let id = $(this)
+                .attr("data-id")
+
+            fetch(`http://localhost:8080/api/users/${id}`, request)
+                .then(res => {
+                    console.log(res.status);
+                    createView("/");
+                })
+                .catch(error => {
+                    console.log(error)
+                    createView("/profile")
+                })
         }
 
-        let id = $(this)
-            .attr("data-id")
-
-        fetch(`http://localhost:8080/api/posts/${id}`, request)
-            .then(res => {
-                console.log(res.status);
-                createView("/");
-            })
-            .catch(error => {
-                console.log(error)
-                createView("/")
-            })
     })
 }
