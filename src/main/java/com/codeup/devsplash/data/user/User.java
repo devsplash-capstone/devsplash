@@ -1,7 +1,10 @@
 package com.codeup.devsplash.data.user;
 
+import com.codeup.devsplash.data.skills.Skill;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
+import java.util.Collection;
 
 @Entity
 @Table(name = "users")
@@ -33,16 +36,16 @@ public class User {
     @Column(nullable = false)
     private Role role = Role.USER;
 
-    public User() {
-    }
+    @ManyToMany
+    @JoinTable(
+            name="user_skill",
+            joinColumns = {@JoinColumn(name = "user_id", nullable = false)},
+            inverseJoinColumns = {@JoinColumn(name="skill_id", nullable = false)},
+            uniqueConstraints = @UniqueConstraint(columnNames = {"user_id","skill_id"})
+    )
+    private Collection<Skill> skills;
 
-    public User(Long id, String email, String firstname, String lastname, String displayName, String password) {
-        this.id = id;
-        this.email = email;
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.displayName = displayName;
-        this.password = password;
+    public User() {
     }
 
     public void setId(Long id) {
@@ -97,7 +100,11 @@ public class User {
         return role;
     }
 
-    public void setRole(Role role) {
-        this.role = role;
+    public Collection<Skill> getSkills() {
+        return skills;
+    }
+
+    public void setSkills(Collection<Skill> skills) {
+        this.skills = skills;
     }
 }
