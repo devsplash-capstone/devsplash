@@ -2,10 +2,11 @@ import Home from "./views/Home.js";
 import Loading from "./views/Loading.js";
 import Error404 from "./views/errors.js";
 import Login from "./views/Login.js";
-import LoginEvent from "./auth.js";
+import LoginEvent, {LogoutEvent} from "./auth.js";
 import Register, {RegisterEvent} from "./views/Register.js";
 import Profile, {ProfileEvent} from "./views/Profile.js";
 import ViewProject from "./views/viewProject.js";
+import ProjectComponent, {ProjectEvent} from "./views/Project.js";
 
 /**
  * Returns the route object for a specific route based on the given URI
@@ -32,23 +33,32 @@ export default function router(URI) {
             uri: location.pathname,
             title: ' ERROR'
         },
-        '/register' : {
+        '/register': {
             returnView: Register,
             state: {},
             uri: '/register',
             title: 'Register',
             viewEvent: RegisterEvent
         },
-        '/login' : {
+        '/login': {
             returnView: Login,
             state: {},
             uri: '/login',
             title: 'Login',
             viewEvent: LoginEvent
         },
-        '/profile' : {
-            returnView: Profile,
+        '/logout': {
+            returnView: Home,
             state: {},
+            uri: '/',
+            title: 'Home',
+            viewEvent: LogoutEvent
+        },
+        '/profile': {
+            returnView: Profile,
+            state: {
+                user: "/api/users/me"
+            },
             uri: '/profile',
             title: "Profile",
             viewEvent: ProfileEvent
@@ -59,6 +69,16 @@ export default function router(URI) {
             uri: '/viewproject',
             title: "View Project",
             // viewEvent: ViewProjectEvent
+        }
+        '/project': {
+            returnView: ProjectComponent,
+            state: {
+                user: "/api/users/me",
+                projects:"/api/projects"
+            },
+            uri: '/project',
+            title: "Project",
+            viewEvent: ProjectEvent
         }
     };
 

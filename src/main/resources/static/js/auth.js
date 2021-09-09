@@ -26,12 +26,25 @@ export default function LoginEvent() {
                 route: `/oauth/token`
             },
             request).then((data) => {
-            setTokens(data);
-            createView("/");
+            console.log(data)
+            if(data.route.error){
+                console.log(data.route.error_description)
+                $("#message").text(data.route.error_description);
+            }else{
+                setTokens(data);
+                createView("/profile");
+            }
+
         });
     });
 
 }
+
+export function LogoutEvent() {
+        deleteTokens();
+        createView("/")
+}
+
 
 /**
  * Gets the Authorization header needed for making requests to protected endpoints
@@ -61,4 +74,16 @@ function setTokens(responseData) {
         localStorage.setItem("refresh_token", responseData.route['refresh_token']);
         console.log("Refresh token set")
     }
+}
+
+/**
+ * Attempts to delete the token on sign out
+ */
+
+function deleteTokens() {
+    console.log("Inside delete token")
+        localStorage.removeItem("access_token");
+        console.log("Access token deleted");
+        localStorage.removeItem("refresh_token");
+        console.log("Refresh token deleted")
 }
