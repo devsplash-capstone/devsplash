@@ -7,7 +7,7 @@ export default function Login() {
             <main>
                  <div class=" container row row-cols-1 mx-auto mt-3">
                      <div class ="col-12 col-md-8 shadow-lg border mx-auto">
-                        <h1 class="text-center mt-3">Devspalsh</h1>
+                        <h1 class="text-center mt-3">Devsplash</h1>
                         <h6 class="text-center mt-3">Sign In</h6>
                         <div class="col-10 col-md-8 col-lg-6 m-3 mt-1  p-4 mx-auto">
                             <p id="message"></p>
