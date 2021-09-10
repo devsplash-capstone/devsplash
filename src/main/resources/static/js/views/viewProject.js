@@ -34,7 +34,6 @@ export default function ViewProject(props) {
 </section>
 </main>
 </body>
-
 </html>`;
 }
 
