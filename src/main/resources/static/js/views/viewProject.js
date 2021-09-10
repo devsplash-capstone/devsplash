@@ -1,4 +1,4 @@
-export default function ViewProject(project) {
+function ViewProject(project) {
     return ` 
  <!DOCTYPE html>
 <html lang="eng">
@@ -32,11 +32,13 @@ ${project.description}
 </main>
 </body>
 </html>`;
+    // ${props.projects.map(project => ${ViewProject(project)})
+
 }
 
-
-export function ViewProjects() {
+export default function ViewProjects() {
     ViewProjectEvent();
+    ViewProject();
 }
 
 //   TODO: 1. display project data on webpage **
@@ -54,5 +56,7 @@ function ViewProjectEvent() {
     fetch(url, request)
         .then(response => console.log(response)) // project was posted successfully!
         .catch(error => console.log(error)) //catches errors
+
+
 }
 
