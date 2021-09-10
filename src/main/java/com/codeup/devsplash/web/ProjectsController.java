@@ -26,9 +26,14 @@ public class ProjectsController {
         projectsRepository.save(newProject);
     }
 
-    @GetMapping
-    private List<Project> getProjects(OAuth2Authentication auth) {
+    @GetMapping("/byMe")
+    private List<Project> getProjectsByLoggedInUser(OAuth2Authentication auth) {
         User loggedInUser = usersRepository.findByEmail(auth.getName()).get();
         return projectsRepository.findByUser_id(loggedInUser.getId());
+    }
+
+    @GetMapping
+    private List<Project> getProjects() {
+        return projectsRepository.findAll();
     }
 }

@@ -10,10 +10,10 @@ export default function Profile(props) {
 
     return `
         <div class="container mx-auto pt-2">
-            <h1 class="pt-2 text-center mb-3">Welcome ${props.user.displayName}!</h1>
+            <h1 class="pt-2 text-center mb-3 bg-animate">Devsplash</h1>
             <div class="row mx-auto">
                 <div class="col-4">
-                    <img class="rounded-circle border border-dark" src="https://randomuser.me/api/portraits/women/90.jpg"
+                    <img class="rounded-circle border border-dark" src="https://picsum.photos/100"
                          alt="profilePic" width="100px">
                 </div>
                 <div class="col-8">
