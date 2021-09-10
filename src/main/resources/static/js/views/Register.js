@@ -1,24 +1,52 @@
 import createView from "../createView.js";
 
 export default function Register(registration) {
-    return `<!DOCTYPE html>
-        <html lang="eng">
-            <head>
-                <meta charset="UTF-8"/>
-                <title>Register</title>
-            </head>
-            <body>
-                <h1>Register</h1>
-           <input id="username" name="username" type="text" placeholder="Enter Username"/>
-            <input id="firstname" name="firstname" type="text" placeholder="Enter Firstname"/>
-            <input id="lastname" name="lastname" type="text" placeholder="Enter LastName"/>
-            <input id="displayName" type="text" placeholder="Enter DisplayName"/>
-                <input id="email" name="email" type="email" placeholder="Enter Email"/>
-                <input id="password" name="password" type="password" placeholder="Enter Password"/>
-                <input id="register-btn" type="button" value="Register"/>
+    return `
+           <div class="container border shadow-lg p-5 mt-2">
+    <div class="signup-form">
+        <form class=" border-box">
+            <h2>Sign Up</h2>
+            <p>Please fill in this form to create an account!</p>
+            <hr>
+            <div class="form-group m-2">
+                <div class="input-group">
+                    <input type="text" class="form-control" id="displayName" name="username" placeholder="Display Name" required="required">
+                </div>
+            </div>
+            <div class="form-group m-2">
+                <div class="input-group">
+                    <input type="text" class="form-control" id="firstname" name="firstname" placeholder="First Name" required="required">
+                </div>
+            </div>
+            <div class="form-group m-2">
+                <div class="input-group">
+                    <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Last Name" required="required">
+                </div>
+            </div>
+            <div class="form-group m-2">
+                <div class="input-group">
+                    <input type="email" class="form-control" id="email" name="email" placeholder="Email Address" required="required">
+                </div>
+            </div>
+            <div class="form-group m-2">
+                <div class="input-group">
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Password" required="required">
+                </div>
+            </div>
+            <div class="form-group m-2">
+                <div class="input-group">
+                    <input type="password" class="form-control" name="confirm_password" placeholder="Confirm Password" required="required">
+                </div>
+            </div>
+            
+                <button id="register-btn" class="m-2 btn btn-secondary btn-block" type="button">Sign Up</button>
+
+        </form>
+        <div class="text-center m-2">Already have an account? <a href="#">Login here</a></div>
+    </div>
+</div>
             </form>
-        </body>
-    </html>`;
+`;
 
 }
 
@@ -44,4 +72,6 @@ export function RegisterEvent() {
                 createView("/profile");
             });
     })
+
+
 }
