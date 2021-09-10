@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(value="api/projects", headers = "Accept=application/json")
+@RequestMapping(value = "api/projects", headers = "Accept=application/json")
 public class ProjectsController {
 
     private final ProjectsRepository projectsRepository;
@@ -22,21 +22,27 @@ public class ProjectsController {
     }
 
     @PostMapping
-    private void createProject(@RequestBody Project newProject){
+    private void createProject(@RequestBody Project newProject) {
         projectsRepository.save(newProject);
     }
 
-    @GetMapping
-    private List<Project> getProjects(OAuth2Authentication auth){
-        //TODO: Get projects which are created by the logged in user
+    @GetMapping("/byMe")
+    private List<Project> getProjectsByLoggedInUser(OAuth2Authentication auth) {
         User loggedInUser = usersRepository.findByEmail(auth.getName()).get();
         return projectsRepository.findByUser_id(loggedInUser.getId());
     }
+
 
     @GetMapping("findById/{id}")
     private Project getProjectByID(@PathVariable Long id){
         System.out.println(id);
         return projectsRepository.findById(id).get();
+    }
+
+
+    @GetMapping
+    private List<Project> getProjects() {
+        return projectsRepository.findAll();
     }
 
 }

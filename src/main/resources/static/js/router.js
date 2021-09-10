@@ -7,6 +7,8 @@ import Register, {RegisterEvent} from "./views/Register.js";
 import Profile, {ProfileEvent} from "./views/Profile.js";
 import ViewProject, {ViewProjects} from "./views/viewProject.js";
 import ProjectComponent, {ProjectEvent} from "./views/Project.js";
+import Projects from "./views/Projects.js";
+import Members from "./views/Members.js";
 
 /**
  * Returns the route object for a specific route based on the given URI
@@ -77,11 +79,28 @@ export default function router(URI) {
             returnView: ProjectComponent,
             state: {
                 user: "/api/users/me",
-                projects:"/api/projects"
             },
             uri: '/project',
             title: "Project",
             viewEvent: ProjectEvent
+        },
+        '/projects': {
+            returnView: Projects,
+            state: {
+                user: "/api/users/me",
+                projects:"/api/projects"
+            },
+            uri: '/projects',
+            title: "Projects"
+        },
+        '/members': {
+            returnView: Members,
+            state: {
+                user: "/api/users/me",
+                users:"/api/users"
+            },
+            uri: '/members',
+            title: "Members"
         }
     };
 

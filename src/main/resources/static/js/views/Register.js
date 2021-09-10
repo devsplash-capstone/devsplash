@@ -41,7 +41,7 @@ export function RegisterEvent() {
         fetch("http://localhost:8080/api/users", request).then(
             (response) => {
                 console.log(response.status);
-                createView("/");
+                createView("/profile");
             });
     })
 }

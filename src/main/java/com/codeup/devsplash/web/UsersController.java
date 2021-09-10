@@ -5,6 +5,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.web.bind.annotation.*;
 import com.codeup.devsplash.data.user.UsersRepository;
+
+import java.util.List;
+
 @RestController
 @RequestMapping(value = "/api/users", headers = "Accept=application/json")
 public class UsersController {
@@ -29,13 +32,16 @@ public class UsersController {
         return usersRepository.findByEmail(auth.getName()).get();
     }
 
+    @GetMapping
+    private List<User> getAllUser() {
+        return usersRepository.findAll();
+    }
+
     @PutMapping
     private void updateUser(@RequestBody User user) {
-        User oldUser = usersRepository.findById(user.getId()).get();
-        oldUser.setFirstname(user.getFirstname());
-        oldUser.setLastname(user.getLastname());
-        oldUser.setEmail(user.getEmail());
-        usersRepository.save(oldUser);
+        User oldUser = usersRepository.getById(user.getId());
+        user.setPassword(oldUser.getPassword());
+        usersRepository.save(user);
     }
 
     @DeleteMapping("{id}")

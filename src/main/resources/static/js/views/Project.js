@@ -1,6 +1,7 @@
 import createView from "../createView.js";
 
 export default function ProjectComponent(props) {
+
     console.log(props);
     if (props)
         if (props.user.error) {
@@ -8,13 +9,27 @@ export default function ProjectComponent(props) {
             createView("/login");
         }
 
+    console.log(props.user.error)
+    if (props.user.error) {
+        console.log("Not a member - Login / Signup")
+        createView("/login");
+    }
     return `
-            <form action="">
-                <h1>Create Project</h1>
-                <input id="name"/>
-                <textarea id="description"></textarea>
-                <input id="createProject" data-id = "${props.user.id}" type="submit">
+        <div class="container mx-auto pt-2">
+            <h3>Have idea in mind. <br> Create project, collabrate!</h3>
+            <form>
+                <div class="form-group mt-2">
+                    <label for="name">Project Name</label>
+                    <input type="email" class="form-control" id="name" aria-describedby="project name">
+                </div>
+                <div class="form-group mt-2">
+                    <label for="description">Description</label>
+                    <textarea  class="form-control" id="description"></textarea>
+                </div>
+
+                <button id="createProject" class="btn btn-primary mt-2" data-id="${props.user.id}">Submit</button>
             </form>
+        </div>
 `;
 }
 

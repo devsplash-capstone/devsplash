@@ -1,43 +1,42 @@
-package com.codeup.devsplash.data.project;
+package com.codeup.devsplash.data.skills;
 
 import com.codeup.devsplash.data.user.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 @Entity
-@Table(name = "projects")
-public class Project {
-
+@Table(name = "Skills")
+public class Skill {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, length = 200)
+    @Column(nullable = false, length = 50)
     private String name;
 
-    @Column(nullable = false)
+    @Column(length = 200)
     private String description;
 
-    @ManyToOne
-    private User user;
+    @ManyToMany(mappedBy = "skills")
+    @JsonIgnore
+    private Collection<User> user;
 
-    public Project() {
+    public Skill() {
     }
 
-    public Project(Long id, String name, String description, User user) {
+    public Skill(Long id, String name, String description) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+    }
+
+    public Skill(Long id, String name, String description, Collection<User> user) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.user = user;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -56,11 +55,19 @@ public class Project {
         this.description = description;
     }
 
-    public User getUser() {
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public Collection<User> getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(Collection<User> user) {
         this.user = user;
     }
 }
