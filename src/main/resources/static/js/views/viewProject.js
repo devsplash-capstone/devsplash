@@ -28,10 +28,6 @@ export default function ViewProject(props) {
 <p>Project description goes here. Project description goes here.Project description goes here.Project description goes here.Project description goes here.Project description goes here.Project description goes here.Project description goes here.
 </p>
 <br>
-<h4>LIST MEMBERS ASSOCIATED WITH PROJECT (possibly with their icons or just their usernames? to be determined
-    later...)</h4>
-<br>
-<br>
 <button type="submit" id="edit-btn">Edit</button>
 </div>
 </div>
@@ -46,7 +42,7 @@ export function ViewProjects() {
     ViewProjectEvent();
 }
 
-//TODO: 1. display project data on webpage **
+//   TODO: 1. display project data on webpage **
 //      2. include 'catch' error that routes to error 404 page
 //      3. add BASIC bootstrap UI (make sure to match the wireframe!)
 //      4. PASS IN ID
