@@ -12,6 +12,7 @@ export default function createView(URI) {
 
     let route = router(URI);
 
+    // TODO: delete these two
     // if route is invalid, return a 404 page
     if (!route) {
         render(null, router('/error'));
