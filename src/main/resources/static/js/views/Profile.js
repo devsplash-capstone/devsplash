@@ -13,12 +13,14 @@ export default function Profile(props) {
             <h1 class="pt-2 text-center mb-3 bg-animate">Devsplash</h1>
             <div class="row mx-auto">
                 <div class="col-4">
-                    <img class="rounded-circle border border-dark" src="https://picsum.photos/100"
-                         alt="profilePic" width="100px">
+                    <img class="rounded-circle border border-dark" src="https://picsum.photos/120"
+                         alt="profilePic" width="120px">
                 </div>
-                <div class="col-8">
+                <div class="col-7 text-center">
                     <div class="full-name mt-3">
                         <h6 id="display-name" class="title-edit">${props.user.displayName}</h6>
+                        <h6 id="first-name" class="title-edit">${props.user.firstname}</h6>
+                        <h6 id="last-name" class="title-edit">${props.user.lastname}</h6>
                     </div>
                     <h6 id="email" class="title-edit">${props.user.email}</h6>
                 </div>
@@ -59,6 +61,7 @@ function editProfile(id) {
         $(".cancel-button").append(`<button type="button" class="cancel" data-id="${id}">Cancel</button>`)
         $(".delete-btn").toggleClass("d-none");
         $(".content-edit, .title-edit").attr("contenteditable", true);
+        $(".content-edit, .title-edit").toggleClass("border-bottom");
         $(".edit").text("Edit");
         $(this).siblings(".title-edit, .content-edit").attr("contenteditable", true);
         $(this).text("Save");
@@ -73,6 +76,7 @@ function editProfile(id) {
                 firstname: $("#first-name").text(),
                 lastname: $("#last-name").text(),
                 email: $("#email").text(),
+                displayName: $("#display-name").text(),
                 id: $(this).attr("data-id")
             }
             console.log("user is being saved");
