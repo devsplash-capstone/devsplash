@@ -14,13 +14,14 @@ export default function Profile(props) {
             <h3 id="last-name" class="title-edit">${props.user.lastname}</h3> 
             <h3 id="email" class="title-edit">${props.user.email}</h3>
             <button type="button" class="edit" data-id="${props.user.id}">Edit Profile</button>
-             <button type="button" class="delete-btn" data-id="${props.user.id}">Delete Profile</button>
+             <button type="button" class="delete-btn" data-id="${props.user.id}">Delete Profile</button> 
+             <div class="cancel-button">${editProfile(props.user.id)}</div>
 `
 }
 
-function editProfile() {
+function editProfile(id) {
     $(".edit").click(function () {
-
+        $(".cancel-button").append(`<button type="button" class="cancel" data-id="${id}">Cancel</button>`)
         $(".content-edit, .title-edit").attr("contenteditable", true);
         $(".edit").text("Edit");
         $(this).siblings(".title-edit, .content-edit").attr("contenteditable", true);
