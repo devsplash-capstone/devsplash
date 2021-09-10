@@ -69,7 +69,7 @@ export default function router(URI) {
             returnView: ViewProject,
             state: {
                 user: "/api/users/me",
-                projects:"/api/projects"
+                projects:"/api/projects/byMe"
             },
             uri: '/viewproject',
             title: "View Project",

@@ -1,5 +1,5 @@
-function ViewProject(project) {
-    return ` 
+export default function ViewProject(props) {
+        return ` 
  <!DOCTYPE html>
 <html lang="eng">
 <head>
@@ -19,11 +19,14 @@ function ViewProject(project) {
 <body>
 <main>
 <div class="p-3">
-<h1 contenteditable="false" class="card-header title">${project.name}</h1>
+<h1 contenteditable="false" class="card-header title">${props.projects[0].name}</h1>
 <br>
-<h4 contenteditable="false" class="p-3 card-text content">${project.name}</h4>
+<h4 contenteditable="false" class="p-3 card-text content">${props.projects[0].description}</h4>
+<h1 contenteditable="false" class="card-header title">${props.projects[1].name}</h1>
+<br>
+<h4 contenteditable="false" class="p-3 card-text content">${props.projects[1].description}</h4>
 <p contenteditable="false" class="p-3 card-text content">
-${project.description}
+${props.description};
 </p>
 <br>
 <button type="submit" id="edit-btn">Edit</button>
@@ -32,19 +35,13 @@ ${project.description}
 </main>
 </body>
 </html>`;
-    // ${props.projects.map(project => ${ViewProject(project)})
 
 }
 
-export default function ViewProjects() {
+export function ViewProjects() {
     ViewProjectEvent();
     ViewProject();
 }
-
-//   TODO: 1. display project data on webpage **
-//      2. include 'catch' error that routes to error 404 page
-//      3. add BASIC bootstrap UI (make sure to match the wireframe!)
-//      4. PASS IN ID
 
 function ViewProjectEvent() {
     let id = 1;
@@ -55,6 +52,7 @@ function ViewProjectEvent() {
     };
     fetch(url, request)
         .then(response => console.log(response)) // project was posted successfully!
+
         .catch(error => console.log(error)) //catches errors
 
 
