@@ -1,6 +1,8 @@
 package com.codeup.devsplash.data.user;
 
+import com.codeup.devsplash.data.project.Project;
 import com.codeup.devsplash.data.skills.Skill;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -35,6 +37,10 @@ public class User {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Role role = Role.USER;
+
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "user")
+    @JsonIgnoreProperties({"user"})
+    private Collection<Project> projects;
 
     @ManyToMany
     @JoinTable(
