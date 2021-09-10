@@ -24,7 +24,7 @@ export default function Navbar(props) {
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="/project" data-link>
+                                <a class="nav-link" href="/projects" data-link>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor"
                                          class="bi bi-card-list" viewBox="0 0 16 16">
                                             <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
@@ -45,18 +45,15 @@ export default function Navbar(props) {
                     <nav class="navbar navbar-light bg-light d-none d-sm-none d-md-block">
                         <ul class="nav justify-content-around">
                             <li class="nav-item">
-                                <a class="navbar-brand" href="#">
+                                <a class="navbar-brand" href="/" data-link>
                                     <img src="http://via.placeholder.com/60x40" alt="">
                                 </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/" data-link>Home</a>
                             </li>
                             <li class="nav-item ">
                                 <a class="nav-link disabled" href="#" data-link >Members</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="/project" data-link>Projects</a>
+                                <a class="nav-link" href="/projects" data-link>Projects</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="/profile" data-link>Profile</a>

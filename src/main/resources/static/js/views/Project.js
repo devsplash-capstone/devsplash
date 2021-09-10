@@ -1,7 +1,11 @@
 import createView from "../createView.js";
 
 export default function ProjectComponent(props) {
-
+    console.log(props.user.error)
+    if (props.user.error) {
+        console.log("Not a member - Login / Signup")
+        createView("/login");
+    }
     return `
         <div class="container mx-auto pt-2">
             <h3>Have idea in mind. <br> Create project, collabrate!</h3>
