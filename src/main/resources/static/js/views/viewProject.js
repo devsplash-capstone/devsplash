@@ -30,24 +30,20 @@ export function ViewProjects() {
     ViewProjectEvent();
 }
 
-function ViewProjectEvent() {
-    //TODO: pass in ID
-    $("#edit-btn").click(function () {
-        let id = 1;
-        let request = {
-            method: "GET",
-            headers: {"Content-type": "application/json"}
-        }
-        console.log(request);
-        fetch(`http://localhost:8080/api/projects/findById/${id}`, request).then(
-            (response) => {
-                console.log(response);
-                // display(id)
+//TODO: 1. display project data on webpage **
+//      2. include 'catch' error that routes to error 404 page
+//      3. add BASIC bootstrap UI (make sure to match the wireframe!)
+//      4. PASS IN ID
 
-                //TODO: 1. display project data on webpage **
-                //      2. include 'catch' error that routes to error 404 page
-                //      3. add BASIC bootstrap UI (make sure to match the wireframe!)
-            })
-    })
+function ViewProjectEvent() {
+let id = 1;
+let url = `http://localhost:8080/api/projects/findById/${id}`;
+let request = {
+    method: 'GET',
+    headers: {"Content-type": "application/json"}
+};
+fetch(url, request)
+    .then(response => console.log(response)) // project was posted successfully!
+    .catch(error => console.log(error)) //catches errors
 }
 
