@@ -33,12 +33,6 @@ export default function Register(registration) {
                     <input type="password" class="form-control" id="password" name="password" placeholder="Password" required="required">
                 </div>
             </div>
-            <div class="form-group m-2">
-                <div class="input-group">
-                    <input type="password" class="form-control" name="confirm_password" placeholder="Confirm Password" required="required">
-                </div>
-            </div>
-            
                 <button id="register-btn" class="m-2 btn btn-secondary btn-block" type="button">Sign Up</button>
 
         </form>
