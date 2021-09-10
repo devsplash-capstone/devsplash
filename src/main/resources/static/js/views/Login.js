@@ -10,7 +10,7 @@ export default function Login() {
                         <h1 class="text-center mt-3">Devsplash</h1>
                         <h6 class="text-center mt-3">Sign In</h6>
                         <div class="col-10 col-md-8 col-lg-6 m-3 mt-1  p-4 mx-auto">
-                            <p id="message"></p>
+                            <p id="message" class="text-danger text-center"></p>
                             <form id="login-form">
                                 <input id="email" class="form-control m-3" name="username" type="text" placeholder="Enter Username"/>
                                 <input id="password" class="form-control m-3" name="password" type="password" placeholder="Enter Password"/>

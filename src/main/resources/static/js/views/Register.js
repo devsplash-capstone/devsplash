@@ -36,7 +36,7 @@ export default function Register(registration) {
                 <button id="register-btn" class="m-2 btn btn-secondary btn-block" type="button">Sign Up</button>
 
         </form>
-        <div class="text-center m-2">Already have an account? <a href="#">Login here</a></div>
+        <div class="text-center m-2">Already have an account? <a href="/login" data-link>Login here</a></div>
     </div>
 </div>
             </form>
