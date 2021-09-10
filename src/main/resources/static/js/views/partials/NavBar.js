@@ -1,8 +1,8 @@
 export default function Navbar(props) {
     console.log(props)
     let username;
-    if(props)
-        if(props.user){
+    if (props)
+        if (props.user) {
             username = props.user.displayName;
             return `
                     <nav class="navbar fixed-bottom navbar-light bg-light d-block d-sm-block d-md-none">
@@ -27,10 +27,10 @@ export default function Navbar(props) {
                                 <a class="nav-link" href="/project" data-link>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor"
                                          class="bi bi-card-list" viewBox="0 0 16 16">
-                                        <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
-                                        <path d="M5 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 5 8zm0-2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0 5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-1-5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0zM4 8a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0zm0 2.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0z"/>
+                                            <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
+                                            <path d="M5 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 5 8zm0-2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0 5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-1-5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0zM4 8a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0zm0 2.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0z"/>
                                     </svg>
-                                </a>
+                                </a>                           
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="/profile" data-link>
@@ -42,7 +42,7 @@ export default function Navbar(props) {
                             </li>
                         </ul>
                     </nav>
-                    <nav class="navbar navbar-light bg-light d-sm-none d-md-block">
+                    <nav class="navbar navbar-light bg-light d-none d-sm-none d-md-block">
                         <ul class="nav justify-content-around">
                             <li class="nav-item">
                                 <a class="navbar-brand" href="#">
@@ -62,14 +62,14 @@ export default function Navbar(props) {
                                 <a class="nav-link" href="/profile" data-link>Profile</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Signout</a>
+                                <a class="nav-link" href="/logout" data-link>Signout</a>
                             </li>
                         </ul>
                     </nav>
                     
                    
     `;
-        }else{
+        } else {
             return `
                     <nav class="navbar navbar-expand-md navbar-light bg-light d-md-block">
                         <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
