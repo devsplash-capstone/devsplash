@@ -53,11 +53,11 @@ export default function Profile(props) {
     //TODO: Save is not working
 }
 
-function editProfile() {
+function editProfile(id) {
     $(".edit").click(function () {
 
+        $(".cancel-button").append(`<button type="button" class="cancel" data-id="${id}">Cancel</button>`)
         $(".delete-btn").toggleClass("d-none");
-
         $(".content-edit, .title-edit").attr("contenteditable", true);
         $(".edit").text("Edit");
         $(this).siblings(".title-edit, .content-edit").attr("contenteditable", true);
