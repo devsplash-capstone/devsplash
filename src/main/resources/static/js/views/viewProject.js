@@ -1,4 +1,4 @@
-export default function ViewProject(props) {
+export default function ViewProject(project) {
     return ` 
  <!DOCTYPE html>
 <html lang="eng">
@@ -18,24 +18,22 @@ export default function ViewProject(props) {
 <br>
 <body>
 <main>
-<section class="py-5 text-center container">
-<div class="row py-lg-5">
-<div class="col-lg-12 col-md-6 mx-auto">
-<h1>PROJECT NAME HERE</h1>
+<div class="p-3">
+<h1 contenteditable="false" class="card-header title">${project.name}</h1>
 <br>
-
-<br>
-<p>Project description goes here. Project description goes here.Project description goes here.Project description goes here.Project description goes here.Project description goes here.Project description goes here.Project description goes here.
+<h4 contenteditable="false" class="p-3 card-text content">${project.name}</h4>
+<p contenteditable="false" class="p-3 card-text content">
+${project.description}
 </p>
 <br>
 <button type="submit" id="edit-btn">Edit</button>
 </div>
 </div>
-</section>
 </main>
 </body>
 </html>`;
 }
+
 
 export function ViewProjects() {
     ViewProjectEvent();
