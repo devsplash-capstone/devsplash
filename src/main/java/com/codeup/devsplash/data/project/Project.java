@@ -1,6 +1,7 @@
 package com.codeup.devsplash.data.project;
 
 import com.codeup.devsplash.data.user.User;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 

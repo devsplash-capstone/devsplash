@@ -20,6 +20,7 @@ public class Skill {
     private String description;
 
     @ManyToMany(mappedBy = "skills")
+    @JsonIgnore
     private Collection<User> user;
 
     public Skill() {
