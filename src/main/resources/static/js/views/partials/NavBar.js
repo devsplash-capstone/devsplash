@@ -66,8 +66,6 @@ export default function Navbar(props) {
                             </li>
                         </ul>
                     </nav>
-                    
-                   
     `;
         } else {
             return `
