@@ -1,29 +1,45 @@
 export default function ViewProject(props) {
     return ` 
  <!DOCTYPE html>
- <html lang="eng">
-<head> 
-<meta charset="utf-8"/>
-<meta name="viewport" content=""
-<title>My Projects Page</title>
+<html lang="eng">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.83.1">
+    <title>Album example · Bootstrap v5.0</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+          integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
+          crossorigin="anonymous">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>My Projects Page</title>
 </head>
 <br>
+<body>
+<main>
+<section class="py-5 text-center container">
+<div class="row py-lg-5">
+<div class="col-lg-12 col-md-6 mx-auto">
+<h1>PROJECT NAME HERE</h1>
 <br>
-   <body>
-   <h1>PROJECT NAME HERE</h1>
-   <br>
-  
-   <br>
-   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean dui metus, euismod vel semper a, consectetur eget neque. Suspendisse in cursus velit. Morbi fringilla imperdiet tortor, eget maximus dui tristique sit amet. Etiam a pellentesque risus. Mauris elementum semper sem vel maximus. Maecenas imperdiet sem cursus leo tincidunt tempus. Aliquam ut quam nisi. Nunc cursus ac lorem eget imperdiet. Suspendisse velit risus, aliquam ac rutrum et, blandit in leo. Etiam dictum egestas enim, in posuere lorem accumsan a. Aenean luctus leo ut ullamcorper pulvinar. Sed ut mi venenatis, vestibulum nisl non, interdum magna. Pellentesque eu mi mauris. Aliquam nunc ante, eleifend sit amet libero in, convallis porta leo. Sed dolor dui, laoreet nec aliquet at, consequat eget quam.  
+
+<br>
+<p>Project description goes here. Project description goes here.Project description goes here.Project description goes here.Project description goes here.Project description goes here.Project description goes here.Project description goes here.
 </p>
 <br>
-<h3>LIST MEMBERS ASSOCIATED WITH PROJECT (possibly with their icons or just their usernames? to be determined later...)</h3>
+<h4>LIST MEMBERS ASSOCIATED WITH PROJECT (possibly with their icons or just their usernames? to be determined
+    later...)</h4>
 <br>
 <br>
 <button type="submit" id="edit-btn">Edit</button>
+</div>
+</div>
+</section>
+</main>
 </body>
-   
-    </html>`;
+
+</html>`;
 }
 
 export function ViewProjects() {
@@ -36,14 +52,14 @@ export function ViewProjects() {
 //      4. PASS IN ID
 
 function ViewProjectEvent() {
-let id = 1;
-let url = `http://localhost:8080/api/projects/findById/${id}`;
-let request = {
-    method: 'GET',
-    headers: {"Content-type": "application/json"}
-};
-fetch(url, request)
-    .then(response => console.log(response)) // project was posted successfully!
-    .catch(error => console.log(error)) //catches errors
+    let id = 1;
+    let url = `http://localhost:8080/api/projects/findById/${id}`;
+    let request = {
+        method: 'GET',
+        headers: {"Content-type": "application/json"}
+    };
+    fetch(url, request)
+        .then(response => console.log(response)) // project was posted successfully!
+        .catch(error => console.log(error)) //catches errors
 }
 
