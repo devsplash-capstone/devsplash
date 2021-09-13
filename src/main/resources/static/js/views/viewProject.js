@@ -63,3 +63,6 @@ function ViewProjectEvent() {
     })
 }
 
+//TODO: Copy the functionality from viewProject to Project.js
+//TODO: Change UI as per mockups
+//TODO: Add ProjectJoinRequestEvent()
