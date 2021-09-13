@@ -1,5 +1,5 @@
-import Navbar from "./views/partials/Navbar.js";
 import Footer from "./views/partials/Footer.js";
+import NavbarView from "./views/partials/Navbar.js";
 
 /**
  * Pushes the current URI to the URL bar and sets the HTML of the app div.
@@ -13,7 +13,7 @@ export default function render(props, route) {
     document.title = title;
 
     // add view and navbar to DOM
-    app.innerHTML = `${Navbar(props)} ${route.returnView(props)} ${Footer(null)}`;
+    app.innerHTML = `${NavbarView(props)} ${route.returnView(props)} ${Footer(null)}`;
 
 
     // add events AFTER view is added to DOM
