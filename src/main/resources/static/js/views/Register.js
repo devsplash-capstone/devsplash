@@ -1,6 +1,6 @@
 import createView from "../createView.js";
 
-export default function Register(registration) {
+export default function RegisterView() {
     return `
            <div class="container border shadow-lg p-5 mt-2">
     <div class="signup-form">
@@ -66,6 +66,15 @@ export function RegisterEvent() {
                 createView("/profile");
             });
     })
-
-
 }
+
+//TODO: function RegisterView() - copy code from signup.html(mockup) return view for register, comment out register events in router.js
+
+//TODO: UI- add password field, confirm password
+//TODO: function RegisterEvent() - calling save and cancel events
+//TODO: function RegisterCancelEvent()- forward to landing page
+//TODO: function registerValidate() -
+//      : input length, input type, special char, null for required fields
+//TODO: function RegisterSaveEvent() -
+//      :fetch post call
+//      :forward to profile page

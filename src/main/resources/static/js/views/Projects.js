@@ -24,3 +24,7 @@ export default function Projects(props){
             </div>
         </main>`;
 }
+
+//TODO: copy UI from Mockup
+//TODO: remove skills badges from Mockup
+//TODO: Add edit link to the projects done by the logged user
