@@ -109,10 +109,10 @@ export default function EditProfile(props) {
                                                 </div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-md-6 mb-4">
+                                                <div class="col-12 mb-4">
                                                     <label class="form-label font-weight-bold" for="github-name">Languages
                                                         I know</label>
-                                                    <select class="custom-select overflow-auto" multiple>
+                                                    <select class="col-12 custom-select overflow-auto" multiple>
                                                         <option value="1" selected>Java</option>
                                                         <option value="2">JSP</option>
                                                         <option value="2" selected>HTML</option>
@@ -181,7 +181,7 @@ function editProfileSave() {
             fetch(`http://localhost:8080/api/users/`, request)
                 .then(res => {
                     console.log(res.status);
-                    // createView("/profile")
+                    createView("/profile")
                 }).catch(error => {
                 console.log(error);
                 createView("/profile")
