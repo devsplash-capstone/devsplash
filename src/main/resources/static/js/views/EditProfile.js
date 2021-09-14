@@ -10,7 +10,7 @@
 
 import createView from "../createView.js";
 
-export default function EditProfile(props){
+export default function EditProfile(props) {
     return `
     <body>
         <div class="content-wrapper pt-md-4">
@@ -21,9 +21,10 @@ export default function EditProfile(props){
                             <div class="col">
                                 <div class="card card-registration my-3 border-0">
                                     <div class="row g-0">
-                                        <form class="card-body px-md-5 needs-validation" action="profile.html">
+                                        <form class="card-body px-md-5 needs-validation" action="profile.html" novalidate>
                                             <h3 class="mb-5">Edit Profile</h3>
 
+                                                <p id="error-messages"></p>
                                             <div class="row">
                                                 <div class="col-md-6 mb-4">
                                                     <div class="form-outline">
@@ -67,7 +68,7 @@ export default function EditProfile(props){
                                                 <div class="col-md-6 mb-4">
                                                     <div class="form-outline">
                                                         <label class="form-label font-weight-bold required" for="password">Password</label>
-                                                        <input type="text" id="password"
+                                                        <input type="password" id="password"
                                                                class="form-control form-control-lg form"
                                                                required/>
                                                     </div>
@@ -75,7 +76,7 @@ export default function EditProfile(props){
                                                 <div class="col-md-6 mb-4">
                                                     <div class="form-outline">
                                                         <label class="form-label font-weight-bold required" for="confirm-password">Confirm Password</label>
-                                                        <input type="text" id="confirm-password"
+                                                        <input type="password" id="confirm-password"
                                                                class="form-control form-control-lg form"
                                                                required/>
                                                     </div>
@@ -155,50 +156,51 @@ export default function EditProfile(props){
 }
 
 export function EditProfileEvent() {
-    // editProfileSave();
+    editProfileSave();
     editProfileCancel();
     editProfileDelete();
-    editProfileValidate();
 }
 
 function editProfileSave() {
     console.log($("#first-name").val())
-    $("#save-btn").click(function (){
-        let user = {
-            firstname: $("#first-name").val(),
-            lastname: $("#last-name").val(),
-            displayName: $("#display-name").val(),
-            email:  $("#email").val(),
-            id: $(this).attr("data-id")
-        }
-        console.log("user is being saved");
-        let request = {
-            method: "PUT",
-            headers: {"Content-type": "application/json"},
-            body: JSON.stringify(user)
-        }
-        fetch(`http://localhost:8080/api/users/`, request)
-            .then(res => {
-                console.log(res.status);
+    $("#save-btn").click(function () {
+        if(editProfileValidate() === true) {
+            let user = {
+                firstname: $("#first-name").val(),
+                lastname: $("#last-name").val(),
+                displayName: $("#display-name").val(),
+                email: $("#email").val().trim(),
+                id: $(this).attr("data-id")
+            }
+            console.log("user is being saved");
+            let request = {
+                method: "PUT",
+                headers: {"Content-type": "application/json"},
+                body: JSON.stringify(user)
+            }
+            fetch(`http://localhost:8080/api/users/`, request)
+                .then(res => {
+                    console.log(res.status);
+                    // createView("/profile")
+                }).catch(error => {
+                console.log(error);
                 createView("/profile")
-            }).catch(error => {
-            console.log(error);
-            createView("/profile")
-        })
+            })
+        }
     })
 }
 
 function editProfileCancel() {
-    $("#cancel-btn").click(function (){
+    $("#cancel-btn").click(function () {
         createView("/profile")
     })
 }
 
 function editProfileDelete() {
-    $("#delete-btn").click(function (){
+    $("#delete-btn").click(function () {
 
         let youSure = confirm("Are you sure you would like to delete your account? This is permanent.");
-        if (youSure === true){
+        if (youSure === true) {
             let request = {
                 method: "DELETE",
                 headers: {"Content-Type": "application/json"},
@@ -221,15 +223,32 @@ function editProfileDelete() {
 }
 
 function editProfileValidate() {
-    $("#save-btn").click(function (){
-        let form = true;
-        if ($(".form") === ""){
-            alert("No characters found")
-            form = false;
-            return;
-        }
-        if (form === true){
-            editProfileSave();
-        }
-    })
+    $("#error-messages").empty();
+    let errorMessages = '';
+    if ($("#first-name").val() === "" || $("#first-name").val().trim() === "") {
+        errorMessages = errorMessages + "Please enter your first name<br>";
+    }
+    if ($("#last-name").val() === "" || $("#last-name").val().trim() === "") {
+        errorMessages = errorMessages + "Please enter your last name<br>";
+    }
+    if ($("#display-name").val() === "" || $("#display-name").val().trim() === "") {
+        errorMessages = errorMessages + "Please enter your username<br>";
+    }
+    if ($("#email").val() === "" || $("#email").val().trim() === "") {
+        errorMessages = errorMessages + "Please enter your email<br>";
+    }
+    if ($("#password").val() === "" || $("#password").val().trim() === "") {
+        errorMessages = errorMessages + "Please enter your password<br>";
+    }
+    if ($("#confirm-password").val() === "" || $("#confirm-password").val().trim() === "") {
+        errorMessages = errorMessages + "Please confirm your password<br>";
+    }
+    if ($("#confirm-password").val() !== $("#password").val()) {
+        errorMessages = errorMessages + "Please check that passwords match<br>";
+    }
+    if (errorMessages !== ""){
+        $("#error-messages").append(errorMessages)
+        return false;
+    }
+    return true;
 }
