@@ -22,7 +22,7 @@ export default function NavbarView(props) {
                                         <li class="nav-item px-3">
                                             <a class="nav-link" href="/projects" data-link>Projects</a>
                                         </li>
-                                        <li class="nav-item pl-3">
+                                        <li class="nav-item px-3">
                                             <a class="nav-link" href="/logout" data-link>Signout</a>
                                         </li>
                                     </ul>
