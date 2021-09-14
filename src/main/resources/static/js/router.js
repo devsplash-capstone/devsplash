@@ -5,8 +5,7 @@ import Login from "./views/Login.js";
 import LoginEvent, {LogoutEvent} from "./auth.js";
 import Register, {RegisterEvent} from "./views/Register.js";
 import Profile, {ProfileEvent} from "./views/Profile.js";
-import ViewProject, {ProjectJoinRequestEvent} from "./views/Project.js";
-import ProjectComponent, {ProjectEvent} from "./views/Project.js";
+import ProjectComponent, {ViewProjects} from "./views/Project.js";
 import Projects from "./views/Projects.js";
 import Members from "./views/Members.js";
 
@@ -66,14 +65,14 @@ export default function router(URI) {
             viewEvent: ProfileEvent
         },
         '/viewproject' : {
-            returnView: ViewProject,
+            returnView: ViewProjects,
             state: {
                 user: "/api/users/me",
                 projects: "/api/projects/byMe"
             },
             uri: '/viewproject',
             title: "View Project",
-            viewEvent: ProjectJoinRequestEvent
+            viewEvent: ViewProjects
         },
         '/project': {
             returnView: ProjectComponent,
@@ -82,7 +81,7 @@ export default function router(URI) {
             },
             uri: '/project',
             title: "Project",
-            viewEvent: ProjectEvent
+            viewEvent: ViewProjects
         },
         '/projects': {
             returnView: Projects,
@@ -106,4 +105,3 @@ export default function router(URI) {
 
     return routes[URI];
 }
-
