@@ -54,6 +54,15 @@ export default function Register(registration) {
                                                 
                                                 <div class="col-md-6 mb-4">
                                                     <div class="form-outline">
+                                                        <label class="form-label font-weight-bold" for="email">Email
+                                                            </label>
+                                                        <input type="text" id="email"
+                                                               class="form-control form-control-lg"/>
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="col-md-6 mb-4">
+                                                    <div class="form-outline">
                                                         <label class="form-label font-weight-bold" for="password">Password</label>
                                                         <input type="password" id="password"
                                                                class="form-control form-control-lg"/>
@@ -130,16 +139,6 @@ export default function Register(registration) {
                 </section>
             </div>
         </div>
-
-        <footer class="my-5 pt-3 text-muted text-center text-small">
-            <p class="mb-1">&copy; 2021 Devsplash</p>
-            <ul class="list-inline">
-                <li class="list-inline-item"><a href="#">Privacy</a></li>
-                <li class="list-inline-item"><a href="#">Terms</a></li>
-                <li class="list-inline-item"><a href="#">Support</a></li>
-                <li class="list-inline-item"><a href="#">faqs</a></li>
-            </ul>
-        </footer>
 `;
 
 }
@@ -147,7 +146,7 @@ export default function Register(registration) {
 export function RegisterEvent() {
     $("#save").click(function () {
         let user = {
-            email: $("#display-name").val(),
+            email: $("#email").val(),
             firstname: $("#firstname").val(),
             lastname: $("#lastname").val(),
             displayName: $("#display-name").val(),
@@ -164,7 +163,7 @@ export function RegisterEvent() {
         fetch("http://localhost:8080/api/users/create", request).then(
             (response) => {
                 console.log(response.status);
-                createView("/profile");
+                createView("/login");
             });
     })
 }
