@@ -1,3 +1,5 @@
+import createView from "../createView.js";
+
 export function sideNavProfileComponent(user, loggedInUserId) {
     return `
         <div class="profile-wrapper col-md-3 d-md-inline-flex mr-md-3 d-none">
@@ -31,10 +33,9 @@ export function addSideNavProfileEvents() {
     sendEmailEvent();
 }
 
-//TODO: add send email button to member's profile, check if member is loggedIn user
 function editProfileEvent() {
     $(".userEditProfileButton").click(function () {
-        alert($(this).attr("data-user-id"))
+        createView("/editProfile")
     });
 }
 
