@@ -1,7 +1,6 @@
 import createView from "../createView.js";
 
 export default function Profile(props) {
-    console.log(props.user.error)
     if (props.user.error) {
         console.log("Not a member - Login / Signup")
         createView("/login");

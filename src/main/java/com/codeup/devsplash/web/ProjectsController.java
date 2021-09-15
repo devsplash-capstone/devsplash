@@ -36,4 +36,9 @@ public class ProjectsController {
     private List<Project> getProjects() {
         return projectsRepository.findAll();
     }
+
+    @GetMapping("findById/{id}")
+    private Project getProjectById(@PathVariable Long id) {
+        return projectsRepository.findById(id).get();
+    }
 }
