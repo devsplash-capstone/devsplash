@@ -65,10 +65,9 @@ export default function router(URI) {
             viewEvent: ProfileEvent
         },
         '/viewproject' : {
-            returnView: ViewProjects,
+            returnView: ProjectComponent,
             state: {
-                user: "/api/users/me",
-                projects: "/api/projects/byMe"
+                user: "/api/users/me"
             },
             uri: '/viewproject',
             title: "View Project",

@@ -2,79 +2,126 @@ import createView from "../createView.js";
 
 // where are we calling ProjectComponent other than router.js?
 export default function ProjectComponent(props) {
-    console.log(props.user.error)
-    if (props.user.error) {
-        console.log("Not a member - Login / Signup")
-        createView("/login");
-    }
-    // get with team & ask, is it okay to replace lines 11-24 with the mockup HTML/updates?
+    console.log("inside project component")
+    // console.log(props)
+    // // console.log(props.user.error)
+    // // if (props.user.error) {
+    // //     console.log("Not a member - Login / Signup")
+    // //     createView("/login");
+    // }
     return `
+<div class="content-wrapper pt-md-4">
+    <div class="content container-xl px-3 px-md-4 px-lg-5 d-md-flex align-items-md-start">
+        <div class="profile-wrapper col-md-3 d-md-inline-flex mr-md-3 d-none">
+            <div class="profile-wrapper-helper row p-2">
+                <div class="profile-image px-0 col-3 col-md-12">
+                    <img src="https://via.placeholder.com/90x90.png?text=Visit+WhoIsHostingThisC/O"
+                         class="rounded-circle" alt="">
+                </div>
+                <div class="profile-info-wrapper col-9 col-md-12 align-self-center d-md-flex justify-content-md-center">
+                    <div class="profile-info pt-md-2 text-md-center">
+                        <h5>${props.user.firstname} ${props.user.lastname}</h5>
+                        <h6>${props.user.displayName}</h6>
+                    </div>
+                </div>
+                <p class="mt-2"> Web Development Instructor with backend
+                    experience in the hospitality, energy, and engineering spaces.</p>
+                <a class="btn btn-light btn-block col-12 border-dark mt-2" href="profile-edit.html">Edit
+                    profile</a>
+            </div>
+        </div>
+        <div class="details-wrapper col-md-9 d-md-inline-flex border rounded py-4 mt-3">
+            <div class="details-wrapper-helper col-12">
+                <div class="current-projects mt-4">
+                    <h3>${(props.projects.user.id)}</h3>
+                    <p>project description</p>
+                    <h6>Created by </h6>
+                    <div class="list-group">
+                        <a href="member.html" class="list-group-item list-group-item-action">
+                            <div class="d-md-flex w-100 justify-content-between">
+                                <h5 class="mb-1">${props.user.displayName}</h5>
+                                <small>Looking for - HTML, CSS, JS</small>
+                            </div>
+                            <small>Springboot, hibernate</small>
+                        </a>
+                    </div>
+                </div>
+                <div class="members mt-4">
+                    <h6>Project Members</h6>
+                    <div class="">
+                        <div class="list-group">
+                            <a href="member.html" class="list-group-item list-group-item-action">
+                                <div class="d-md-flex w-100 justify-content-between">
+                                    <h5 class="mb-1">${props.user.displayName}</h5>
+                                    <small>Looking for - HTML, CSS, JS</small>
+                                </div>
+                                <small>Springboot, hibernate</small>
+                            </a>
+                            <a href="member.html" class="list-group-item list-group-item-action">
+                                <div class="d-md-flex w-100 justify-content-between">
+                                    <h5 class="mb-1">@mitch</h5>
+                                    <small>Looking for - HTML, CSS, JS</small>
+                                </div>
+                                <small>Springboot, hibernate</small>
+                            </a>
+                            <a href="profile.html" class="list-group-item list-group-item-action">
+                                <div class="d-md-flex w-100 justify-content-between">
+                                    <h5 class="mb-1">@prachi007</h5>
+                                    <small>Looking for - HTML, CSS, JS</small>
+                                </div>
+                                <small>Springboot, hibernate</small>
+                            </a>
+                            <a href="member.html" class="list-group-item list-group-item-action">
+                                <div class="d-md-flex w-100 justify-content-between">
+                                    <h5 class="mb-1">@ricardo</h5>
+                                    <small>Looking for - HTML, CSS, JS</small>
+                                </div>
+                                <small>Springboot, hibernate</small>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <form action="projects.html">
+                    <button class="btn btn-light btn-block col-12 border-dark mt-3" id="joinProject">Join Project
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+    </div>
+</div>
 
+<!--       deleted footer + navbar because it's being written separately!!! -->
 `;
 }
 
-function ProjectJoinRequestEvent(){
-$("#joinProject").click(function () {
+function ProjectJoinRequestEvent() {
+    $("#joinProject").click(function () {
+        console.log("join project still in progress!")
+    })
 
-    let
-
-})
-
-
-}
-
-function ProjectEvent() {
-    $("#createProject").click(function () {
-
-        let project = {
-            name: $("#name").val(),
-            description: $("#description").val(),
-            user: {
-                id: $(this).attr("data-id")
-            }
-        };
-
-        const url = `http://localhost:8080/api/projects`;
-
-        const options = {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(project)
-        };
-
-        fetch(url, options)
-            .then(data => {
-                console.log(data)
-                createView("/project")
-            })
-            .catch(error => console.error(error)); /* handle errors */
-    });
 }
 
 // calls ALL functions within project.js
-export function ViewProjects(){
+export function ViewProjects() {
     // handles GET request to VIEW a project
     ViewProjectEvent();
-    // handles POST request to create a project <-- this will be apart of US-6
-    ProjectEvent();
-    // handles POST request to JOIN a project
+    // handles POST request for a user to JOIN a project
     ProjectJoinRequestEvent();
+    // calls primary function in project.js (it wasn't being called anywhere except the router, that's why I placed it here)
+    // ProjectComponent();
 }
 
 function ViewProjectEvent() {
-    $("#edit-btn").click(function () {
-        let request = {
-            method: "GET",
-            headers: {"Content-type": "application/json"},
-            body: JSON.stringify(project)
-        }
-        console.log(request);
-        fetch("http://localhost.8080/api/projects/byMe", request).then(
-            (response) => {
-                console.log(response);
+    console.log("inside view project event")
+    let request = {
+        method: "GET",
+        headers: {"Content-type": "application/json"},
+    }
+    console.log(request);
+    fetch(`http://localhost.8080/api/projects/findById/${id}`, request).then(
+        (response) => {
+            console.log(response);
 
-            });
-    })
+        });
 }
