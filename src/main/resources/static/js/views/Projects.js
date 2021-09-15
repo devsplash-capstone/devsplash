@@ -6,11 +6,8 @@ import {addSideNavProfileEvents, sideNavProfileComponent} from "./SideNavProfile
 import {PageContentView} from "./partials/content.js";
 
 export default function ProjectsView(props) {
-    console.log("Inside ProjectView")
-    console.log(props.projects);
-    console.log(props.user);
-    let projectPage = sideNavProfileComponent(props.user, props.user.id) + ProjectsComponent(props.projects, props.user.id)
-    return PageContentView(projectPage)
+    let projectsPage = sideNavProfileComponent(props.user, props.user.id) + ProjectsComponent(props.projects, props.user.id)
+    return PageContentView(projectsPage)
 }
 
 
@@ -24,7 +21,7 @@ export function ProjectsEvents() {
 
 function ProjectsComponent(projects, loggedInUserId) {
     return `
-            <div class="details-wrapper col-md-9 d-md-inline-flex border rounded py-4 px-2 m-md-3">
+            <div class="details-wrapper col-md-8 d-md-inline-flex border rounded py-4 px-2 m-md-3">
                 <div class="details-wrapper-helper col-12 p-md-4">
                     <div class="current-projects mt-4">
 
