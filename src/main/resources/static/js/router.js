@@ -7,7 +7,7 @@ import Register, {RegisterEvent} from "./views/Register.js";
 import Profile, {ProfileEvent} from "./views/Profile.js";
 import ViewProject, {ViewProjects} from "./views/viewProject.js";
 import ProjectComponent, {ProjectEvent} from "./views/Project.js";
-import Projects from "./views/Projects.js";
+import ProjectsView, {ProjectsEvents} from "./views/Projects.js";
 import Members from "./views/Members.js";
 
 /**
@@ -85,13 +85,14 @@ export default function router(URI) {
             viewEvent: ProjectEvent
         },
         '/projects': {
-            returnView: Projects,
+            returnView: ProjectsView,
             state: {
                 user: "/api/users/me",
                 projects:"/api/projects"
             },
             uri: '/projects',
-            title: "Projects"
+            title: "Projects",
+            viewEvent:ProjectsEvents
         },
         '/members': {
             returnView: Members,
@@ -101,7 +102,14 @@ export default function router(URI) {
             },
             uri: '/members',
             title: "Members"
+        },
+        '/editProject': {
+            returnView: ProjectComponent,
+            state: {},
+            uri: '/editProject',
+            title: "Project"
         }
+
     };
 
     return routes[URI];

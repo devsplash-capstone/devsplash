@@ -8,6 +8,7 @@ import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "api/projects", headers = "Accept=application/json")
@@ -35,5 +36,10 @@ public class ProjectsController {
     @GetMapping
     private List<Project> getProjects() {
         return projectsRepository.findAll();
+    }
+
+    @GetMapping("findById/{id}")
+    private Project getProjectById(@PathVariable Long id) {
+        return projectsRepository.findById(id).get();
     }
 }

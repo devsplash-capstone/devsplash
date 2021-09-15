@@ -1,7 +1,7 @@
 import createView from "../createView.js";
+import {sideNavProfileComponent} from "./SideNavProfile.js";
 
 export default function Profile(props) {
-    console.log(props.user.error)
     if (props.user.error) {
         console.log("Not a member - Login / Signup")
         createView("/login");
@@ -9,6 +9,7 @@ export default function Profile(props) {
 
 
     return `
+        ${sideNavProfileComponent(props.user)}
         <div class="container mx-auto pt-2">
             <h1 class="pt-2 text-center mb-3 bg-animate">Devsplash</h1>
             <div class="row mx-auto">
