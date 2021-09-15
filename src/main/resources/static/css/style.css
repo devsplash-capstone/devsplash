@@ -3,3 +3,12 @@ img {
     width: 100%; /* or any custom size */
     object-fit: contain;
 }
+
+.required:after {
+    content:" *";
+    color: red;
+}
+
+#error-messages {
+    color: red;
+}
