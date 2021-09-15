@@ -21,7 +21,7 @@ export function ProjectsEvents() {
 
 function ProjectsComponent(projects, loggedInUserId) {
     return `
-            <div class="details-wrapper col-md-8 d-md-inline-flex border rounded py-4 px-2 m-md-3">
+            <div class="details-wrapper col-md-8 d-md-inline-flex py-4 px-2 m-md-3">
                 <div class="details-wrapper-helper col-12 p-md-4">
                     <div class="current-projects mt-4">
 
@@ -38,7 +38,7 @@ function ProjectsComponent(projects, loggedInUserId) {
     ;
 }
 
-function printOutProject(project, loggedInUserId) {
+export function printOutProject(project, loggedInUserId) {
     return `
             <div class="card col-12 col-md-6 px-3 px-md-0">
                 <div class="card-body">

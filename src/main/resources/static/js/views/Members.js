@@ -3,7 +3,7 @@ import {PageContentView} from "./partials/content.js";
 
 
 export default function Members(props) {
-    let membersPage = sideNavProfileComponent(props.user, props.user.id) + membersList(props.users, "Members pppp");
+    let membersPage = sideNavProfileComponent(props.user, props.user.id) + membersList(props.users, "Members");
     return PageContentView(membersPage)
 }
 
@@ -21,7 +21,7 @@ function printOutUsers(member) {
 
 export function membersList(members, label=''){
     return `
-        <div class="details-wrapper col-md-8 d-md-inline-flex border rounded py-4 mt-3">
+        <div class="details-wrapper col-md-8 d-md-inline-flex py-4 mt-3">
             <div class="details-wrapper-helper col-12">
                 <div class="current-members mt-4 m-md-4">
                     <h3 class="mb-4">${label}</h3>

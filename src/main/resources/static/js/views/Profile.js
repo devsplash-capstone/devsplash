@@ -1,12 +1,7 @@
 import createView from "../createView.js";
 
 export default function Profile(props) {
-    if (props.user.error) {
-        console.log("Not a member - Login / Signup")
-        createView("/login");
-    }
-
-
+    console.log(props)
     return `
         <body>
         <div class="header-wrapper bg-light">
@@ -33,7 +28,7 @@ export default function Profile(props) {
                             profile</a>
                     </div>
                 </div>
-                <div class="details-wrapper col-md-9 d-md-inline-flex border rounded py-4 mt-3">
+                <div class="details-wrapper col-md-9 d-md-inline-flex py-4 mt-3">
                     <div class="details-wrapper-helper col-12">
                         <div class="skills ">
                             <p class="mb-1">Languages I know</p>
@@ -107,7 +102,6 @@ export default function Profile(props) {
             </div>
         </div>
 `
-    //TODO: Save is not working
 }
 
 export function ProfileEvent() {
