@@ -62,7 +62,7 @@ export function EditProjectComponent(props) {
                         ${(!isNew)?`
                             <div class="row mt-5 mb-3 border border-danger rounded mx-auto">
                                 <button class="btn btn-light btn-block col-10 border-dark mx-auto mt-5"
-                                        data-id="${props.user.id}" type="submit">Delete Proect
+                                        data-id="${props.user.id}" id="deleteProject">Delete Proect
                                 </button>
                                 <small class="col-12 col-md-12 mt-1 mb-5 text-center text-danger">This
                                     change will be permanent.</small>
@@ -75,8 +75,21 @@ export function EditProjectComponent(props) {
 `;
 }
 
-export function EditProjectEvent() {
+function EditProjectCancelEvent() {
+    $("")
+}
+
+function EditProjectDeleteEvent() {
+
+}
+
+export function EditProjectEvents(){
+    EditProjectEvent();
+    EditProjectCancelEvent();
+    EditProjectDeleteEvent();
     addSideNavProfileEvents();
+}
+export function EditProjectEvent() {
     $("#createProject").click(function () {
         let skills = [];
         $.each($("#skills option:selected"), function () {
