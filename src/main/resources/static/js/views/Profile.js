@@ -45,7 +45,7 @@ export function ProfileComponent(user, projects, profileId) {
                 <div class="current-projects mt-4">
                     <p class="mb-1">Ongoing Projects</p>
                     <div class="row d-flex justify-content-around">
-                             ${(projects) ?
+                             ${!(projects === undefined) ?
                                 projects.map(project => `${printOutProject(project, user.id)}`).join('')
                                 : 'Your projects will go here.'}
                     </div>
