@@ -1,9 +1,11 @@
-import ProjectComponent, {ProjectEvent} from "./Project.js";
+import ProjectComponent, {EditProjectEvent} from "./EditProject.js";
 import render from "../render.js";
 import fetchData from "../fetchData.js";
 import {getHeaders} from "../auth.js";
 import {addSideNavProfileEvents, sideNavProfileComponent} from "./SideNavProfile.js";
 import {PageContentView} from "./partials/content.js";
+import {memberClickEvent} from "./Members.js";
+import ViewProject, {ViewProjectEvents} from "./viewProject.js";
 
 export default function ProjectsView(props) {
     let projectsPage = sideNavProfileComponent(props.user, props.user.id) + ProjectsComponent(props.projects, props.user.id)
@@ -11,12 +13,14 @@ export default function ProjectsView(props) {
 }
 
 
-export function ProjectsEvents() {
-    projectUserClickEvent();
+export function ProjectsViewEvents() {
+    ProjectEvents();
+    addSideNavProfileEvents();
+}
+export function ProjectEvents(){
     projectClickEvent();
     editProjectClickEvent();
-
-    addSideNavProfileEvents();
+    memberClickEvent();
 }
 
 function ProjectsComponent(projects, loggedInUserId) {
@@ -28,7 +32,8 @@ function ProjectsComponent(projects, loggedInUserId) {
                         <h3 class="mb-4">Explore Projects</h3>
 
                         <div class="row d-flex justify-content-around">
-                            ${projects.map(project => `${printOutProject(project, loggedInUserId)}`).join('')}
+                            ${(projects)?projects.map(project => `${printOutProject(project, loggedInUserId)}`).join('')
+                            :'All the projects will go here.'}
                         </div>
 
                     </div>
@@ -43,8 +48,10 @@ export function printOutProject(project, loggedInUserId) {
             <div class="card col-12  px-3 px-md-0">
                 <div class="card-body">
                     <a href="#" class="projectViewLink" data-id="${project.id}"><h5 class="card-title">${project.name}</h5></a>
-                    <a href="#" class="userProfileLink" data-id="${project.user.id}">
-                        <h6 class="card-subtitle mb-2 text-muted">${project.user.displayName}</h6>
+                    <a href="#">
+                        <h6 class="memberView card-subtitle mb-2 text-muted" data-member-id="${project.user.id}">
+                            ${project.user.displayName}
+                        </h6>
                     </a>
                     <p class="card-text">${project.description}</p>
                     ${(project.user.id === loggedInUserId)  ? `<a href="#" class="projectEditLink" data-id="${project.id}">Edit</a>` : ``}
@@ -53,16 +60,34 @@ export function printOutProject(project, loggedInUserId) {
             `
 }
 
-export function projectUserClickEvent() {
-    $(".userProfileLink").click(function (){
-        alert($(this).attr("data-id"))
-    })
-}
-
+//TODO: review the fetch function
 export function projectClickEvent() {
     $(".projectViewLink").click(function (){
-        alert($(this).attr("data-id"))
-    })
+
+            const id = $(this).attr("data-id");
+
+            const route =  {
+                returnView: ViewProject,
+                state: {
+                    user: "/api/users/me",
+                    project:`/api/projects/findById/${id}`,
+                },
+                uri: '/project',
+                title: "Project",
+                viewEvent:ViewProjectEvents
+            }
+
+            const request = {
+                headers: getHeaders()
+            }
+
+            fetchData(route.state, request)
+                .then((props) => {
+                    render(props, route);
+                })
+                .catch(error => console.error(error)); /* handle errors */
+
+        });
 }
 
 //TODO: review the fetch function
@@ -76,11 +101,12 @@ export function editProjectClickEvent() {
             returnView: ProjectComponent,
             state: {
                 user: "/api/users/me",
-                project:`/api/projects/findById/${id}`
+                project:`/api/projects/findById/${id}`,
+                skills:"/api/skills"
             },
             uri: '/project',
             title: "Project",
-            viewEvent:ProjectEvent
+            viewEvent:EditProjectEvent
         }
 
         const request = {

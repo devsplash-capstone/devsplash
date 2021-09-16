@@ -5,11 +5,12 @@ import Login from "./views/Login.js";
 import LoginEvent, {LogoutEvent} from "./auth.js";
 import Register, {RegisterEvent} from "./views/Register.js";
 import ProfileView, {ProfileEvent} from "./views/Profile.js";
-import ViewProject, {ViewProjects} from "./views/viewProject.js";
-import ProjectComponent, {ProjectEvent} from "./views/Project.js";
-import ProjectsView, {ProjectsEvents} from "./views/Projects.js";
-import Members from "./views/Members.js";
+import ViewProject, {ViewProjectEvents} from "./views/viewProject.js";
+import ProjectComponent, {EditProjectEvent} from "./views/EditProject.js";
+import ProjectsView, {ProjectsViewEvents} from "./views/Projects.js";
+import Members, {MembersEvent} from "./views/Members.js";
 import EditProfile, {EditProfileEvent} from "./views/EditProfile.js";
+import EditProjectView from "./views/EditProject.js";
 
 /**
  * Returns the route object for a specific route based on the given URI
@@ -75,16 +76,17 @@ export default function router(URI) {
             },
             uri: '/viewproject',
             title: "View Project",
-            viewEvent: ViewProjects
+            viewEvent: ViewProjectEvents
         },
         '/project': {
-            returnView: ProjectComponent,
+            returnView: EditProjectView,
             state: {
                 user: "/api/users/me",
+                skills:"/api/skills"
             },
             uri: '/project',
             title: "Project",
-            viewEvent: ProjectEvent
+            viewEvent: EditProjectEvent
         },
         '/projects': {
             returnView: ProjectsView,
@@ -94,7 +96,7 @@ export default function router(URI) {
             },
             uri: '/projects',
             title: "Projects",
-            viewEvent:ProjectsEvents
+            viewEvent:ProjectsViewEvents
         },
         '/members': {
             returnView: Members,
@@ -103,7 +105,8 @@ export default function router(URI) {
                 users:"/api/users"
             },
             uri: '/members',
-            title: "Members"
+            title: "Members",
+            viewEvent:MembersEvent
         },
         '/editProject': {
             returnView: ProjectComponent,
