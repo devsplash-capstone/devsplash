@@ -1,37 +1,37 @@
-function getRandomInt() {
-    return Math.floor(Math.random() * 100);
+import {sideNavProfileComponent} from "./SideNavProfile.js";
+import {PageContentView} from "./partials/content.js";
+
+
+export default function Members(props) {
+    let membersPage = sideNavProfileComponent(props.user, props.user.id) + membersList(props.users, "Members");
+    return PageContentView(membersPage)
 }
 
-
-function printOutUsers(user) {
+function printOutUsers(member) {
     return `
-            <div class="card border m-1" style="max-width: 540px;">
-              <div class="row no-gutters">
-                <div class="col-4 px-0">
-                  <img src="https://picsum.photos/id/${getRandomInt()}/100" class="card-img" alt="...">
+            <a href="member.html" class="list-group-item list-group-item-action">
+                <div class="d-md-flex w-100 justify-content-between">
+                    <h5 class="mb-1">${member.firstname} ${member.lastname}</h5>
+                    <small>${member.displayName}</small>
                 </div>
-                <div class="col-8">
-                  <div class="card-body">
-                    <p class="card-title font-weight-bold">${user.firstname} ${user.lastname}</p>
-                    <p class="card-title">${user.displayName}</p>
-                    <a class="card-text" href="#">Email</a>
-                  </div>
-                </div>
-              </div>
-            </div>
+                <small>Springboot, hibernate</small>
+            </a>
         `
 }
 
-export default function Members(props){
+export function membersList(members, label=''){
     return `
-       <main>
-            <div class="container">
-                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 mx-auto">
-                <div class="col-12 my-3 text-center">
-                    <h3>Members</h3>
+        <div class="details-wrapper col-md-8 d-md-inline-flex py-4 mt-3">
+            <div class="details-wrapper-helper col-12">
+                <div class="current-members mt-4 m-md-4">
+                    <h3 class="mb-4">${label}</h3>
+                    <div class="mt-4">
+                        <div class="list-group">
+                            ${members.map(member => `${printOutUsers(member)}`).join('')}
+                        </div>
+                    </div>
                 </div>
-                 ${props.users.map(user => `${printOutUsers(user)}`).join('')}
             </div>
-            </div>
-        </main>`;
+        </div>
+    `;
 }

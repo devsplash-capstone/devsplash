@@ -11,3 +11,13 @@ img {
 #error-messages {
     color: red;
 }
+a{
+    text-decoration: none;
+}
+
+@media (min-width: 47em) {
+    .details-wrapper {
+        border: lightgrey 1px solid;
+        border-radius: 1%;
+    }
+}

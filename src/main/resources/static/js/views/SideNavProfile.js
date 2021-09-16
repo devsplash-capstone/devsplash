@@ -1,7 +1,9 @@
+import createView from "../createView.js";
+
 export function sideNavProfileComponent(user, loggedInUserId) {
     return `
-        <div class="profile-wrapper col-md-3 d-md-inline-flex mr-md-3 d-none">
-            <div class="profile-wrapper-helper row p-2 mr-3">
+        <div class="profile-wrapper col-md-3 d-md-inline-flex mr-md-3">
+            <div class="profile-wrapper-helper row p-2">
                 <div class="profile-image px-0 col-3 col-md-12">
                     <img src="https://via.placeholder.com/90x90.png?text=Visit+WhoIsHostingThisC/O"
                          class="rounded-circle" alt="">
@@ -31,10 +33,9 @@ export function addSideNavProfileEvents() {
     sendEmailEvent();
 }
 
-//TODO: add send email button to member's profile, check if member is loggedIn user
 function editProfileEvent() {
     $(".userEditProfileButton").click(function () {
-        alert($(this).attr("data-user-id"))
+        createView("/editProfile")
     });
 }
 
