@@ -40,7 +40,7 @@ function ProjectsComponent(projects, loggedInUserId) {
 
 export function printOutProject(project, loggedInUserId) {
     return `
-            <div class="card col-12 col-md-6 px-3 px-md-0">
+            <div class="card col-12  px-3 px-md-0">
                 <div class="card-body">
                     <a href="#" class="projectViewLink" data-id="${project.id}"><h5 class="card-title">${project.name}</h5></a>
                     <a href="#" class="userProfileLink" data-id="${project.user.id}">
@@ -53,20 +53,20 @@ export function printOutProject(project, loggedInUserId) {
             `
 }
 
-function projectUserClickEvent() {
+export function projectUserClickEvent() {
     $(".userProfileLink").click(function (){
         alert($(this).attr("data-id"))
     })
 }
 
-function projectClickEvent() {
+export function projectClickEvent() {
     $(".projectViewLink").click(function (){
         alert($(this).attr("data-id"))
     })
 }
 
-//TODO: fix the fetch function
-function editProjectClickEvent() {
+//TODO: review the fetch function
+export function editProjectClickEvent() {
 
     $(".projectEditLink").click(function () {
 
