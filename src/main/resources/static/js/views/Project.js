@@ -39,7 +39,7 @@ export default function ProjectComponent(props) {
                     <div class="list-group">
                         <a href="member.html" class="list-group-item list-group-item-action">
                             <div class="d-md-flex w-100 justify-content-between">
-                                <h5 class="mb-1">Member Name</h5>
+                                <h5 class="mb-1">Member Display Name</h5>
                                 <small>Looking for - HTML, CSS, JS</small>
                             </div>
                             <small>Springboot, hibernate</small>
