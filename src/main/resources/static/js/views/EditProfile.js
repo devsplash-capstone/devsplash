@@ -117,6 +117,7 @@ export default function EditProfile(props) {
                                                       `<option value="${skill.id}">${skill.name}</option>`
                                                           ) : 'Skills required for the project will go here.'}
                                                      </select>
+                                                     <p class="instruction mt-1">Hold cmd to select more than one skill (ctrl for pc)</p>
                                                 </div>
                                             </div>
 
