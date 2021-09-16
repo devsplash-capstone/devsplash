@@ -28,19 +28,24 @@ export function EditProjectComponent(props) {
                     <h5>${pageHeader}</h5>
                     <form>
                         <div class="form-group mt-4">
-                            <label for="name">Project Name</label>
-                            <input type="email" class="form-control" id="name" aria-describedby="project name" 
+                            <label for="name" class="required">Project Name</label>
+                            <input class="form-control" id="name" aria-describedby="project name" 
                             value="${(props.project) ? (props.project.name) : ''}">
                         </div>
                         <div class="form-group mt-4">
-                            <label for="description">Description</label>
+                            <label for="description" class="required">Description</label>
                             <textarea  class="form-control" id="description">${(props.project) ? (props.project.description) : ''}</textarea>
                         </div>
                         <div class="col-12 mt-4">
                             <label class="form-label font-weight-bold" for="github-name">Required skills</label>
                             <select id="skills" class="col-12 custom-select overflow-auto" multiple>
+                                <!--  Check if it's edit project, show previously saved skills selected    -->
                                 ${(props.skills) ? props.skills.map(skill =>
-                                        `<option value="${skill.id}">${skill.name}</option>`
+                                        (isNew)
+                                        ?`<option value="${skill.id}">${skill.name}</option>`
+                                        :(props.project.skills.includes(skill.id))
+                                                    ?`<option value="${skill.id}" selected>${skill.name}</option>`
+                                                    :`<option value="${skill.id}">${skill.name}</option>`
                                     ) : 'Skills required for the project will go here.'}
                             </select>
                         </div>
@@ -77,7 +82,6 @@ export function EditProjectEvent() {
         $.each($("#skills option:selected"), function () {
             skills.push({id: $(this).val()});
         });
-        console.log("You have selected the skill[0] - " + skills[0].id);
 
         let project = {
             name: $("#name").val(),
