@@ -4,7 +4,7 @@ import {PageContentView} from "./partials/content.js";
 import {printOutProject, ProjectEvents} from "./Projects.js";
 
 export default function ProfileView(props, githubRepos) {
-    console.log("In profileView")
+    console.log(props)
     // githubRepos = GitHubInfo();
 
     //To check if it's user's profile or member's profile
@@ -18,13 +18,14 @@ export default function ProfileView(props, githubRepos) {
         user = props.member;
     }
 
-    let profilePage = sideNavProfileComponent(user, profileId) + ProfileComponent(user, props.projects, profileId)
-    return PageContentView(profilePage)
+    let profilePage = sideNavProfileComponent(user, profileId) + ProfileComponent(user, props.projects, profileId, githubRepos)
+    $(".header-wrapper").after(PageContentView(profilePage));
 }
 
-export function ProfileComponent(user, projects, profileId) {
+export function ProfileComponent(user, projects, profileId, githubRepos) {
     console.log(user);
     console.log(projects)
+    console.log(githubRepos)
     return `
         <div class="details-wrapper col-md-8 d-md-inline-flex py-4 mt-3">
             <div class="details-wrapper-helper col-12 p-md-4">
@@ -38,7 +39,8 @@ export function ProfileComponent(user, projects, profileId) {
                     <p class="mb-1">Github</p>
                     <div class="">
                         <div id="repos" class="list-group border rounded p-3">
-                            <p>Your github information will go here!</p>
+                         <a href="https://api.github.com/repos/PrachiPhatak/blogapp"> Link</a>
+                            ${showRepos(githubRepos)}
                         </div>
                     </div>
                 </div>
@@ -93,4 +95,24 @@ function creatProjectClickEvent() {
     $("#createProject").click(function () {
         createView("/project")
     })
+}
+
+//TODO change the function name
+export function showRepos(repos) {
+    let repoComponent = '';
+        (repos!==null)?
+            repos.slice(1,5).map((repo)=> {
+                repoComponent = repoComponent + `
+                     <a href="${repo.url}" class="list-group-item list-group-item-action" data-link>
+                        <div class="d-md-flex w-100 justify-content-between">
+                            <h5 class="mb-1">${repo.name}</h5>
+                            <small class="text-muted">Updated at</small>
+                        </div>
+                        <small class="text-muted">${repo.language}</small>
+                    </a> `
+            }):
+            repoComponent ='Repositories from github will go here.'
+
+    console.log(repoComponent)
+    return repoComponent;
 }

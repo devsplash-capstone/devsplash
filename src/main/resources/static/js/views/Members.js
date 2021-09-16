@@ -4,6 +4,7 @@ import {getHeaders} from "../auth.js";
 import fetchData from "../fetchData.js";
 import render from "../render.js";
 import ProfileView, {ProfileEvent} from "./Profile.js";
+import GitHubInfo from "../gitHubInfo.js";
 
 
 export default function Members(props) {
@@ -54,7 +55,7 @@ export function memberClickEvent() {
         const id = $(this).attr("data-member-id");
 
         const route =  {
-            returnView: ProfileView,
+            returnView: GitHubInfo,
             state: {
                 user: "/api/users/me",
                 member: `/api/users/findById/${id}`,

@@ -11,6 +11,7 @@ import ProjectsView, {ProjectsViewEvents} from "./views/Projects.js";
 import Members, {MembersEvent} from "./views/Members.js";
 import EditProfile, {EditProfileEvent} from "./views/EditProfile.js";
 import EditProjectView from "./views/EditProject.js";
+import GitHubInfo from "./gitHubInfo.js";
 
 /**
  * Returns the route object for a specific route based on the given URI
@@ -59,7 +60,7 @@ export default function router(URI) {
             viewEvent: LogoutEvent
         },
         '/profile': {
-            returnView: ProfileView,
+            returnView: GitHubInfo,
             state: {
                 user: "/api/users/me",
                 projects: "/api/projects/byMe"
