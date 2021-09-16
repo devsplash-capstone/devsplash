@@ -5,7 +5,7 @@ img {
 }
 
 .required:after {
-    content: "*";
+    content: " *";
     color: red;
 }
 #error-messages {
