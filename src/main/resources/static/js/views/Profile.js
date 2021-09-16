@@ -1,140 +1,96 @@
 import createView from "../createView.js";
+import {addSideNavProfileEvents, sideNavProfileComponent} from "./SideNavProfile.js";
+import {PageContentView} from "./partials/content.js";
+import {printOutProject, ProjectEvents} from "./Projects.js";
 
-export default function Profile(props) {
-    console.log(props.user.error)
-    if (props.user.error) {
-        console.log("Not a member - Login / Signup")
-        createView("/login");
+export default function ProfileView(props, githubRepos) {
+    console.log("In profileView")
+    // githubRepos = GitHubInfo();
+
+    //To check if it's user's profile or member's profile
+    let profileId;
+    let user;
+    if (props.member === undefined) {
+        profileId = props.user.id
+        user = props.user;
+    } else {
+        profileId = props.user.id;
+        user = props.member;
     }
 
-
-    return `
-        <div class="container mx-auto pt-2">
-            <h1 class="pt-2 text-center mb-3 bg-animate">Devsplash</h1>
-            <div class="row mx-auto">
-                <div class="col-4">
-                    <img class="rounded-circle border border-dark" src="https://picsum.photos/120"
-                         alt="profilePic" width="120px">
-                </div>
-                <div class="col-7 text-center">
-                    <div class="full-name mt-3">
-                        <h6 id="display-name" class="title-edit">${props.user.displayName}</h6>
-                        <h6 id="first-name" class="title-edit">${props.user.firstname}</h6>
-                        <h6 id="last-name" class="title-edit">${props.user.lastname}</h6>
-                    </div>
-                    <h6 id="email" class="title-edit">${props.user.email}</h6>
-                </div>
-                <button type="button" class="btn btn-block border border-primary edit mt-2 mb-2" data-id="${props.user.id}">Edit Profile</button>
-                <a href="/logout"  class="btn btn-block border border-primary mb-2" data-link> Logout</a>
-                <button type="button" class="btn btn-block border border-primary delete-btn d-none" data-id="${props.user.id}">Delete Profile</button>
-                <p class="p-3">I am backend developer. I have many good ideas. I am looking for enthusiastic
-                team player to collabrate.</p>
-                <br>
-                <div class="m-2 ml-0">Languages I Know </div>
-                    <div class="border border-box rounded">
-                        <ul class="d-flex list-unstyled justify-content-around">
-                            <li class="border border-dark rounded-circle p-2 m-2 mb-0">JS</li>
-                            <li class="border border-dark rounded-circle p-2 m-2 mb-0">HTML</li>
-                            <li class="border border-dark rounded-circle p-2 m-2 mb-0">CSS</li>
-                            <li class="border border-dark rounded-circle p-2 m-2 mb-0">Java</li>
-                        </ul>
-                    </div>
-
-                <div class="m-2 mb-1">Looking For </div>
-                    <div class="border border-box rounded">
-                        <ul class="d-flex list-unstyled justify-content-around">
-                            <li class="border border-dark rounded-circle p-2 m-2 mb-0">PHP</li>
-                            <li class="border border-dark rounded-circle p-2 m-2 mb-0">C++</li>
-                            <li class="border border-dark rounded-circle p-2 m-2 mb-0">React</li>
-                        </ul>
-                    </div>
-                <a href="/project"  class="btn btn-block border border-primary create-btn mt-5" data-link> Create Project </a>
-            </div>
-        </div>
-`
-    //TODO: Save is not working
+    let profilePage = sideNavProfileComponent(user, profileId) + ProfileComponent(user, props.projects, profileId)
+    return PageContentView(profilePage)
 }
 
-function editProfile(id) {
+export function ProfileComponent(user, projects, profileId) {
+    console.log(user);
+    console.log(projects)
+    return `
+        <div class="details-wrapper col-md-8 d-md-inline-flex py-4 mt-3">
+            <div class="details-wrapper-helper col-12 p-md-4">
+                <div class="skills ">
+                    <p class="mb-1">Languages I know</p>
+                    <div class="border rounded p-3">
+                        ${skillsComponents(user.skills)}
+                    </div>
+                </div>
+                <div class="github mt-4">
+                    <p class="mb-1">Github</p>
+                    <div class="">
+                        <div id="repos" class="list-group border rounded p-3">
+                            <p>Your github information will go here!</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="current-projects mt-4">
+                    <p class="mb-1">Ongoing Projects</p>
+                    <div class="row d-flex justify-content-around">
+                             ${(projects) ?
+                                projects.map(project => `${printOutProject(project, user.id)}`).join('')
+                                : 'Your projects will go here.'}
+                    </div>
+                </div>
+                ${(user.id === profileId )?
+                `<a id="createProject" class=" btn btn-light btn-block col-12 border-dark mt-2"
+                                data-user-id="${user.id}" href="#">Create New Project</a>`
+                :``}
+            </div>
+        </div>
+    `;
+}
+
+function skillsComponents(skills) {
+    console.log(skills)
+    let skillComponent = '';
+    if (skills) {
+        skills.map(
+            skill => skillComponent = skillComponent
+                + `<span class="badge badge-pill badge-secondary my-1 p-2 text-dark">${skill.name}</span>`)
+    } else {
+        skillComponent = 'Your skills will go here.'
+    }
+
+    return skillComponent;
+}
+
+export function ProfileEvent(props) {
+    //GitHubInfo();
+    editProfile();
+    creatProjectClickEvent();
+
+    ProjectEvents();
+
+    addSideNavProfileEvents();
+}
+
+function editProfile() {
     $(".edit").click(function () {
-
-        $(".cancel-button").append(`<button type="button" class="cancel" data-id="${id}">Cancel</button>`)
-        $(".delete-btn").toggleClass("d-none");
-        $(".content-edit, .title-edit").attr("contenteditable", true);
-        $(".content-edit, .title-edit").toggleClass("border-bottom");
-        $(".edit").text("Edit");
-        $(this).siblings(".title-edit, .content-edit").attr("contenteditable", true);
-        $(this).text("Save");
-
-        console.log("edit event fired off");
-        $(this).siblings(".title-edit, .content-edit").attr("contenteditable", true);
-        $(this).text("Save");
-
-        $(this).on("click", function () {
-            $(".delete-btn").toggleClass("d-none");
-            let user = {
-                firstname: $("#first-name").text(),
-                lastname: $("#last-name").text(),
-                email: $("#email").text(),
-                displayName: $("#display-name").text(),
-                id: $(this).attr("data-id")
-            }
-            console.log("user is being saved");
-            let request = {
-                method: "PUT",
-                headers: {"Content-type": "application/json"},
-                body: JSON.stringify(user)
-            }
-            fetch(`http://localhost:8080/api/users/`, request)
-                .then(res => {
-                    console.log(res.status);
-                    createView("/profile")
-                }).catch(error => {
-                console.log(error);
-                createView("/profile")
-
-                fetch(`http://localhost:8080/api/users/`, request)
-                    .then(res => {
-                        console.log(res.status);
-                        createView("/users")
-                    }).catch(error => {
-                    console.log(error);
-                    createView("/users")
-                })
-            })
-        })
+        createView("/editProfile")
     })
 }
 
-export function ProfileEvent() {
-    console.log("inside profile event");
-    editProfile();
-    deleteEvent();
-}
-
-function deleteEvent() {
-    $(".delete-btn").click(function () {
-
-        let youSure = confirm("Are you sure you would like to delete your account? This is permanent");
-        if (youSure === true){
-            let request = {
-                method: "DELETE",
-                headers: {"Content-Type": "application/json"},
-            }
-
-            let id = $(this)
-                .attr("data-id")
-
-            fetch(`http://localhost:8080/api/users/${id}`, request)
-                .then(res => {
-                    console.log(res.status);
-                    createView("/");
-                })
-                .catch(error => {
-                    console.log(error)
-                    createView("/profile")
-                })
-        }
-
+function creatProjectClickEvent() {
+    $("#createProject").click(function () {
+        createView("/project")
     })
 }

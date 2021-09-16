@@ -1,9 +1,11 @@
 package com.codeup.devsplash.data.project;
 
+import com.codeup.devsplash.data.skills.Skill;
 import com.codeup.devsplash.data.user.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 @Entity
 @Table(name = "projects")
@@ -21,6 +23,15 @@ public class Project {
 
     @ManyToOne
     private User user;
+
+    @ManyToMany
+    @JoinTable(
+            name="project_skill",
+            joinColumns = {@JoinColumn(name = "project_id", nullable = false)},
+            inverseJoinColumns = {@JoinColumn(name="skill_id", nullable = false)},
+            uniqueConstraints = @UniqueConstraint(columnNames = {"project_id","skill_id"})
+    )
+    private Collection<Skill> skills;
 
     public Project() {
     }
@@ -62,5 +73,13 @@ public class Project {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Collection<Skill> getSkills() {
+        return skills;
+    }
+
+    public void setSkills(Collection<Skill> skills) {
+        this.skills = skills;
     }
 }

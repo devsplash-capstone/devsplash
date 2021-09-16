@@ -21,7 +21,7 @@ public class UsersController {
         this.passwordEncoder = passwordEncoder;
     }
 
-    @PostMapping
+    @PostMapping("/create")
     private void createUser(@RequestBody User newUser) {
         newUser.setPassword(passwordEncoder.encode(newUser.getPassword()));
         usersRepository.save(newUser);
@@ -47,7 +47,11 @@ public class UsersController {
     @DeleteMapping("{id}")
     private void deleteById(@PathVariable Long id) {
         usersRepository.deleteById(id);
+    }
 
+    @GetMapping("findById/{id}")
+    private User getMemberById(@PathVariable Long id) {
+        return usersRepository.findById(id).get();
     }
 }
 

@@ -32,6 +32,12 @@ public class User {
     @Column(nullable = false, length = 100)
     private String password;
 
+    @Column
+    private String aboutMe;
+
+    @Column(nullable = false, length = 100)
+    private String imgUrl;
+
     public enum Role {USER, ADMIN};
 
     @Enumerated(EnumType.STRING)
@@ -50,9 +56,6 @@ public class User {
             uniqueConstraints = @UniqueConstraint(columnNames = {"user_id","skill_id"})
     )
     private Collection<Skill> skills;
-
-    public User() {
-    }
 
     public void setId(Long id) {
         this.id = id;
@@ -112,5 +115,21 @@ public class User {
 
     public void setSkills(Collection<Skill> skills) {
         this.skills = skills;
+    }
+
+    public String getAboutMe() {
+        return aboutMe;
+    }
+
+    public void setAboutMe(String aboutMe) {
+        this.aboutMe = aboutMe;
+    }
+
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
     }
 }
