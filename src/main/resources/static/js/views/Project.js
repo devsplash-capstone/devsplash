@@ -25,8 +25,8 @@ export default function ProjectComponent(props) {
                 </div>
                 <div class="profile-info-wrapper col-9 col-md-12 align-self-center d-md-flex justify-content-md-center">
                     <div class="profile-info pt-md-2 text-md-center">
-                        <h5>Member First Name & Last Name</h5>
-                        <h6>Member Display Name</h6>
+                        <h5>${props.user.firstname} ${props.user.lastname}</h5>
+                        <h6>${props.user.displayName}</h6>
                     </div>
                 </div>
                 <p class="mt-2"> Web Development Instructor with backend
@@ -42,9 +42,9 @@ export default function ProjectComponent(props) {
                     <p>${props.project.description}</p>
                     <h6>Created by </h6>
                     <div class="list-group">
-                        <a href="member.html" class="list-group-item list-group-item-action">
+                        <a href="/profile" class="list-group-item list-group-item-action" data-id="${props.user.id}">
                             <div class="d-md-flex w-100 justify-content-between">
-                                <h5 class="mb-1">${props.project.}</h5>
+                                <h5 class="mb-1">${props.project.user.displayName}</h5>
                                 <small>Looking for - HTML, CSS, JS</small>
                             </div>
                             <small>Springboot, hibernate</small>
@@ -57,28 +57,28 @@ export default function ProjectComponent(props) {
                         <div class="list-group">
                             <a href="member.html" class="list-group-item list-group-item-action">
                                 <div class="d-md-flex w-100 justify-content-between">
-                                    <h5 class="mb-1">Member Display Name Here</h5>
+                                    <h5 class="mb-1">${props.project.user.displayName}</h5>
                                     <small>Looking for - HTML, CSS, JS</small>
                                 </div>
                                 <small>Springboot, hibernate</small>
                             </a>
                             <a href="member.html" class="list-group-item list-group-item-action">
                                 <div class="d-md-flex w-100 justify-content-between">
-                                    <h5 class="mb-1">@mitch</h5>
+                                    <h5 class="mb-1">${props.project.user.displayName}</h5>
                                     <small>Looking for - HTML, CSS, JS</small>
                                 </div>
                                 <small>Springboot, hibernate</small>
                             </a>
                             <a href="profile.html" class="list-group-item list-group-item-action">
                                 <div class="d-md-flex w-100 justify-content-between">
-                                    <h5 class="mb-1">@prachi007</h5>
+                                    <h5 class="mb-1">${props.project.user.displayName}</h5>
                                     <small>Looking for - HTML, CSS, JS</small>
                                 </div>
                                 <small>Springboot, hibernate</small>
                             </a>
                             <a href="member.html" class="list-group-item list-group-item-action">
                                 <div class="d-md-flex w-100 justify-content-between">
-                                    <h5 class="mb-1">@ricardo</h5>
+                                    <h5 class="mb-1">${props.project.user.displayName}</h5>
                                     <small>Looking for - HTML, CSS, JS</small>
                                 </div>
                                 <small>Springboot, hibernate</small>
@@ -130,14 +130,14 @@ function ProjectJoinRequestEvent() {
 
 function ViewProjectEvent() {
     // $("#edit-btn").click(function () {
-        let request = {
-            method: "GET",
-            headers: {"Content-type": "application/json"},
-        }
-        console.log(request);
-        fetch(`http://localhost.8080/api/projects/findById/${1}`, request).then(
-            (response) => {
-                console.log(response.status);
+    let request = {
+        method: "GET",
+        headers: {"Content-type": "application/json"},
+    }
+    console.log(request);
+    fetch(`http://localhost.8080/api/projects/findById/${3}`, request).then(
+        (response) => {
+            console.log(response.status);
 
         });
 }

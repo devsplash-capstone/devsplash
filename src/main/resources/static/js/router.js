@@ -68,15 +68,6 @@ export default function router(URI) {
             title: "Profile",
             viewEvent: ProfileEvent
         },
-        // '/viewproject': {
-        //     returnView: ProjectComponent,
-        //     state: {
-        //         user: "/api/users/me"
-        //     },
-        //     uri: '/viewproject',
-        //     title: "View Project",
-        //     viewEvent: ViewProjects
-        // },
         '/project': {
             returnView: ProjectComponent,
             state: {
