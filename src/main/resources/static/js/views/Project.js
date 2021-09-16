@@ -20,8 +20,8 @@ export default function ProjectComponent(props) {
                 </div>
                 <div class="profile-info-wrapper col-9 col-md-12 align-self-center d-md-flex justify-content-md-center">
                     <div class="profile-info pt-md-2 text-md-center">
-                        <h5>${props.user.firstname} ${props.user.lastname}</h5>
-                        <h6>${props.user.displayName}</h6>
+                        <h5>Member First Name & Last Name</h5>
+                        <h6>Member Display Name</h6>
                     </div>
                 </div>
                 <p class="mt-2"> Web Development Instructor with backend
@@ -33,13 +33,13 @@ export default function ProjectComponent(props) {
         <div class="details-wrapper col-md-9 d-md-inline-flex border rounded py-4 mt-3">
             <div class="details-wrapper-helper col-12">
                 <div class="current-projects mt-4">
-                    <h3>${(props.projects.user.id)}</h3>
+                    <h3>project name</h3>
                     <p>project description</p>
                     <h6>Created by </h6>
                     <div class="list-group">
                         <a href="member.html" class="list-group-item list-group-item-action">
                             <div class="d-md-flex w-100 justify-content-between">
-                                <h5 class="mb-1">${props.user.displayName}</h5>
+                                <h5 class="mb-1">Member Name</h5>
                                 <small>Looking for - HTML, CSS, JS</small>
                             </div>
                             <small>Springboot, hibernate</small>
@@ -52,7 +52,7 @@ export default function ProjectComponent(props) {
                         <div class="list-group">
                             <a href="member.html" class="list-group-item list-group-item-action">
                                 <div class="d-md-flex w-100 justify-content-between">
-                                    <h5 class="mb-1">${props.user.displayName}</h5>
+                                    <h5 class="mb-1">Member Display Name Here</h5>
                                     <small>Looking for - HTML, CSS, JS</small>
                                 </div>
                                 <small>Springboot, hibernate</small>
@@ -95,6 +95,15 @@ export default function ProjectComponent(props) {
 `;
 }
 
+// calls ALL functions within project.js
+export function ViewProjects() {
+    // handles POST request for a user to JOIN a project
+    ProjectJoinRequestEvent();
+    // handles GET request to VIEW a project
+    ViewProjectEvent();
+
+}
+
 function ProjectJoinRequestEvent() {
     $("#joinProject").click(function () {
         console.log("join project still in progress!")
@@ -102,17 +111,8 @@ function ProjectJoinRequestEvent() {
 
 }
 
-// calls ALL functions within project.js
-export function ViewProjects() {
-    // handles GET request to VIEW a project
-    ViewProjectEvent();
-    // handles POST request for a user to JOIN a project
-    ProjectJoinRequestEvent();
-    // calls primary function in project.js (it wasn't being called anywhere except the router, that's why I placed it here)
-    // ProjectComponent();
-}
-
 function ViewProjectEvent() {
+    //this console.log is to help with trouble-shooting...
     console.log("inside view project event")
     let request = {
         method: "GET",
