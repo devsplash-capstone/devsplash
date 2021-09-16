@@ -180,7 +180,7 @@ function editProfileSave() {
                 headers: {"Content-type": "application/json"},
                 body: JSON.stringify(user)
             }
-            fetch(`http://localhost:8080/api/users/`, request)
+            fetch(`${DOMAIN_NAME}/api/users/`, request)
                 .then(res => {
                     console.log(res.status);
                     createView("/profile")
@@ -211,7 +211,7 @@ function editProfileDelete() {
             let id = $(this)
                 .attr("data-id")
 
-            fetch(`http://localhost:8080/api/users/${id}`, request)
+            fetch(`${DOMAIN_NAME}/api/users/${id}`, request)
                 .then(res => {
                     console.log(res.status);
                     createView("/");
