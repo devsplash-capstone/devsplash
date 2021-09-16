@@ -33,8 +33,8 @@ export default function ProjectComponent(props) {
         <div class="details-wrapper col-md-9 d-md-inline-flex border rounded py-4 mt-3">
             <div class="details-wrapper-helper col-12">
                 <div class="current-projects mt-4">
-                    <h3>${props.projects.name}</h3>
-                    <p>${props.projects.description}</p>
+                    <h3>${props.project.name}</h3>
+                    <p>${props.project.description}</p>
                     <h6>Created by </h6>
                     <div class="list-group">
                         <a href="member.html" class="list-group-item list-group-item-action">
