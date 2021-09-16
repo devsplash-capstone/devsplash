@@ -21,3 +21,8 @@ a{
         border-radius: 1%;
     }
 }
+
+.instruction {
+    color: #8f8f8f;
+    font-size: .75em;
+}

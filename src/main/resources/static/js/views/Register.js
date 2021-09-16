@@ -110,6 +110,7 @@ export default function Register(registration) {
                                                         <option value="3">JS</option>
                                                         <option value="3">JS</option>
                                                     </select>
+                                                    <p class="instruction mt-1">Hold cmd to select more than one skill (ctrl for pc)</p>
                                                 </div>
                                             </div>
 
