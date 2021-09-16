@@ -33,8 +33,8 @@ export default function ProjectComponent(props) {
         <div class="details-wrapper col-md-9 d-md-inline-flex border rounded py-4 mt-3">
             <div class="details-wrapper-helper col-12">
                 <div class="current-projects mt-4">
-                    <h3>project name</h3>
-                    <p>project description</p>
+                    <h3>${props.projects.name}</h3>
+                    <p>${props.projects.description}</p>
                     <h6>Created by </h6>
                     <div class="list-group">
                         <a href="member.html" class="list-group-item list-group-item-action">
@@ -111,17 +111,28 @@ function ProjectJoinRequestEvent() {
 
 }
 
+// function ViewProjectEvent() {
+//     //this console.log is to help with trouble-shooting...
+//     console.log("inside view project event")
+//     let request = {
+//         method: "GET",
+//         headers: {"Content-type": "application/json"},
+//     }
+//     console.log(request);
+//     fetch(`http://localhost.8080/api/projects/findById/${id}`, request).then(
+//         (response) => {
+//             console.log(response);
+
 function ViewProjectEvent() {
-    //this console.log is to help with trouble-shooting...
-    console.log("inside view project event")
-    let request = {
-        method: "GET",
-        headers: {"Content-type": "application/json"},
-    }
-    console.log(request);
-    fetch(`http://localhost.8080/api/projects/findById/${id}`, request).then(
-        (response) => {
-            console.log(response);
+    // $("#edit-btn").click(function () {
+        let request = {
+            method: "GET",
+            headers: {"Content-type": "application/json"},
+        }
+        console.log(request);
+        fetch("http://localhost.8080/api/users", request).then(
+            (response) => {
+                console.log(response.status);
 
         });
 }
