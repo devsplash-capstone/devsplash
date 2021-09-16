@@ -93,18 +93,18 @@ export default function EditProfile(props) {
                                             <div class="row">
                                                 <div class="col-12 mb-4">
                                                     <div class="form-outline">
-                                                        <label class="form-label font-weight-bold" for="display-name">About Me</label>
+                                                        <label class="form-label font-weight-bold" for="about-me">About Me</label>
                                                         <textarea id="about-me"
                                                                   class="form-control form-control-lg" placeholder="Tell us about yourself..."
-                                                                  required></textarea>
+                                                                  required>${props.user.aboutMe}</textarea>
                                                     </div>
                                                 </div>
                                                 <div class="col-12 mb-4">
                                                     <div class="form-outline">
-                                                        <label class="form-label font-weight-bold" for="github-name">Profile Img URL
+                                                        <label class="form-label font-weight-bold" for="profile-img">Profile Img URL
                                                         </label>
                                                         <input type="text" id="profile-img"
-                                                               class="form-control form-control-lg"/>
+                                                               class="form-control form-control-lg" value="${(props.user.imgUrl)?props.user.imgUrl:''}"/>
                                                     </div>
                                                 </div>
                                             </div>
@@ -112,17 +112,11 @@ export default function EditProfile(props) {
                                                 <div class="col-12 mb-4">
                                                     <label class="form-label font-weight-bold" for="github-name">Languages
                                                         I know</label>
-                                                    <select class="col-12 custom-select overflow-auto" multiple>
-                                                        <option value="1" selected>Java</option>
-                                                        <option value="2">JSP</option>
-                                                        <option value="2" selected>HTML</option>
-                                                        <option value="3" selected>JS</option>
-                                                        <option value="3" selected>CSS</option>
-                                                        <option value="3" selected>Springboot</option>
-                                                        <option value="1">RESTFul</option>
-                                                        <option value="3">Bootstrap</option>
-                                                        <option value="3">Hibernate</option>
-                                                    </select>
+                                                    <select id="skills" class="col-12 custom-select overflow-auto" multiple>
+                                                        ${(props.skills) ? props.skills.map(skill =>
+                                                      `<option value="${skill.id}">${skill.name}</option>`
+                                                          ) : 'Skills required for the project will go here.'}
+                                                     </select>
                                                 </div>
                                             </div>
 
@@ -165,12 +159,19 @@ function editProfileSave() {
     console.log($("#first-name").val())
     $("#save-btn").click(function () {
         if(editProfileValidate() === true) {
+            let skills = [];
+            $.each($("#skills option:selected"), function () {
+                skills.push({id: $(this).val()});
+            });
             let user = {
                 firstname: $("#first-name").val(),
                 lastname: $("#last-name").val(),
                 displayName: $("#display-name").val(),
                 email: $("#email").val().trim(),
-                id: $(this).attr("data-id")
+                id: $(this).attr("data-id"),
+                aboutMe: $("#about-me").val(),
+                imgUrl: $("#profile-img").val(),
+                skills: skills
             }
             console.log("user is being saved");
             let request = {
