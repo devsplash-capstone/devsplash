@@ -5,7 +5,7 @@ import {getHeaders} from "../auth.js";
 import {addSideNavProfileEvents, sideNavProfileComponent} from "./SideNavProfile.js";
 import {PageContentView} from "./partials/content.js";
 import {memberClickEvent} from "./Members.js";
-import ViewProject, {ViewProjectEvents} from "./viewProject.js";
+import ViewProject, {ViewProjects} from "./Project.js";
 
 export default function ProjectsView(props) {
     let projectsPage = sideNavProfileComponent(props.user, props.user.id) + ProjectsComponent(props.projects, props.user.id)
@@ -74,7 +74,7 @@ export function projectClickEvent() {
                 },
                 uri: '/project',
                 title: "Project",
-                viewEvent:ViewProjectEvents
+                viewEvent:ViewProjects
             }
 
             const request = {

@@ -3,6 +3,11 @@ import createView from "../createView.js";
 // where are we calling ProjectComponent other than router.js?
 export default function ProjectComponent(props) {
     console.log("inside project component")
+    console.log(props)
+
+
+    // fetch it manually, assign the project object to a variable & use the variable in the HTML
+
     // console.log(props)
     // // console.log(props.user.error)
     // // if (props.user.error) {
@@ -39,7 +44,7 @@ export default function ProjectComponent(props) {
                     <div class="list-group">
                         <a href="member.html" class="list-group-item list-group-item-action">
                             <div class="d-md-flex w-100 justify-content-between">
-                                <h5 class="mb-1">Member Display Name</h5>
+                                <h5 class="mb-1">${props.project.}</h5>
                                 <small>Looking for - HTML, CSS, JS</small>
                             </div>
                             <small>Springboot, hibernate</small>
@@ -130,7 +135,7 @@ function ViewProjectEvent() {
             headers: {"Content-type": "application/json"},
         }
         console.log(request);
-        fetch("http://localhost.8080/api/users", request).then(
+        fetch(`http://localhost.8080/api/projects/findById/${1}`, request).then(
             (response) => {
                 console.log(response.status);
 
