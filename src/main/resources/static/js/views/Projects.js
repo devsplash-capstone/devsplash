@@ -28,7 +28,8 @@ function ProjectsComponent(projects, loggedInUserId) {
                         <h3 class="mb-4">Explore Projects</h3>
 
                         <div class="row d-flex justify-content-around">
-                            ${projects.map(project => `${printOutProject(project, loggedInUserId)}`).join('')}
+                            ${(projects)?projects.map(project => `${printOutProject(project, loggedInUserId)}`).join('')
+                            :'All the projects will go here.'}
                         </div>
 
                     </div>

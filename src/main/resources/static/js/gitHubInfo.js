@@ -10,8 +10,10 @@ export default function GitHubInfo() {
         })
 }
 
+//TODO change the function name
 export function test(repos) {
         $("#content").append(
+            (repos)?
             repos.map(repo => {
                 `<a href=${repo.git_url} class="list-group-item list-group-item-action">
                         <div class="d-md-flex w-100 justify-content-between">
@@ -20,7 +22,8 @@ export function test(repos) {
                         </div>
                         <small class="text-muted">${repo.language}</small>
                     </a>`
-            })
+            }):
+                'Repositories from github will go here.'
         )
 
 

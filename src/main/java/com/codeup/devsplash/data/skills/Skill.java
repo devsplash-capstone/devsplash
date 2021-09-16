@@ -1,5 +1,6 @@
 package com.codeup.devsplash.data.skills;
 
+import com.codeup.devsplash.data.project.Project;
 import com.codeup.devsplash.data.user.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -22,6 +23,10 @@ public class Skill {
     @ManyToMany(mappedBy = "skills")
     @JsonIgnore
     private Collection<User> user;
+
+    @ManyToMany(mappedBy = "skills")
+    @JsonIgnore
+    private Collection<Project> project;
 
     public Skill() {
     }
@@ -69,5 +74,13 @@ public class Skill {
 
     public void setUser(Collection<User> user) {
         this.user = user;
+    }
+
+    public Collection<Project> getProject() {
+        return project;
+    }
+
+    public void setProject(Collection<Project> project) {
+        this.project = project;
     }
 }

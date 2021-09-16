@@ -8,7 +8,7 @@ import ProfileView, {ProfileEvent} from "./views/Profile.js";
 import ViewProject, {ViewProjects} from "./views/viewProject.js";
 import ProjectComponent, {ProjectEvent} from "./views/Project.js";
 import ProjectsView, {ProjectsEvents} from "./views/Projects.js";
-import Members from "./views/Members.js";
+import Members, {MembersEvent} from "./views/Members.js";
 import EditProfile, {EditProfileEvent} from "./views/EditProfile.js";
 
 /**
@@ -81,6 +81,7 @@ export default function router(URI) {
             returnView: ProjectComponent,
             state: {
                 user: "/api/users/me",
+                skills:"/api/skills"
             },
             uri: '/project',
             title: "Project",
@@ -103,7 +104,8 @@ export default function router(URI) {
                 users:"/api/users"
             },
             uri: '/members',
-            title: "Members"
+            title: "Members",
+            viewEvent:MembersEvent
         },
         '/editProject': {
             returnView: ProjectComponent,

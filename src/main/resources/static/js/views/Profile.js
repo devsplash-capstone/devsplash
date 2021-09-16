@@ -33,7 +33,9 @@ export function ProfileComponent(props ) {
                 <div class="current-projects mt-4">
                     <p class="mb-1">Ongoing Projects</p>
                     <div class="row d-flex justify-content-around">
-                             ${props.projects.map(project => `${printOutProject(project, props.user.id)}`).join('')}
+                             ${(props.projects)?
+                                props.projects.map(project => `${printOutProject(project, props.user.id)}`).join('')
+                                :'Your projects will go here.'}
                     </div>
                 </div>
                 <form action="/project">
@@ -49,7 +51,7 @@ export function ProfileComponent(props ) {
 function skillsComponents(skills) {
     console.log(skills)
     let skillComponent = '';
-    if( skills != null || skills !== []){
+    if(skills){
         skills.map(
             skill => skillComponent = skillComponent
                 + `<span class="badge badge-pill badge-secondary my-1 p-2 text-dark">${skill.name}</span>`)
