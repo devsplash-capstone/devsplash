@@ -1,11 +1,12 @@
 import createView from "../createView.js";
 
 export function sideNavProfileComponent(user, loggedInUserId) {
+    let placeholderImg = 'https://via.placeholder.com/90x90.png?text=Visit+WhoIsHostingThisC/O';
     return `
         <div class="profile-wrapper col-md-3 d-md-inline-flex mr-md-3">
             <div class="profile-wrapper-helper row p-2">
                 <div class="profile-image px-0 col-3 col-md-12">
-                    <img src="${user.imgUrl}"
+                    <img src="${(user.imgUrl)?user.imgUrl:placeholderImg}"
                          class="rounded-circle" alt="">
                 </div>
                 <div class="profile-info-wrapper col-9 col-md-12 align-self-center d-md-flex justify-content-md-center">
