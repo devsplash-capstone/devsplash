@@ -1,9 +1,9 @@
 import {addSideNavProfileEvents, sideNavProfileComponent} from "./SideNavProfile.js";
 import {PageContentView} from "./partials/content.js";
-import ProjectComponent, {ProjectEvent} from "./Project";
-import {getHeaders} from "../auth";
-import fetchData from "../fetchData";
-import render from "../render";
+import {getHeaders} from "../auth.js";
+import fetchData from "../fetchData.js";
+import render from "../render.js";
+import ProfileView, {ProfileEvent} from "./Profile.js";
 
 
 export default function Members(props) {
@@ -49,20 +49,20 @@ export function MembersEvent(){
     memberClickEvent();
 }
 
-function memberClickEvent() {
+export function memberClickEvent() {
     $(".memberView").click(function () {
-
         const id = $(this).attr("data-member-id");
 
         const route =  {
-            returnView: ProjectComponent,
+            returnView: ProfileView,
             state: {
                 user: "/api/users/me",
-                project:`/api/projects/findById/${id}`
+                member: `/api/users/findById/${id}`,
+                projects:`/api/projects/findByUserId/${id}`
             },
-            uri: '/project',
-            title: "Project",
-            viewEvent:ProjectEvent
+            uri: '/profile',
+            title: "Member's Profile",
+            viewEvent:ProfileEvent
         }
 
         const request = {

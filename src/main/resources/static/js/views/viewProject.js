@@ -1,4 +1,5 @@
 export default function ViewProject(props) {
+    console.log(props)
     return ` 
     <!DOCTYPE html>
  <html lang="eng">
@@ -22,9 +23,9 @@ export default function ViewProject(props) {
    <main>
    <div class="card text-center">
    <div class="card-body">
-   <h1 contenteditable="false" class="card-title">${props.projects[0].name}</h1>
+   <h1 contenteditable="false" class="card-title">${props.project.name}</h1>
    <br>
-   <p contenteditable="false" class="p-3 card-text content">${props.projects[0].description}</p>
+   <p contenteditable="false" class="p-3 card-text content">${props.project.description}</p>
    <br>
   <a href="https://ibb.co/4K0f533"><img src="https://i.ibb.co/VJkNP55/image-placeholder.jpg" alt="image-placeholder" border="0"></a>
    <br>
@@ -42,27 +43,10 @@ export default function ViewProject(props) {
  `;
 }
 
-export function ViewProjects(){
-    ViewProjectEvent();
-    ViewProject();
+export function ViewProjectEvents() {
+    console.log("In View project event")
 }
 
-function ViewProjectEvent() {
-    $("#edit-btn").click(function () {
-        let request = {
-            method: "GET",
-            headers: {"Content-type": "application/json"},
-            body: JSON.stringify(user)
-        }
-        console.log(request);
-        fetch("http://localhost.8080/api/users", request).then(
-            (response) => {
-                console.log(response.status);
-
-            });
-    })
-}
-
-//TODO: Copy the functionality from viewProject to Project.js
+//TODO: Copy the functionality from viewProject to EditProject.js
 //TODO: Change UI as per mockups
 //TODO: Add ProjectJoinRequestEvent()
