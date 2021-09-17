@@ -48,6 +48,7 @@ export function EditProjectComponent(props) {
                                                     :`<option value="${skill.id}">${skill.name}</option>`
                                     ) : 'Skills required for the project will go here.'}
                             </select>
+                            <p class="instruction mt-1">Hold cmd to select more than one skill (ctrl for pc)</p>
                         </div>
                         
                         <div class="row justify-content-around pt-3">
@@ -62,7 +63,7 @@ export function EditProjectComponent(props) {
                         ${(!isNew)?`
                             <div class="row mt-5 mb-3 border border-danger rounded mx-auto">
                                 <button class="btn btn-light btn-block col-10 border-dark mx-auto mt-5"
-                                        data-id="${props.user.id}" type="submit">Delete Proect
+                                        data-id="${props.user.id}" type="submit">Delete Project
                                 </button>
                                 <small class="col-12 col-md-12 mt-1 mb-5 text-center text-danger">This
                                     change will be permanent.</small>
@@ -92,7 +93,7 @@ export function EditProjectEvent() {
             skills: skills
         };
 
-        const url = `http://localhost:8080/api/projects`;
+        const url = `${DOMAIN_NAME}/api/projects`;
         const options = {
             method: 'POST',
             headers: {

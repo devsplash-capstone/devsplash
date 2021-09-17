@@ -65,7 +65,7 @@ function skillsComponents(skills) {
     if (skills) {
         skills.map(
             skill => skillComponent = skillComponent
-                + `<span class="badge badge-pill badge-secondary my-1 p-2 text-dark">${skill.name}</span>`)
+                + `<span class="badge badge-pill badge-secondary my-1 mt-0 mb-0 p-2 m-2">${skill.name}</span>`)
     } else {
         skillComponent = 'Your skills will go here.'
     }

@@ -117,6 +117,7 @@ export default function EditProfile(props) {
                                                       `<option value="${skill.id}">${skill.name}</option>`
                                                           ) : 'Skills required for the project will go here.'}
                                                      </select>
+                                                     <p class="instruction mt-1">Hold cmd to select more than one skill (ctrl for pc)</p>
                                                 </div>
                                             </div>
 
@@ -179,7 +180,7 @@ function editProfileSave() {
                 headers: {"Content-type": "application/json"},
                 body: JSON.stringify(user)
             }
-            fetch(`http://localhost:8080/api/users/`, request)
+            fetch(`${DOMAIN_NAME}/api/users/`, request)
                 .then(res => {
                     console.log(res.status);
                     createView("/profile")
@@ -210,7 +211,7 @@ function editProfileDelete() {
             let id = $(this)
                 .attr("data-id")
 
-            fetch(`http://localhost:8080/api/users/${id}`, request)
+            fetch(`${DOMAIN_NAME}/api/users/${id}`, request)
                 .then(res => {
                     console.log(res.status);
                     createView("/");
