@@ -163,7 +163,7 @@ export function RegisterEvent() {
             console.log(request);
             console.log(user.displayName);
 
-            fetch("http://localhost:8080/api/users/create", request).then(
+            fetch(`${DOMAIN_NAME}/api/users/create`, request).then(
                 (response) => {
                     console.log(response.status);
                     createView("/login");
