@@ -34,27 +34,27 @@ export default function NavbarView(props) {
         } else {
             return `
                     <div class="header-wrapper bg-light">
-            <div class="header">
-                <nav class="navbar navbar-expand-md navbar-light container-xl">
-                    <a class="navbar-brand" href="#">Devsplash</a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse"
-                            data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                            aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
-                        <ul class="navbar-nav ml-auto">
-                            <li class="nav-item px-3">
-                                <a class="nav-link" href="/login" data-link>Sign In</a>
-                            </li>
-                            <li class="nav-item px-3">
-                                <a class="nav-link" href="/register" data-link>Sign Up</a>
-                            </li>
-                        </ul>
+                        <div class="header">
+                            <nav class="navbar navbar-expand-md navbar-light container-xl">
+                                <a class="navbar-brand" href="#">Devsplash</a>
+                                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                                        aria-expanded="false" aria-label="Toggle navigation">
+                                    <span class="navbar-toggler-icon"></span>
+                                </button>
+                                <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                                    <ul class="navbar-nav ml-auto">
+                                        <li class="nav-item px-3">
+                                            <a class="nav-link" href="/login" data-link>Sign In</a>
+                                        </li>
+                                        <li class="nav-item px-3">
+                                            <a class="nav-link" href="/register" data-link>Sign Up</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </nav>
+                        </div>
                     </div>
-                </nav>
-            </div>
-        </div>
                 `;
         }
     else {

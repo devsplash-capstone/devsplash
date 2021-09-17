@@ -4,6 +4,7 @@ import {getHeaders} from "../auth.js";
 import fetchData from "../fetchData.js";
 import render from "../render.js";
 import ProfileView, {ProfileEvent} from "./Profile.js";
+import GitHubInfo from "../gitHubInfo.js";
 
 
 export default function Members(props) {

@@ -38,6 +38,9 @@ public class User {
     @Column
     private String imgUrl;
 
+    @Column
+    private String githubUsername;
+
     public enum Role {USER, ADMIN};
 
     @Enumerated(EnumType.STRING)
@@ -131,5 +134,13 @@ public class User {
 
     public void setImgUrl(String imgUrl) {
         this.imgUrl = imgUrl;
+    }
+
+    public String getGithubUsername() {
+        return githubUsername;
+    }
+
+    public void setGithubUsername(String githubUsername) {
+        this.githubUsername = githubUsername;
     }
 }

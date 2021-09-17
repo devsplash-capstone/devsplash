@@ -75,12 +75,7 @@ export default function router(URI) {
                 skills: "/api/skills"
             },
             uri: '/project',
-            title: "Project",
-
-            viewEvent: ProjectEvents
-
-            // viewEvent: EditProjectEvent
-
+            title: "Project"
         },
         '/projects': {
             returnView: ProjectsView,

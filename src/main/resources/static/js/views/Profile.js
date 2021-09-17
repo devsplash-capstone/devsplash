@@ -1,11 +1,11 @@
 import createView from "../createView.js";
 import {addSideNavProfileEvents, sideNavProfileComponent} from "./SideNavProfile.js";
 import {PageContentView} from "./partials/content.js";
+import {GitHubInfo} from "../gitHubInfo.js";
 import {printOutProject, ProjectsEvents} from "./Projects.js";
 
-export default function ProfileView(props, githubRepos) {
-    console.log("In profileView")
-    // githubRepos = GitHubInfo();
+export default function ProfileView(props) {
+    console.log(props)
 
     //To check if it's user's profile or member's profile
     let profileId;
@@ -19,12 +19,11 @@ export default function ProfileView(props, githubRepos) {
     }
 
     let profilePage = sideNavProfileComponent(user, profileId) + ProfileComponent(user, props.projects, profileId)
-    return PageContentView(profilePage)
+    return PageContentView(profilePage);
+
 }
 
 export function ProfileComponent(user, projects, profileId) {
-    console.log(user);
-    console.log(projects)
     return `
         <div class="details-wrapper col-md-8 d-md-inline-flex py-4 mt-3">
             <div class="details-wrapper-helper col-12 p-md-4">
@@ -38,20 +37,20 @@ export function ProfileComponent(user, projects, profileId) {
                     <p class="mb-1">Github</p>
                     <div class="">
                         <div id="repos" class="list-group border rounded p-3">
-                            <p>Your github information will go here!</p>
+                            ${GitHubInfo(user.githubUsername)}
                         </div>
                     </div>
                 </div>
                 <div class="current-projects mt-4">
                     <p class="mb-1">Ongoing Projects</p>
-                    <div class="row d-flex justify-content-around">
-                             ${!(projects === undefined) ?
+                    <div class="row d-flex justify-content-around p-2">
+                             ${(!(projects.error)) ?
                                 projects.map(project => `${printOutProject(project, user.id)}`).join('')
                                 : 'Your projects will go here.'}
                     </div>
                 </div>
                 ${(user.id === profileId )?
-                `<a id="createProject" class=" btn btn-light btn-block col-12 border-dark mt-2"
+                `<a id="createProject" class=" btn btn-light btn-block col-12 border-dark mt-4"
                                 data-user-id="${user.id}" href="#">Create New Project</a>`
                 :``}
             </div>
@@ -73,8 +72,7 @@ function skillsComponents(skills) {
     return skillComponent;
 }
 
-export function ProfileEvent(props) {
-    //GitHubInfo();
+export function ProfileEvent() {
     editProfile();
     creatProjectClickEvent();
 
@@ -94,3 +92,22 @@ function creatProjectClickEvent() {
         createView("/project")
     })
 }
+
+//TODO change the function name
+// export function showRepos(repos) {
+//     let repoComponent = '';
+//         (repos)?
+//             repos.slice(1,5).map((repo)=> {
+//                 repoComponent = repoComponent + `
+//                      <a href="${repo.html_url}" class="list-group-item list-group-item-action" data-link>
+//                         <div class="d-md-flex w-100 justify-content-between">
+//                             <h5 class="mb-1">${repo.name}</h5>
+//                             <small class="text-muted">Updated at</small>
+//                         </div>
+//                         <small class="text-muted">${repo.language}</small>
+//                     </a> `
+//             }):
+//             repoComponent ='Repositories from github will go here.'
+//     console.log(repoComponent)
+//     return repoComponent;
+// }

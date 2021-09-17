@@ -26,11 +26,9 @@ export default function LoginEvent() {
                 route: `/oauth/token`
             },
             request).then((data) => {
-            console.log(data)
-            if(data.route.error){
-                console.log(data.route.error_description)
+            if (data.route.error) {
                 $("#message").text(data.route.error_description);
-            }else{
+            } else {
                 setTokens(data);
                 createView("/profile");
             }
@@ -41,8 +39,8 @@ export default function LoginEvent() {
 }
 
 export function LogoutEvent() {
-        deleteTokens();
-        createView("/")
+    deleteTokens();
+    createView("/")
 }
 
 
@@ -81,9 +79,8 @@ function setTokens(responseData) {
  */
 
 function deleteTokens() {
-    console.log("Inside delete token")
-        localStorage.removeItem("access_token");
-        console.log("Access token deleted");
-        localStorage.removeItem("refresh_token");
-        console.log("Refresh token deleted")
+    localStorage.removeItem("access_token");
+    console.log("Access token deleted");
+    localStorage.removeItem("refresh_token");
+    console.log("Refresh token deleted")
 }
