@@ -21,29 +21,26 @@ export function GitHubInfo(githubUsername) {
     //TODO: this needs to be moved to a prop file or env variable
     const baseUri = `https://api.github.com/users/${githubUsername}/repos`;
 
-    if(githubUsername){
-        promises.push(
-            fetch(baseUri)
-                .then(function (res) {
-                    return res.json();
-                }));
+    promises.push(
+        fetch(baseUri)
+            .then(function (res) {
+                return res.json();
+            }));
 
-        return Promise.all(promises).then(propsData => {
-            console.log(propsData)
-            const data = {};
+    return Promise.all(promises).then(propsData => {
+        console.log(propsData)
+        const data = {};
             data['repos'] = showRepos(propsData);
-            console.log(data)
-            return data;
-        });
-    }else{
-        return 'Github information not provided.'
-    }
+        console.log(data)
+        return data;
+    });
 }
 
 
 //TODO change the function name
 export default function showRepos(repos) {
 
+    console.log(repos[0][0].name);
     let repoComponent = '';
     (repos[0])? repos[0].slice(1,5).map((repo)=> {
         repoComponent = repoComponent + `

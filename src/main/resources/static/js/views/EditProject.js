@@ -105,7 +105,7 @@ export function EditProjectEvent() {
             skills: skills
         };
 
-        const url = `http://localhost:8080/api/projects`;
+        const url = `${DOMAIN_NAME}/api/projects`;
         const options = {
             method: 'POST',
             headers: {

@@ -1,8 +1,12 @@
 import createView from "../createView.js";
 import {addSideNavProfileEvents, sideNavProfileComponent} from "./SideNavProfile.js";
 import {PageContentView} from "./partials/content.js";
+<<<<<<< HEAD
 import {printOutProject, ProjectEvents} from "./Projects.js";
 import {GitHubInfo} from "../gitHubInfo.js";
+=======
+import {printOutProject, ProjectsEvents} from "./Projects.js";
+>>>>>>> 5ba67c5cfe98553d29307c34f62b93bdffe77955
 
 export default function ProfileView(props) {
     console.log(props)
@@ -76,7 +80,7 @@ export function ProfileEvent() {
     editProfile();
     creatProjectClickEvent();
 
-    ProjectEvents();
+    ProjectsEvents();
 
     addSideNavProfileEvents();
 }
