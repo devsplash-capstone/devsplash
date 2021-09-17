@@ -9,7 +9,6 @@ import EditProjectComponent, {EditProjectEvent} from "./views/EditProject.js";
 import ProjectsView, {ProjectsViewEvents} from "./views/Projects.js";
 import Members, {MembersEvent} from "./views/Members.js";
 import EditProfile, {EditProfileEvent} from "./views/EditProfile.js";
-import EditProjectView from "./views/EditProject.js";
 import ProjectView, {ProjectEvents} from "./views/Project.js";
 
 /**
