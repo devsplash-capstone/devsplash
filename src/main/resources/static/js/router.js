@@ -5,12 +5,12 @@ import Login from "./views/Login.js";
 import LoginEvent, {LogoutEvent} from "./auth.js";
 import Register, {RegisterEvent} from "./views/Register.js";
 import ProfileView, {ProfileEvent} from "./views/Profile.js";
-import ViewProject, {ViewProjectEvents} from "./views/viewProject.js";
-import ProjectComponent, {EditProjectEvent} from "./views/EditProject.js";
+import EditProjectComponent, {EditProjectEvent} from "./views/EditProject.js";
 import ProjectsView, {ProjectsViewEvents} from "./views/Projects.js";
 import Members, {MembersEvent} from "./views/Members.js";
 import EditProfile, {EditProfileEvent} from "./views/EditProfile.js";
 import EditProjectView from "./views/EditProject.js";
+import ProjectView, {ProjectEvents} from "./views/Project.js";
 
 /**
  * Returns the route object for a specific route based on the given URI
@@ -68,48 +68,42 @@ export default function router(URI) {
             title: "Profile",
             viewEvent: ProfileEvent
         },
-        '/viewproject' : {
-            returnView: ViewProject,
-            state: {
-                user: "/api/users/me",
-                projects: "/api/projects/byMe"
-            },
-            uri: '/viewproject',
-            title: "View Project",
-            viewEvent: ViewProjectEvents
-        },
         '/project': {
-            returnView: EditProjectView,
+            returnView: ProjectView,
             state: {
                 user: "/api/users/me",
-                skills:"/api/skills"
+                skills: "/api/skills"
             },
             uri: '/project',
             title: "Project",
-            viewEvent: EditProjectEvent
+
+            viewEvent: ProjectEvents
+
+            // viewEvent: EditProjectEvent
+
         },
         '/projects': {
             returnView: ProjectsView,
             state: {
                 user: "/api/users/me",
-                projects:"/api/projects"
+                projects: "/api/projects"
             },
             uri: '/projects',
             title: "Projects",
-            viewEvent:ProjectsViewEvents
+            viewEvent: ProjectsViewEvents
         },
         '/members': {
             returnView: Members,
             state: {
                 user: "/api/users/me",
-                users:"/api/users"
+                users: "/api/users"
             },
             uri: '/members',
             title: "Members",
-            viewEvent:MembersEvent
+            viewEvent: MembersEvent
         },
         '/editProject': {
-            returnView: ProjectComponent,
+            returnView: EditProjectComponent,
             state: {},
             uri: '/editProject',
             title: "Project"
@@ -128,4 +122,3 @@ export default function router(URI) {
 
     return routes[URI];
 }
-
