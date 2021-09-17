@@ -170,8 +170,8 @@ export function RegisterEvent() {
                     createView("/login");
                 });
         }
-
     })
+
     cancelRegistration();
 }
 
