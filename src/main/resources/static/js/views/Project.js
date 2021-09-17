@@ -1,4 +1,8 @@
 import createView from "../createView.js";
+import ProfileView, {ProfileEvent} from "./Profile.js";
+import {getHeaders} from "../auth.js";
+import fetchData from "../fetchData.js";
+import render from "../render.js";
 
 // where are we calling ProjectComponent other than router.js?
 export default function ProjectComponent(props) {
@@ -55,28 +59,28 @@ export default function ProjectComponent(props) {
                     <h6>Project Members</h6>
                     <div class="">
                         <div class="list-group">
-                            <a href="member.html" class="list-group-item list-group-item-action">
+                            <a href="/member" class="list-group-item list-group-item-action">
                                 <div class="d-md-flex w-100 justify-content-between">
                                     <h5 class="mb-1">${props.project.user.displayName}</h5>
                                     <small>Looking for - HTML, CSS, JS</small>
                                 </div>
                                 <small>Springboot, hibernate</small>
                             </a>
-                            <a href="member.html" class="list-group-item list-group-item-action">
+                            <a href="/member" class="list-group-item list-group-item-action">
                                 <div class="d-md-flex w-100 justify-content-between">
                                     <h5 class="mb-1">${props.project.user.displayName}</h5>
                                     <small>Looking for - HTML, CSS, JS</small>
                                 </div>
                                 <small>Springboot, hibernate</small>
                             </a>
-                            <a href="profile.html" class="list-group-item list-group-item-action">
+                            <a href="/profile" class="list-group-item list-group-item-action">
                                 <div class="d-md-flex w-100 justify-content-between">
                                     <h5 class="mb-1">${props.project.user.displayName}</h5>
                                     <small>Looking for - HTML, CSS, JS</small>
                                 </div>
                                 <small>Springboot, hibernate</small>
                             </a>
-                            <a href="member.html" class="list-group-item list-group-item-action">
+                            <a href="/member" class="list-group-item list-group-item-action">
                                 <div class="d-md-flex w-100 justify-content-between">
                                     <h5 class="mb-1">${props.project.user.displayName}</h5>
                                     <small>Looking for - HTML, CSS, JS</small>
@@ -106,7 +110,37 @@ export function ViewProjects() {
     ProjectJoinRequestEvent();
     // handles GET request to VIEW a project
     ViewProjectEvent();
+    // handles CLICK EVENT for member names to lead to member profiles
+    ProfileMemberClickEvent();
 
+}
+
+export function ProfileMemberClickEvent() {
+    $(".memberView").click(function () {
+        const id = $(this).attr("member-data-id");
+
+        const route = {
+            returnView: ProfileView,
+            state: {
+                user: "/api/users/me",
+                member: `/api/users/findById/${id}`,
+            },
+            uri: '/profile',
+            title: "Member's Profile",
+            viewEvent: ProfileEvent
+        }
+
+        const request = {
+            headers: getHeaders()
+        }
+
+        fetchData(route.state, request)
+            .then((props) => {
+                render(props, route);
+            })
+            .catch(error => console.error(error)); /* handle errors */
+
+    });
 }
 
 function ProjectJoinRequestEvent() {
@@ -116,18 +150,6 @@ function ProjectJoinRequestEvent() {
 
 }
 
-// function ViewProjectEvent() {
-//     //this console.log is to help with trouble-shooting...
-//     console.log("inside view project event")
-//     let request = {
-//         method: "GET",
-//         headers: {"Content-type": "application/json"},
-//     }
-//     console.log(request);
-//     fetch(`http://localhost.8080/api/projects/findById/${id}`, request).then(
-//         (response) => {
-//             console.log(response);
-
 function ViewProjectEvent() {
     // $("#edit-btn").click(function () {
     let request = {
@@ -135,7 +157,7 @@ function ViewProjectEvent() {
         headers: {"Content-type": "application/json"},
     }
     console.log(request);
-    fetch(`http://localhost.8080/api/projects/findById/${3}`, request).then(
+    fetch(`http://localhost.8080/api/projects/findById/${id}`, request).then(
         (response) => {
             console.log(response.status);
 

@@ -76,7 +76,7 @@ function skillsComponents(skills) {
 export function ProfileEvent(props) {
     //GitHubInfo();
     editProfile();
-    createProjectClickEvent();
+    creatProjectClickEvent();
 
     ProjectEvents();
 
@@ -89,7 +89,7 @@ function editProfile() {
     })
 }
 
-function createProjectClickEvent() {
+function creatProjectClickEvent() {
     $("#createProject").click(function () {
         createView("/project")
     })
