@@ -1,4 +1,4 @@
-import {memberClickEvent} from "./Members.js";
+import {memberClickEvent, printOutUsers} from "./Members.js";
 import {sideNavProfileComponent} from "./SideNavProfile.js";
 import {PageContentView} from "./partials/content.js";
 import {skillsComponents} from "./Profile.js";
@@ -21,13 +21,7 @@ export function ProjectComponent(project) {
                     <p>${project.description}</p>
                     <h6>Created by </h6>
                     <div class="list-group">
-                        <a href="#" class="memberView list-group-item list-group-item-action" data-member-id="${project.user.id}">
-                            <div class="d-md-flex w-100 justify-content-between">
-                                <h5 class="mb-1">${project.user.displayName}</h5>
-                                <small>Looking for - HTML, CSS, JS</small>
-                            </div>
-                            <small>Springboot, hibernate</small>
-                        </a>
+                        ${printOutUsers(project.user)}
                     </div>
                 </div>
                 <div class="skills ">
@@ -47,7 +41,6 @@ export function ProjectComponent(project) {
 
 // calls ALL functions within project.js
 export function ProjectEvents() {
-
     memberClickEvent();
 }
 
