@@ -5,12 +5,7 @@ import Login from "./views/Login.js";
 import LoginEvent, {LogoutEvent} from "./auth.js";
 import Register, {RegisterEvent} from "./views/Register.js";
 import ProfileView, {ProfileEvent} from "./views/Profile.js";
-<<<<<<< HEAD
-import ViewProject, {ViewProjectEvents} from "./views/viewProject.js";
-import ProjectComponent, {EditProjectEvents} from "./views/EditProject.js";
-=======
 import EditProjectComponent, {EditProjectEvent} from "./views/EditProject.js";
->>>>>>> 5ba67c5cfe98553d29307c34f62b93bdffe77955
 import ProjectsView, {ProjectsViewEvents} from "./views/Projects.js";
 import Members, {MembersEvent} from "./views/Members.js";
 import EditProfile, {EditProfileEvent} from "./views/EditProfile.js";
@@ -80,16 +75,7 @@ export default function router(URI) {
                 skills: "/api/skills"
             },
             uri: '/project',
-            title: "Project",
-<<<<<<< HEAD
-            viewEvent: EditProjectEvents
-=======
-
-            viewEvent: ProjectEvents
-
-            // viewEvent: EditProjectEvent
-
->>>>>>> 5ba67c5cfe98553d29307c34f62b93bdffe77955
+            title: "Project"
         },
         '/projects': {
             returnView: ProjectsView,
