@@ -59,7 +59,7 @@ export function ProfileComponent(user, projects, profileId) {
     `;
 }
 
-function skillsComponents(skills) {
+export function skillsComponents(skills) {
     console.log(skills)
     let skillComponent = '';
     if (skills) {
