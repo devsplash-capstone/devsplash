@@ -111,7 +111,8 @@ export default function router(URI) {
         '/editProfile': {
             returnView: EditProfile,
             state: {
-                user: "/api/users/me"
+                user: "/api/users/me",
+                skills:"/api/skills"
             },
             uri: '/editProfile',
             title: 'Edit Profile',

@@ -35,7 +35,7 @@ public class User {
     @Column
     private String aboutMe;
 
-    @Column(nullable = false, length = 100)
+    @Column
     private String imgUrl;
 
     public enum Role {USER, ADMIN};

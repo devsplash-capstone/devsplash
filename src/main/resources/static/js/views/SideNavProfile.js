@@ -1,11 +1,12 @@
 import createView from "../createView.js";
 
 export function sideNavProfileComponent(user, loggedInUserId) {
+    let placeholderImg = 'https://via.placeholder.com/90x90.png?text=Visit+WhoIsHostingThisC/O';
     return `
         <div class="profile-wrapper col-md-3 d-md-inline-flex mr-md-3">
             <div class="profile-wrapper-helper row p-2">
                 <div class="profile-image px-0 col-3 col-md-12">
-                    <img src="https://via.placeholder.com/90x90.png?text=Visit+WhoIsHostingThisC/O"
+                    <img src="${(user.imgUrl)?user.imgUrl:placeholderImg}"
                          class="rounded-circle" alt="">
                 </div>
                 <div class="profile-info-wrapper col-9 col-md-12 align-self-center d-md-flex justify-content-md-center">
@@ -14,8 +15,7 @@ export function sideNavProfileComponent(user, loggedInUserId) {
                         <h6>${user.displayName}</h6>
                     </div>
                 </div>
-                <p class="mt-2"> Web Development Instructor with backend
-                    experience in the hospitality, energy, and engineering spaces.</p>
+                <p class="mt-2"> ${user.aboutMe}</p>
                 ${(user.id === loggedInUserId )?
                 `<a class="userEditProfileButton btn btn-light btn-block col-12 border-dark mt-2"
                         data-user-id="${user.id}" href="#">Edit profile</a>`

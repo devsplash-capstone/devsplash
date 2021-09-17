@@ -110,6 +110,7 @@ export default function Register(registration) {
                                                         <option value="3">JS</option>
                                                         <option value="3">JS</option>
                                                     </select>
+                                                    <p class="instruction mt-1">Hold cmd to select more than one skill (ctrl for pc)</p>
                                                 </div>
                                             </div>
 
@@ -160,7 +161,7 @@ export function RegisterEvent() {
         console.log(request);
         console.log(user.displayName);
 
-        fetch("http://localhost:8080/api/users/create", request).then(
+        fetch(`${DOMAIN_NAME}/api/users/create`, request).then(
             (response) => {
                 console.log(response.status);
                 createView("/login");

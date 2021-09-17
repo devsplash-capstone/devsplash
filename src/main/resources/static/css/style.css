@@ -5,7 +5,7 @@ img {
 }
 
 .required:after {
-    content: "*";
+    content: " *";
     color: red;
 }
 #error-messages {
@@ -20,4 +20,9 @@ a{
         border: lightgrey 1px solid;
         border-radius: 1%;
     }
+}
+
+.instruction {
+    color: #8f8f8f;
+    font-size: .75em;
 }
