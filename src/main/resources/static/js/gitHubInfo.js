@@ -31,7 +31,7 @@ export function GitHubInfo(githubUsername) {
         console.log(propsData)
         const data = {};
             data['repos'] = showRepos(propsData);
-        console.log(data)
+        //console.log(data)
         return data;
     });
 }
@@ -53,6 +53,6 @@ export default function showRepos(repos) {
                     </a> `
         }):
         repoComponent = 'Repositories from github will go here.'
-    console.log(repoComponent)
+    //console.log(repoComponent)
     return repoComponent;
 }
