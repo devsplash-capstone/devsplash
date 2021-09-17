@@ -17,7 +17,8 @@ export default function ProfileView(props) {
         profileId = props.user.id;
         user = props.member;
     }
-
+    console.log(profileId);
+    console.log(user.id)
     let profilePage = sideNavProfileComponent(user, profileId) + ProfileComponent(user, props.projects, profileId)
     return PageContentView(profilePage);
 
@@ -45,7 +46,7 @@ export function ProfileComponent(user, projects, profileId) {
                     <p class="mb-1">Ongoing Projects</p>
                     <div class="row d-flex justify-content-around p-2">
                              ${(!(projects.error)) ?
-                                projects.map(project => `${printOutProject(project, user.id)}`).join('')
+                                projects.map(project => `${printOutProject(project, profileId)}`).join('')
                                 : 'Your projects will go here.'}
                     </div>
                 </div>

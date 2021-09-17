@@ -3,8 +3,7 @@ import {PageContentView} from "./partials/content.js";
 import {getHeaders} from "../auth.js";
 import fetchData from "../fetchData.js";
 import render from "../render.js";
-import ProfileView, {ProfileEvent} from "./Profile.js";
-import GitHubInfo from "../gitHubInfo.js";
+import ProfileView, {ProfileEvent, skillsComponents} from "./Profile.js";
 
 
 export default function Members(props) {
@@ -12,14 +11,14 @@ export default function Members(props) {
     return PageContentView(membersPage)
 }
 
-function printOutUsers(member) {
+export function printOutUsers(member) {
     return `
             <a href="#" class="memberView list-group-item list-group-item-action" data-member-id=${member.id}>
                 <div class="d-md-flex w-100 justify-content-between">
                     <h5 class="mb-1">${member.firstname} ${member.lastname}</h5>
                     <small>${member.displayName}</small>
                 </div>
-                <small>Springboot, hibernate</small>
+                <small>${member.skills.map(skill => " " + skill.name)}</small>
             </a>
         `
 }
