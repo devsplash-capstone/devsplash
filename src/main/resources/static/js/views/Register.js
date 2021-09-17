@@ -161,16 +161,17 @@ export function RegisterEvent() {
                 headers: {"Content-type": "application/json"},
                 body: JSON.stringify(user)
             }
-           console.log(request);
-        console.log(user.displayName);
+            console.log(request);
+            console.log(user.displayName);
 
-        fetch(`${DOMAIN_NAME}/api/users/create`, request).then(
-            (response) => {
-                console.log(response.status);
-                createView("/login");
-            });
+            fetch(`${DOMAIN_NAME}/api/users/create`, request).then(
+                (response) => {
+                    console.log(response.status);
+                    createView("/login");
+                });
         }
     })
+
     cancelRegistration();
 }
 
