@@ -55,7 +55,7 @@ export function memberClickEvent() {
         const id = $(this).attr("data-member-id");
 
         const route =  {
-            returnView: GitHubInfo,
+            returnView: ProfileView,
             state: {
                 user: "/api/users/me",
                 member: `/api/users/findById/${id}`,

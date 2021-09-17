@@ -1,46 +1,61 @@
-import ProfileView from "./views/Profile.js";
+// export function GitHubInfo(githubUsername) {
+//     console.log("Data Loading from GitHub")
+//
+//     const myGitHubRequest = new Request(`https://api.github.com/users/${githubUsername}/repos`);
+//     return fetch(myGitHubRequest)
+//         .then(response => response.json())
+//         .then(data => {
+//             console.log(data[0].name)
+//             console.log(showRepos(data[0]))
+//             return showRepos(data[0]);
+//         }).catch(error => {
+//             console.log(error)
+//         });
+//
+//     return 'Github information will go here'
+//
+// }
 
-export default function GitHubInfo(props) {
-    console.log("Data Loading from GitHub")
+export function GitHubInfo(githubUsername) {
+    const promises = [];
+    //TODO: this needs to be moved to a prop file or env variable
+    const baseUri = `https://api.github.com/users/${githubUsername}/repos`;
 
-    let githubUsername;
-    if (props.member === undefined) {
-        githubUsername = props.user.githubUsername;
-    } else {
-        githubUsername = props.member.githubUsername;
+    if(githubUsername){
+        promises.push(
+            fetch(baseUri)
+                .then(function (res) {
+                    return res.json();
+                }));
+
+        return Promise.all(promises).then(propsData => {
+            console.log(propsData)
+            const data = {};
+            data['repos'] = showRepos(propsData);
+            console.log(data)
+            return data;
+        });
+    }else{
+        return 'Github information not provided.'
     }
-
-    console.log(githubUsername)
-    if (githubUsername !== null) {
-        const myGitHubRequest = new Request(`https://api.github.com/users/${githubUsername}/repos`);
-        return fetch(myGitHubRequest)
-            .then(response => response.json())
-            .then(data => {
-                console.log(data)
-                ProfileView(props, data);
-            }).catch(error => {
-                console.log(error)
-                ProfileView(props, null)
-            });
-    } else {
-        ProfileView(props, null);
-    }
-
 }
 
+
 //TODO change the function name
-export function test(repos) {
-    $("#content").append(
-        (repos) ?
-            repos.map(repo => {
-                `<a href="${repo.git_url}" class="list-group-item list-group-item-action">
+export default function showRepos(repos) {
+
+    let repoComponent = '';
+    (repos[0])? repos[0].slice(1,5).map((repo)=> {
+        repoComponent = repoComponent + `
+                     <a href="${repo.html_url}" class="list-group-item list-group-item-action" data-link>
                         <div class="d-md-flex w-100 justify-content-between">
                             <h5 class="mb-1">${repo.name}</h5>
-                            <small class="text-muted">${repo.update_at}</small>
+                            <small class="text-muted">Updated at</small>
                         </div>
                         <small class="text-muted">${repo.language}</small>
-                    </a>`
-            }) :
-            'Repositories from github will go here.'
-    )
+                    </a> `
+        }):
+        repoComponent = 'Repositories from github will go here.'
+    console.log(repoComponent)
+    return repoComponent;
 }

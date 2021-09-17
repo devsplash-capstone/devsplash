@@ -3,7 +3,6 @@ import {addSideNavProfileEvents, sideNavProfileComponent} from "./SideNavProfile
 import {PageContentView} from "./partials/content.js";
 
 export default function EditProjectView(props) {
-    console.log("In profileView")
     let profilePage = sideNavProfileComponent(props.user, props.user.id) + EditProjectComponent(props)
     return PageContentView(profilePage)
 }
@@ -63,7 +62,7 @@ export function EditProjectComponent(props) {
                         ${(!isNew)?`
                             <div class="row mt-5 mb-3 border border-danger rounded mx-auto">
                                 <button class="btn btn-light btn-block col-10 border-dark mx-auto mt-5"
-                                        data-id="${props.user.id}" id="deleteProject">Delete Proect
+                                        data-id="${props.user.id}" id="deleteProject">Delete Project
                                 </button>
                                 <small class="col-12 col-md-12 mt-1 mb-5 text-center text-danger">This
                                     change will be permanent.</small>
@@ -117,7 +116,6 @@ export function EditProjectEvent() {
 
         fetch(url, options)
             .then(data => {
-                console.log(data)
                 createView("/projects")
             })
             .catch(error => console.error(error)); /* handle errors */

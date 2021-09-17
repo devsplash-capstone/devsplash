@@ -2,10 +2,10 @@ import createView from "../createView.js";
 import {addSideNavProfileEvents, sideNavProfileComponent} from "./SideNavProfile.js";
 import {PageContentView} from "./partials/content.js";
 import {printOutProject, ProjectEvents} from "./Projects.js";
+import {GitHubInfo} from "../gitHubInfo.js";
 
-export default function ProfileView(props, githubRepos) {
+export default function ProfileView(props) {
     console.log(props)
-    // githubRepos = GitHubInfo();
 
     //To check if it's user's profile or member's profile
     let profileId;
@@ -18,14 +18,12 @@ export default function ProfileView(props, githubRepos) {
         user = props.member;
     }
 
-    let profilePage = sideNavProfileComponent(user, profileId) + ProfileComponent(user, props.projects, profileId, githubRepos)
-    $(".header-wrapper").after(PageContentView(profilePage));
+    let profilePage = sideNavProfileComponent(user, profileId) + ProfileComponent(user, props.projects, profileId)
+    return PageContentView(profilePage);
+
 }
 
-export function ProfileComponent(user, projects, profileId, githubRepos) {
-    console.log(user);
-    console.log(projects)
-    console.log(githubRepos)
+export function ProfileComponent(user, projects, profileId) {
     return `
         <div class="details-wrapper col-md-8 d-md-inline-flex py-4 mt-3">
             <div class="details-wrapper-helper col-12 p-md-4">
@@ -39,21 +37,20 @@ export function ProfileComponent(user, projects, profileId, githubRepos) {
                     <p class="mb-1">Github</p>
                     <div class="">
                         <div id="repos" class="list-group border rounded p-3">
-                         <a href="https://api.github.com/repos/PrachiPhatak/blogapp"> Link</a>
-                            ${showRepos(githubRepos)}
+                            ${GitHubInfo(user.githubUsername)}
                         </div>
                     </div>
                 </div>
                 <div class="current-projects mt-4">
                     <p class="mb-1">Ongoing Projects</p>
-                    <div class="row d-flex justify-content-around">
-                             ${!(projects === undefined) ?
+                    <div class="row d-flex justify-content-around p-2">
+                             ${(!(projects.error)) ?
                                 projects.map(project => `${printOutProject(project, user.id)}`).join('')
                                 : 'Your projects will go here.'}
                     </div>
                 </div>
                 ${(user.id === profileId )?
-                `<a id="createProject" class=" btn btn-light btn-block col-12 border-dark mt-2"
+                `<a id="createProject" class=" btn btn-light btn-block col-12 border-dark mt-4"
                                 data-user-id="${user.id}" href="#">Create New Project</a>`
                 :``}
             </div>
@@ -75,8 +72,7 @@ function skillsComponents(skills) {
     return skillComponent;
 }
 
-export function ProfileEvent(props) {
-    //GitHubInfo();
+export function ProfileEvent() {
     editProfile();
     creatProjectClickEvent();
 
@@ -98,21 +94,20 @@ function creatProjectClickEvent() {
 }
 
 //TODO change the function name
-export function showRepos(repos) {
-    let repoComponent = '';
-        (repos!==null)?
-            repos.slice(1,5).map((repo)=> {
-                repoComponent = repoComponent + `
-                     <a href="${repo.url}" class="list-group-item list-group-item-action" data-link>
-                        <div class="d-md-flex w-100 justify-content-between">
-                            <h5 class="mb-1">${repo.name}</h5>
-                            <small class="text-muted">Updated at</small>
-                        </div>
-                        <small class="text-muted">${repo.language}</small>
-                    </a> `
-            }):
-            repoComponent ='Repositories from github will go here.'
-
-    console.log(repoComponent)
-    return repoComponent;
-}
+// export function showRepos(repos) {
+//     let repoComponent = '';
+//         (repos)?
+//             repos.slice(1,5).map((repo)=> {
+//                 repoComponent = repoComponent + `
+//                      <a href="${repo.html_url}" class="list-group-item list-group-item-action" data-link>
+//                         <div class="d-md-flex w-100 justify-content-between">
+//                             <h5 class="mb-1">${repo.name}</h5>
+//                             <small class="text-muted">Updated at</small>
+//                         </div>
+//                         <small class="text-muted">${repo.language}</small>
+//                     </a> `
+//             }):
+//             repoComponent ='Repositories from github will go here.'
+//     console.log(repoComponent)
+//     return repoComponent;
+// }
