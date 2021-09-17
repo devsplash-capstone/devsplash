@@ -1,6 +1,7 @@
 import {memberClickEvent} from "./Members.js";
 import {sideNavProfileComponent} from "./SideNavProfile.js";
 import {PageContentView} from "./partials/content.js";
+import {skillsComponents} from "./Profile.js";
 
 export default function ProjectView(props) {
     let membersPage = sideNavProfileComponent(props.user, props.user.id) + ProjectComponent(props.project);
@@ -29,7 +30,12 @@ export function ProjectComponent(project) {
                         </a>
                     </div>
                 </div>
-                
+                <div class="skills ">
+                    <p class="mb-1">Skills Required</p>
+                    <div class="border rounded p-3">
+                        ${skillsComponents(project.skills)}
+                    </div>
+                </div>
                 <form action="projects.html">
                     <button class="btn btn-light btn-block col-12 border-dark mt-3" id="joinProject">Join Project
                     </button>
