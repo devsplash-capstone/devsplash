@@ -97,7 +97,9 @@ export default function router(URI) {
         },
         '/editProject': {
             returnView: EditProjectComponent,
-            state: {},
+            state: {
+                user: "/api/users/me"
+            },
             uri: '/editProject',
             title: "Project"
         },

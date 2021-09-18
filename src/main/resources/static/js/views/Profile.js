@@ -71,6 +71,6 @@ export function ProfileEvent() {
 
 function creatProjectClickEvent() {
     $("#createProject").click(function () {
-        createView("/project")
+        createView("/editProject")
     })
 }
