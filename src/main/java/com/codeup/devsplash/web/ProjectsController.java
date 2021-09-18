@@ -46,4 +46,9 @@ public class ProjectsController {
     private List<Project> getProjectsByUserId(@PathVariable Long id) {
         return projectsRepository.findByUser_id(id);
     }
+
+    @DeleteMapping("{id}")
+    private void deleteProjectById(@PathVariable Long id){
+        projectsRepository.deleteById(id);
+    }
 }

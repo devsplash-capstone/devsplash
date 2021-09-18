@@ -1,4 +1,4 @@
-import ProjectComponent, {EditProjectEvent} from "./EditProject.js";
+import ProjectComponent, {EditProjectEvents} from "./EditProject.js";
 import render from "../render.js";
 import fetchData from "../fetchData.js";
 import {getHeaders} from "../auth.js";
@@ -140,7 +140,7 @@ export function editProjectClickFetchEvent() {
             },
             uri: '/project',
             title: "Project",
-            viewEvent: EditProjectEvent
+            viewEvent: EditProjectEvents
         }
         const request = {
             headers: getHeaders()

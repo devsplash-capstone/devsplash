@@ -5,7 +5,7 @@ import Login from "./views/Login.js";
 import LoginEvent, {LogoutEvent} from "./auth.js";
 import Register, {RegisterEvent} from "./views/Register.js";
 import ProfileView from "./views/Profile.js";
-import EditProjectComponent from "./views/EditProject.js";
+import EditProjectComponent, {EditProjectEvents} from "./views/EditProject.js";
 import ProjectsView, {ProjectsViewEvents} from "./views/Projects.js";
 import Members, {MembersEvents} from "./views/Members.js";
 import EditProfile, {EditProfileEvent} from "./views/EditProfile.js";
@@ -98,10 +98,12 @@ export default function router(URI) {
         '/editProject': {
             returnView: EditProjectComponent,
             state: {
-                user: "/api/users/me"
+                user: "/api/users/me",
+                skills:"/api/skills"
             },
             uri: '/editProject',
-            title: "Project"
+            title: "Project",
+            viewEvent:EditProjectEvents
         },
         '/editProfile': {
             returnView: EditProfile,

@@ -7,19 +7,14 @@ export default function EditProjectView(props) {
     return PageContentView(profilePage)
 }
 
+/**
+ * Renders edit project form if props have project or renders create new project form
+ * @param props
+ * @returns {string}
+ */
 export function EditProjectComponent(props) {
-    let pageHeader;
-    let isNew;
-    if (props.project) {
-        //Edit project
-        pageHeader = "Edit Project"
-        isNew = false;
-    } else {
-        //New Project
-        pageHeader = "Create New Project";
-        isNew = true;
+    let pageHeader = isNew(props) ? "Create New Project" : "Edit Project"
 
-    }
     return `
         <div class="details-wrapper col-md-8 d-md-inline-flex py-4 mt-3">
             <div class="details-wrapper-helper col-12 p-md-4">
@@ -35,38 +30,22 @@ export function EditProjectComponent(props) {
                             <label for="description" class="required">Description</label>
                             <textarea  class="form-control" id="description">${(props.project) ? (props.project.description) : ''}</textarea>
                         </div>
-                        <div class="col-12 mt-4">
+                        <div class="form-group mt-4">
                             <label class="form-label font-weight-bold" for="github-name">Required skills</label>
                             <select id="skills" class="col-12 custom-select overflow-auto" multiple>
-                                <!--  Check if it's edit project, show previously saved skills selected    -->
-                                ${(props.skills) ? props.skills.map(skill =>
-                                        (isNew)
-                                        ?`<option value="${skill.id}">${skill.name}</option>`
-                                        :(props.project.skills.includes(skill.id))
-                                                    ?`<option value="${skill.id}" selected>${skill.name}</option>`
-                                                    :`<option value="${skill.id}">${skill.name}</option>`
-                                    ) : 'Skills required for the project will go here.'}
+                                ${renderAndHighlightSkills(props)}
                             </select>
                             <p class="instruction mt-1">Hold cmd to select more than one skill (ctrl for pc)</p>
                         </div>
                         
                         <div class="row justify-content-around pt-3">
-                            <button id="createProject" class="btn btn-light btn-block col-10 col-md-5 border-dark mt-2"
-                                    data-id="${props.user.id}">Save
-                            </button>
-                            <button class="btn btn-light btn-block col-10 col-md-5 border-dark mt-2"
+                            ${renderSaveButton(props)}
+                            <button class="cancel btn btn-light btn-block col-10 col-md-5 border-dark mt-2"
                                     >Cancel
                             </button>
                         </div>
                         
-                        ${(!isNew)?`
-                            <div class="row mt-5 mb-3 border border-danger rounded mx-auto">
-                                <button class="btn btn-light btn-block col-10 border-dark mx-auto mt-5"
-                                        data-id="${props.user.id}" id="deleteProject">Delete Project
-                                </button>
-                                <small class="col-12 col-md-12 mt-1 mb-5 text-center text-danger">This
-                                    change will be permanent.</small>
-                            </div>` :''}
+                        ${renderDeleteButton(props)}
                         
                     </form>
                 </div>
@@ -75,22 +54,113 @@ export function EditProjectComponent(props) {
 `;
 }
 
-function EditProjectCancelEvent() {
-    $("")
+/**
+ * Renders all skills for new project and renders skills with selected previously
+ * @param props
+ * @returns {*|string}
+ */
+function renderAndHighlightSkills(props) {
+    return (isNew(props)) ? renderSkills(props.skills) : renderAndSelectSkills(props.skills, props.project.skills)
 }
 
-function EditProjectDeleteEvent() {
-
+function renderSkills(skills) {
+    return skills.map(skill => `<option value="${skill.id}">${skill.name}</option>`)
 }
 
-export function EditProjectEvents(){
-    EditProjectEvent();
+function renderAndSelectSkills(skillsList, selectedSkills) {
+    let skills = '';
+    const selected = new Map();
+    selectedSkills.map(skill => selected.set(skill.id, `<option value="${skill.id}" selected>${skill.name}</option>`))
+    skillsList.map(skill => {
+        if (!selected.has(skill.id))
+            selected.set(skill.id, `<option value="${skill.id}">${skill.name}</option>`)
+    })
+    for (let [key, value] of selected) {
+        skills = skills + value;
+    }
+    console.log(skills)
+    return skills;
+}
+
+/**
+ * Checks if projects is new or editing a project
+ * @param props
+ * @returns {boolean}
+ */
+function isNew(props) {
+    return (!props.project)
+}
+
+/**
+ * Renders save project button with project-id if editing project or render Save button
+ * @param props
+ * @returns {string}
+ */
+function renderSaveButton(props) {
+    return (isNew(props))
+        ? `<button class="saveProject btn btn-light btn-block col-10 col-md-5 border-dark mt-2"
+                   data-user-id="${props.user.id}" data-isNew ="true">Save </button>`
+        : `<button class="saveProject btn btn-light btn-block col-10 col-md-5 border-dark mt-2"
+                   data-user-id="${props.user.id}" data-project-id="${props.project.id}" data-isNew ="false">
+                Save
+            </button>`;
+}
+
+/**
+ * Renders delete button if editing a project
+ * @param props
+ * @returns {string|string}
+ */
+function renderDeleteButton(props) {
+    return (!isNew(props))
+        ? `<div class="row mt-5 mb-3 border border-danger rounded mx-auto">
+            <button class="btn btn-light btn-block col-10 border-dark mx-auto mt-5" data-project-id="${props.project.id}"
+                id="deleteProject">Delete Project</button>
+            <small class="col-12 col-md-12 mt-1 mb-5 text-center text-danger">This change will be permanent.</small>
+           </div>`
+        : ''
+}
+
+/**
+ * Adds events for profile card, edit, delete and save
+ */
+export function EditProjectEvents() {
+    saveProjectFetchEvent();
     EditProjectCancelEvent();
-    EditProjectDeleteEvent();
+    deleteProjectFetchEvent();
     profileCardEvents();
 }
-export function EditProjectEvent() {
-    $("#createProject").click(function () {
+
+function EditProjectCancelEvent() {
+    $(".cancel").click(function () {
+        createView("/profile")
+    })
+}
+
+function deleteProjectFetchEvent() {
+    $("#deleteProject").click(function () {
+        if (confirm("Do you want to delete project?")) {
+            let id = $(this).attr("data-project-id");
+            const url = `${DOMAIN_NAME}/api/projects/${id}`;
+            const options = {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+            };
+
+            fetch(url, options)
+                .then(_ => {
+                    createView("/profile")
+                })
+                .catch(error => console.error(error)); /* handle errors */
+        }
+    })
+}
+
+export function saveProjectFetchEvent() {
+    $(".saveProject").click(function () {
+        console.log("inside click")
         let skills = [];
         $.each($("#skills option:selected"), function () {
             skills.push({id: $(this).val()});
@@ -100,11 +170,16 @@ export function EditProjectEvent() {
             name: $("#name").val(),
             description: $("#description").val(),
             user: {
-                id: $(this).attr("data-id")
+                id: $(this).attr("data-user-id")
             },
             skills: skills
         };
 
+        //Set project id if editing project
+        if ($(this).attr("data-isNew") === "false")
+            project.id = $(this).attr("data-project-id")
+
+        console.log(project)
         const url = `${DOMAIN_NAME}/api/projects`;
         const options = {
             method: 'POST',
@@ -115,8 +190,8 @@ export function EditProjectEvent() {
         };
 
         fetch(url, options)
-            .then(data => {
-                createView("/projects")
+            .then(_ => {
+                createView("/profile")
             })
             .catch(error => console.error(error)); /* handle errors */
     });
