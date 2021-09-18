@@ -4,7 +4,7 @@ import Error404 from "./views/errors.js";
 import Login from "./views/Login.js";
 import LoginEvent, {LogoutEvent} from "./auth.js";
 import Register, {RegisterEvent} from "./views/Register.js";
-import ProfileView, {ProfileEvent} from "./views/Profile.js";
+import ProfileView from "./views/Profile.js";
 import EditProjectComponent from "./views/EditProject.js";
 import ProjectsView, {ProjectsViewEvents} from "./views/Projects.js";
 import Members, {MembersEvent} from "./views/Members.js";
@@ -65,7 +65,6 @@ export default function router(URI) {
             },
             uri: '/profile',
             title: "Profile",
-            viewEvent: ProfileEvent
         },
         '/project': {
             returnView: ProjectView,

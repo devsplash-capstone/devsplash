@@ -25,7 +25,7 @@ export function RenderProfileCardComponent(user, loggedInUserId) {
                 </div>
                 <p class="mt-2"> ${user.aboutMe}</p>
                 <div id="profileAction" class="col-12">
-                    ${renderSideNavProfileButtons(user, loggedInUserId)}
+                    ${renderProfileCardButtons(user, loggedInUserId)}
                 </div>
             </div>
         </div>
@@ -33,34 +33,44 @@ export function RenderProfileCardComponent(user, loggedInUserId) {
 }
 
 /**
- * Renders
- * @param user
- * @param loggedInUserId
- * @returns {string}
+ * renderProfileCardButtons renders sendEmail or editProfile Buttons
+ * @param user - can be logged in user or member
+ * @param loggedInUserId- user id of logged in user
+ * @returns {string} - sendEmail or editProfile
  */
-function renderSideNavProfileButtons(user, loggedInUserId) {
+function renderProfileCardButtons(user, loggedInUserId) {
     return (user.id === loggedInUserId) ?
-        `<a class="userEditProfileButton btn btn-light btn-block col-12 border-dark mt-2"
+        `<a class="editProfileButton btn btn-light btn-block col-12 border-dark mt-2"
                         data-user-id="${user.id}" href="#">Edit profile</a>`
         :
-        ` <a class="sendEmailProfileButton btn btn-light btn-block col-12 border-dark mt-2"
+        ` <a class="sendEmailButton btn btn-light btn-block col-12 border-dark mt-2"
                         data-user-id="${user.id}" data-member-id="${loggedInUserId}" href="#">Send Email</a>`
 }
 
-
-export function addSideNavProfileEvents() {
+/**
+ * Adds editProfileEvent and sendEmailEvent
+ */
+export function profileCardEvents() {
     editProfileEvent();
     sendEmailEvent();
 }
 
+/**
+ * Adds editProfileEvent for .userEditProfileButton
+ */
 function editProfileEvent() {
-    $(".userEditProfileButton").click(function () {
+    $(".editProfileButton").click(function () {
         createView("/editProfile")
     });
 }
+
+/**
+ * Adds sendEmailEvent for .sendEmailEvent
+ * -------WIP-------
+ */
 // TODO: Adds functionality to send email
 function sendEmailEvent() {
-    $(".sendEmailProfileButton").click(function () {
+    $(".sendEmailButton").click(function () {
         //alert($(this).attr("data-user-id") + " Send email to " + $(this).attr("data-member-id"))
     });
 }

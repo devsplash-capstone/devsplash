@@ -1,5 +1,5 @@
 import createView from "../createView.js";
-import {addSideNavProfileEvents} from "./SideNavProfile.js";
+import {profileCardEvents} from "./ProfileCard.js";
 import {RenderProfileWithGithubInfo} from "../gitHubInfo.js";
 import {printOutProject, ProjectsEvents} from "./Projects.js";
 import {PageContentView} from "./partials/content.js";
@@ -32,8 +32,8 @@ export function ProfileComponent(user, projects, githubRepos, profileId) {
                     <p class="mb-1">Ongoing Projects</p>
                     <div class="row d-flex justify-content-around p-2">
                              ${(!(projects.error)) ?
-                            projects.map(project => `${printOutProject(project, profileId)}`).join('')
-                            : 'Your projects will go here.'}
+        projects.map(project => `${printOutProject(project, profileId)}`).join('')
+        : 'Your projects will go here.'}
                     </div>
                 </div>
                 ${(user.id === profileId) ?
@@ -59,18 +59,9 @@ export function skillsComponents(skills) {
 }
 
 export function ProfileEvent() {
-    editProfile();
+    profileCardEvents();
     creatProjectClickEvent();
-
     ProjectsEvents();
-
-    addSideNavProfileEvents();
-}
-
-function editProfile() {
-    $(".edit").click(function () {
-        createView("/editProfile")
-    })
 }
 
 function creatProjectClickEvent() {

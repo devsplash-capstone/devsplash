@@ -2,7 +2,7 @@ import ProjectComponent, {EditProjectEvent} from "./EditProject.js";
 import render from "../render.js";
 import fetchData from "../fetchData.js";
 import {getHeaders} from "../auth.js";
-import {addSideNavProfileEvents, RenderProfileCardComponent} from "./SideNavProfile.js";
+import {profileCardEvents, RenderProfileCardComponent} from "./ProfileCard.js";
 import {PageContentView} from "./partials/content.js";
 import {memberClickEvent} from "./Members.js";
 import ProjectView, {ProjectEvents} from "./Project.js";
@@ -14,7 +14,7 @@ export default function ProjectsView(props) {
 
 export function ProjectsViewEvents() {
     ProjectsEvents();
-    addSideNavProfileEvents();
+    profileCardEvents();
 }
 export function ProjectsEvents(){
     projectClickEvent();

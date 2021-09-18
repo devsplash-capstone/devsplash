@@ -1,9 +1,9 @@
-import {addSideNavProfileEvents, RenderProfileCardComponent} from "./SideNavProfile.js";
+import {profileCardEvents, RenderProfileCardComponent} from "./ProfileCard.js";
 import {PageContentView} from "./partials/content.js";
 import {getHeaders} from "../auth.js";
 import fetchData from "../fetchData.js";
 import render from "../render.js";
-import ProfileView, {ProfileEvent} from "./Profile.js";
+import ProfileView from "./Profile.js";
 
 
 export default function Members(props) {
@@ -44,7 +44,7 @@ export function membersList(members, label=''){
 
 
 export function MembersEvent(){
-    addSideNavProfileEvents();
+    profileCardEvents();
 
     memberClickEvent();
 }
@@ -62,7 +62,6 @@ export function memberClickEvent() {
             },
             uri: '/profile',
             title: "Member's Profile",
-            viewEvent:ProfileEvent
         }
 
         const request = {

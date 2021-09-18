@@ -1,5 +1,5 @@
-import {ProfileComponent} from "./views/Profile.js";
-import {RenderProfileCardComponent} from "./views/SideNavProfile.js";
+import {ProfileComponent, ProfileEvent} from "./views/Profile.js";
+import {RenderProfileCardComponent} from "./views/ProfileCard.js";
 import {PageContentView} from "./views/partials/content.js";
 
 export function RenderProfileWithGithubInfo(props) {
@@ -24,9 +24,10 @@ export function RenderProfileWithGithubInfo(props) {
             ProfileComponent(user, props.projects, renderGithubInfo(propsData), profileId)
 
     }).then(profilePage => {
-        let temp = PageContentView(profilePage)
+        let pageContentView = PageContentView(profilePage)
         $("#loadingGif").remove()
-        $(".header-wrapper").append(temp)
+        $(".header-wrapper").append(pageContentView)
+        ProfileEvent();
     });
 }
 

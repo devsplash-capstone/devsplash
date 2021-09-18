@@ -1,5 +1,5 @@
 import {memberClickEvent, printOutUsers} from "./Members.js";
-import {RenderProfileCardComponent} from "./SideNavProfile.js";
+import {RenderProfileCardComponent} from "./ProfileCard.js";
 import {PageContentView} from "./partials/content.js";
 import {skillsComponents} from "./Profile.js";
 

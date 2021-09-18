@@ -1,5 +1,5 @@
 import createView from "../createView.js";
-import {addSideNavProfileEvents, RenderProfileCardComponent} from "./SideNavProfile.js";
+import {profileCardEvents, RenderProfileCardComponent} from "./ProfileCard.js";
 import {PageContentView} from "./partials/content.js";
 
 export default function EditProjectView(props) {
@@ -87,7 +87,7 @@ export function EditProjectEvents(){
     EditProjectEvent();
     EditProjectCancelEvent();
     EditProjectDeleteEvent();
-    addSideNavProfileEvents();
+    profileCardEvents();
 }
 export function EditProjectEvent() {
     $("#createProject").click(function () {
