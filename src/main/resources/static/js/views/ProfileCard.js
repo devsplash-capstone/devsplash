@@ -2,7 +2,7 @@ import createView from "../createView.js";
 
 /**
  * RenderProfileCardComponent method renders Profile component with members information.
- * It adds "sendemail" if a member is rendered or adds "edit profile" if logged in member
+ * It adds "Send Email" if a member is rendered or adds "edit profile" if logged in member
  * is rendered.
  * @param user - can be logged in user or member
  * @param loggedInUserId - user id of logged in user
