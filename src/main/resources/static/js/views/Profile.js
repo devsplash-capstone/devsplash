@@ -11,23 +11,23 @@ export default function ProfileView(props) {
 
 export function renderProfileComponent(user, projects, githubRepos, profileId) {
     return `
-        <div class="details-wrapper col-md-8 d-md-inline-flex py-4 mt-3">
-            <div class="details-wrapper-helper col-12 p-md-4">
+        <div class="details-wrapper col-md-8 d-md-inline-flex px-0 py-4 mt-3">
+            <div class="details-wrapper-helper px-0 col-12 p-md-4">
                 <div class="skills ">
-                    <p class="mb-1">Languages I know</p>
-                    <div class="border rounded p-3">
+                    <h6 class="mb-2">Languages I know</h6>
+                    <div class="border rounded p-md-2 m-md-2">
                         ${renderSkillsComponents(user.skills)}
                     </div>
                 </div>
                 <div class="github mt-4">
-                    <p class="mb-1">Github</p>
-                    <div id="repos" class="list-group p-2">
+                    <h6 class="mb-1">Github</h6>
+                    <div id="repos" class="list-group p-md-2">
                         ${renderGithubInfo(githubRepos)}
                     </div>
                 </div>
                 <div class="current-projects mt-4">
-                    <p class="mb-1">Ongoing Projects</p>
-                    <div class="row d-flex justify-content-around p-2 mx-0">
+                    <h6 class="mb-1">Ongoing Projects</h6>
+                    <div class="row d-flex justify-content-around p-md-2 mx-0">
                          ${renderProjects(projects, profileId)}
                     </div>
                 </div>
@@ -42,7 +42,7 @@ export function renderProfileComponent(user, projects, githubRepos, profileId) {
 function renderProjects(projects, profileId) {
     return (!(projects.error))
         ? projects.map(project => `${renderProject(project, profileId)} `).join('')
-        : `<div class="border rounded p-2">Your projects will go here.</div>`;
+        : `<div class="border rounded p-2 col-12">Your projects will go here.</div>`;
 }
 
 function renderCreateProjectButton(user, profileId) {

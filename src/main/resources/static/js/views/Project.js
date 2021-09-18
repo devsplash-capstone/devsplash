@@ -1,4 +1,4 @@
-import {memberClickEvent, renderUsers} from "./Members.js";
+import {memberClickFetchEvent, renderMember} from "./Members.js";
 import {RenderProfileCardComponent} from "./ProfileCard.js";
 import {PageContentView} from "./partials/content.js";
 import {renderSkillsComponents} from "./Profile.js";
@@ -22,7 +22,7 @@ export function renderProjectComponent(project) {
                     <p>${project.description}</p>
                     <div class="list-group mt-4">
                         <p class="mb-1">Created by </p>
-                        ${renderUsers(project.user)}
+                        ${renderMember(project.user)}
                     </div>
                 </div>
                 <div class="skills pt-3 p-md-3">
@@ -44,13 +44,5 @@ export function renderProjectComponent(project) {
  * Adds click event for creator
  */
 export function ProjectEvents() {
-    memberClickEvent();
-}
-
-//TODO: complete project join function
-function ProjectJoinRequestEvent() {
-    $("#joinProject").click(function () {
-        console.log("join project still in progress!")
-    })
-
+    memberClickFetchEvent();
 }

@@ -7,7 +7,7 @@ import Register, {RegisterEvent} from "./views/Register.js";
 import ProfileView from "./views/Profile.js";
 import EditProjectComponent from "./views/EditProject.js";
 import ProjectsView, {ProjectsViewEvents} from "./views/Projects.js";
-import Members, {MembersEvent} from "./views/Members.js";
+import Members, {MembersEvents} from "./views/Members.js";
 import EditProfile, {EditProfileEvent} from "./views/EditProfile.js";
 import ProjectView from "./views/Project.js";
 
@@ -93,7 +93,7 @@ export default function router(URI) {
             },
             uri: '/members',
             title: "Members",
-            viewEvent: MembersEvent
+            viewEvent: MembersEvents
         },
         '/editProject': {
             returnView: EditProjectComponent,
