@@ -8,38 +8,34 @@ import {memberClickEvent} from "./Members.js";
 import ProjectView, {ProjectEvents} from "./Project.js";
 
 export default function ProjectsView(props) {
-    let projectsPage = RenderProfileCardComponent(props.user, props.user.id) + ProjectsComponent(props.projects, props.user.id)
+    let projectsPage = RenderProfileCardComponent(props.user, props.user.id) + renderProjectsComponent(props.projects, props.user.id)
     return PageContentView(projectsPage)
 }
 
-export function ProjectsViewEvents() {
-    ProjectsEvents();
-    profileCardEvents();
-}
-export function ProjectsEvents(){
-    projectClickEvent();
-    editProjectClickEvent();
-    memberClickEvent();
-}
 
-function ProjectsComponent(projects, loggedInUserId) {
+function renderProjectsComponent(projects, loggedInUserId) {
     return `
-            <div class="details-wrapper col-md-8 d-md-inline-flex py-4 px-2 m-md-3">
-                <div class="details-wrapper-helper col-12 p-md-4">
-                    <div class="current-projects mt-4">
+            <div class="details-wrapper col-md-8 d-md-inline-flex py-4 pt-md-0 px-0 m-md-3">
+                <div class="details-wrapper-helper col-12 px-0 p-md-4">
+                    <div class="current-projects px-0 mt-4 mt-md-0 p-md-4">
                         <h3 class="mb-4">Explore Projects</h3>
-                        <div class="row d-flex justify-content-around">
-                            ${(projects)?projects.map(project => `${printOutProject(project, loggedInUserId)}`).join('')
-                            :'All the projects will go here.'}
+                        <div class="row d-flex justify-content-around mx-0">
+                           ${renderProjects(projects, loggedInUserId)}
                         </div>
                     </div>
                 </div>
             </div>
         `
-    ;
+        ;
 }
 
-export function printOutProject(project, loggedInUserId) {
+function renderProjects(projects, loggedInUserId) {
+    return (projects)
+        ? projects.map(project => `${renderProject(project, loggedInUserId)}`).join('')
+        : `<div class="border rounded p-2">All the projects will go here.</div>`
+}
+
+export function renderProject(project, loggedInUserId) {
     return `
             <div class="card col-12  px-3 px-md-0">
                 <div class="card-body">
@@ -50,40 +46,51 @@ export function printOutProject(project, loggedInUserId) {
                         </h6>
                     </a>
                     <p class="card-text">${project.description}</p>
-                    ${(project.user.id === loggedInUserId)  ? `<a href="#" class="projectEditLink" data-id="${project.id}">Edit</a>` : ``}
+                    ${(project.user.id === loggedInUserId) ? `<a href="#" class="projectEditLink" data-id="${project.id}">Edit</a>` : ``}
                 </div>
             </div>
             `
 }
 
+export function ProjectsViewEvents() {
+    ProjectsEvents();
+    profileCardEvents();
+}
+
+export function ProjectsEvents() {
+    projectClickEvent();
+    editProjectClickEvent();
+    memberClickEvent();
+}
+
 //TODO: review the fetch function
 export function projectClickEvent() {
-    $(".projectViewLink").click(function (){
+    $(".projectViewLink").click(function () {
 
-            const id = $(this).attr("data-id");
+        const id = $(this).attr("data-id");
 
-            const route =  {
-                returnView: ProjectView,
-                state: {
-                    user: "/api/users/me",
-                    project:`/api/projects/findById/${id}`,
-                },
-                uri: '/project',
-                title: "Project",
-                viewEvent:ProjectEvents
-            }
+        const route = {
+            returnView: ProjectView,
+            state: {
+                user: "/api/users/me",
+                project: `/api/projects/findById/${id}`,
+            },
+            uri: '/project',
+            title: "Project",
+            viewEvent: ProjectEvents
+        }
 
-            const request = {
-                headers: getHeaders()
-            }
+        const request = {
+            headers: getHeaders()
+        }
 
-            fetchData(route.state, request)
-                .then((props) => {
-                    render(props, route);
-                })
-                .catch(error => console.error(error)); /* handle errors */
+        fetchData(route.state, request)
+            .then((props) => {
+                render(props, route);
+            })
+            .catch(error => console.error(error)); /* handle errors */
 
-        });
+    });
 }
 
 //TODO: review the fetch function
@@ -93,16 +100,16 @@ export function editProjectClickEvent() {
 
         const id = $(this).attr("data-id");
 
-        const route =  {
+        const route = {
             returnView: ProjectComponent,
             state: {
                 user: "/api/users/me",
-                project:`/api/projects/findById/${id}`,
-                skills:"/api/skills"
+                project: `/api/projects/findById/${id}`,
+                skills: "/api/skills"
             },
             uri: '/project',
             title: "Project",
-            viewEvent:EditProjectEvent
+            viewEvent: EditProjectEvent
         }
 
         const request = {

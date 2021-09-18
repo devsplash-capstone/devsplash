@@ -24,7 +24,7 @@ export function RenderProfileCardComponent(user, loggedInUserId) {
                     </div>
                 </div>
                 <p class="mt-2"> ${user.aboutMe}</p>
-                <div id="profileAction" class="col-12">
+                <div id="profileAction" class="col-12 p-0">
                     ${renderProfileCardButtons(user, loggedInUserId)}
                 </div>
             </div>
