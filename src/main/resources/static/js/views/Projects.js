@@ -2,16 +2,15 @@ import ProjectComponent, {EditProjectEvent} from "./EditProject.js";
 import render from "../render.js";
 import fetchData from "../fetchData.js";
 import {getHeaders} from "../auth.js";
-import {addSideNavProfileEvents, sideNavProfileComponent} from "./SideNavProfile.js";
+import {addSideNavProfileEvents, RenderProfileCardComponent} from "./SideNavProfile.js";
 import {PageContentView} from "./partials/content.js";
 import {memberClickEvent} from "./Members.js";
 import ProjectView, {ProjectEvents} from "./Project.js";
 
 export default function ProjectsView(props) {
-    let projectsPage = sideNavProfileComponent(props.user, props.user.id) + ProjectsComponent(props.projects, props.user.id)
+    let projectsPage = RenderProfileCardComponent(props.user, props.user.id) + ProjectsComponent(props.projects, props.user.id)
     return PageContentView(projectsPage)
 }
-
 
 export function ProjectsViewEvents() {
     ProjectsEvents();
@@ -28,14 +27,11 @@ function ProjectsComponent(projects, loggedInUserId) {
             <div class="details-wrapper col-md-8 d-md-inline-flex py-4 px-2 m-md-3">
                 <div class="details-wrapper-helper col-12 p-md-4">
                     <div class="current-projects mt-4">
-
                         <h3 class="mb-4">Explore Projects</h3>
-
                         <div class="row d-flex justify-content-around">
                             ${(projects)?projects.map(project => `${printOutProject(project, loggedInUserId)}`).join('')
                             :'All the projects will go here.'}
                         </div>
-
                     </div>
                 </div>
             </div>

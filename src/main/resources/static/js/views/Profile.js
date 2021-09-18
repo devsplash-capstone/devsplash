@@ -1,30 +1,16 @@
 import createView from "../createView.js";
-import {addSideNavProfileEvents, sideNavProfileComponent} from "./SideNavProfile.js";
-import {PageContentView} from "./partials/content.js";
-import {GitHubInfo} from "../gitHubInfo.js";
+import {addSideNavProfileEvents} from "./SideNavProfile.js";
+import {RenderProfileWithGithubInfo} from "../gitHubInfo.js";
 import {printOutProject, ProjectsEvents} from "./Projects.js";
+import {PageContentView} from "./partials/content.js";
 
 export default function ProfileView(props) {
-    console.log(props)
 
-    //To check if it's user's profile or member's profile
-    let profileId;
-    let user;
-    if (props.member === undefined) {
-        profileId = props.user.id
-        user = props.user;
-    } else {
-        profileId = props.user.id;
-        user = props.member;
-    }
-    console.log(profileId);
-    console.log(user.id)
-    let profilePage = sideNavProfileComponent(user, profileId) + ProfileComponent(user, props.projects, profileId)
-    return PageContentView(profilePage);
-
+    RenderProfileWithGithubInfo(props)
+    return PageContentView(`<img id="loadingGif" src="https://flevix.com/wp-content/uploads/2019/07/Color-Loading-2.gif" alt=""/>`)
 }
 
-export function ProfileComponent(user, projects, profileId) {
+export function ProfileComponent(user, projects, githubRepos, profileId) {
     return `
         <div class="details-wrapper col-md-8 d-md-inline-flex py-4 mt-3">
             <div class="details-wrapper-helper col-12 p-md-4">
@@ -38,7 +24,7 @@ export function ProfileComponent(user, projects, profileId) {
                     <p class="mb-1">Github</p>
                     <div class="">
                         <div id="repos" class="list-group border rounded p-3">
-                            ${GitHubInfo(user.githubUsername)}
+                            ${githubRepos}
                         </div>
                     </div>
                 </div>
@@ -46,21 +32,20 @@ export function ProfileComponent(user, projects, profileId) {
                     <p class="mb-1">Ongoing Projects</p>
                     <div class="row d-flex justify-content-around p-2">
                              ${(!(projects.error)) ?
-                                projects.map(project => `${printOutProject(project, profileId)}`).join('')
-                                : 'Your projects will go here.'}
+                            projects.map(project => `${printOutProject(project, profileId)}`).join('')
+                            : 'Your projects will go here.'}
                     </div>
                 </div>
-                ${(user.id === profileId )?
-                `<a id="createProject" class=" btn btn-light btn-block col-12 border-dark mt-4"
+                ${(user.id === profileId) ?
+        `<a id="createProject" class=" btn btn-light btn-block col-12 border-dark mt-4"
                                 data-user-id="${user.id}" href="#">Create New Project</a>`
-                :``}
+        : ``}
             </div>
         </div>
     `;
 }
 
 export function skillsComponents(skills) {
-    console.log(skills)
     let skillComponent = '';
     if (skills) {
         skills.map(
@@ -93,22 +78,3 @@ function creatProjectClickEvent() {
         createView("/project")
     })
 }
-
-//TODO change the function name
-// export function showRepos(repos) {
-//     let repoComponent = '';
-//         (repos)?
-//             repos.slice(1,5).map((repo)=> {
-//                 repoComponent = repoComponent + `
-//                      <a href="${repo.html_url}" class="list-group-item list-group-item-action" data-link>
-//                         <div class="d-md-flex w-100 justify-content-between">
-//                             <h5 class="mb-1">${repo.name}</h5>
-//                             <small class="text-muted">Updated at</small>
-//                         </div>
-//                         <small class="text-muted">${repo.language}</small>
-//                     </a> `
-//             }):
-//             repoComponent ='Repositories from github will go here.'
-//     console.log(repoComponent)
-//     return repoComponent;
-// }

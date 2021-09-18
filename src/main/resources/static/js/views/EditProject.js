@@ -1,9 +1,9 @@
 import createView from "../createView.js";
-import {addSideNavProfileEvents, sideNavProfileComponent} from "./SideNavProfile.js";
+import {addSideNavProfileEvents, RenderProfileCardComponent} from "./SideNavProfile.js";
 import {PageContentView} from "./partials/content.js";
 
 export default function EditProjectView(props) {
-    let profilePage = sideNavProfileComponent(props.user, props.user.id) + EditProjectComponent(props)
+    let profilePage = RenderProfileCardComponent(props.user, props.user.id) + EditProjectComponent(props)
     return PageContentView(profilePage)
 }
 

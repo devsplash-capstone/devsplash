@@ -1,13 +1,13 @@
-import {addSideNavProfileEvents, sideNavProfileComponent} from "./SideNavProfile.js";
+import {addSideNavProfileEvents, RenderProfileCardComponent} from "./SideNavProfile.js";
 import {PageContentView} from "./partials/content.js";
 import {getHeaders} from "../auth.js";
 import fetchData from "../fetchData.js";
 import render from "../render.js";
-import ProfileView, {ProfileEvent, skillsComponents} from "./Profile.js";
+import ProfileView, {ProfileEvent} from "./Profile.js";
 
 
 export default function Members(props) {
-    let membersPage = sideNavProfileComponent(props.user, props.user.id) + membersList(props.users, "Members");
+    let membersPage = RenderProfileCardComponent(props.user, props.user.id) + membersList(props.users, "Members");
     return PageContentView(membersPage)
 }
 

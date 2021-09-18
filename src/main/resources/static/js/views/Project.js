@@ -1,10 +1,10 @@
 import {memberClickEvent, printOutUsers} from "./Members.js";
-import {sideNavProfileComponent} from "./SideNavProfile.js";
+import {RenderProfileCardComponent} from "./SideNavProfile.js";
 import {PageContentView} from "./partials/content.js";
 import {skillsComponents} from "./Profile.js";
 
 export default function ProjectView(props) {
-    let membersPage = sideNavProfileComponent(props.user, props.user.id) + ProjectComponent(props.project);
+    let membersPage = RenderProfileCardComponent(props.user, props.user.id) + ProjectComponent(props.project);
     return PageContentView(membersPage)
 }
 
