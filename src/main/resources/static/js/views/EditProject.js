@@ -78,7 +78,6 @@ function renderAndSelectSkills(skillsList, selectedSkills) {
     for (let [key, value] of selected) {
         skills = skills + value;
     }
-    console.log(skills)
     return skills;
 }
 
