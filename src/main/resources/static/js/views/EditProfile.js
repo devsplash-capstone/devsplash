@@ -213,7 +213,6 @@ function editProfileDelete() {
 
             fetch(`${DOMAIN_NAME}/api/users/${id}`, request)
                 .then(res => {
-                    console.log(res.status);
                     createView("/");
                 })
                 .catch(error => {
