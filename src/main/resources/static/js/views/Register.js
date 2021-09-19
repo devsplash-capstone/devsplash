@@ -161,12 +161,9 @@ export function RegisterEvent() {
                 headers: {"Content-type": "application/json"},
                 body: JSON.stringify(user)
             }
-            console.log(request);
-            console.log(user.displayName);
 
             fetch(`${DOMAIN_NAME}/api/users/create`, request).then(
                 (response) => {
-                    console.log(response.status);
                     createView("/login");
                 });
         }
@@ -232,7 +229,6 @@ function RegisterValidation() {
     if ($("#confirm-password").val().length > 100) {
         errorMessages = errorMessages + "Too many characters";
     }
-    console.log(errorMessages);
     if (errorMessages) {
         $("#error-messages").append(errorMessages)
         return false;

@@ -1,114 +1,76 @@
 import createView from "../createView.js";
-import {addSideNavProfileEvents, sideNavProfileComponent} from "./SideNavProfile.js";
-import {PageContentView} from "./partials/content.js";
-import {GitHubInfo} from "../gitHubInfo.js";
-import {printOutProject, ProjectsEvents} from "./Projects.js";
+import {profileCardEvents} from "./ProfileCard.js";
+import RenderProfileWithGithubInfo, {renderGithubInfo} from "../gitHubInfo.js";
+import {renderProject, ProjectsEvents} from "./Projects.js";
 
 export default function ProfileView(props) {
-    console.log(props)
 
-    //To check if it's user's profile or member's profile
-    let profileId;
-    let user;
-    if (props.member === undefined) {
-        profileId = props.user.id
-        user = props.user;
-    } else {
-        profileId = props.user.id;
-        user = props.member;
-    }
-    console.log(profileId);
-    console.log(user.id)
-    let profilePage = sideNavProfileComponent(user, profileId) + ProfileComponent(user, props.projects, profileId)
-    return PageContentView(profilePage);
-
+    RenderProfileWithGithubInfo(props)
+    return `<img id="loadingGif" src="https://flevix.com/wp-content/uploads/2019/07/Color-Loading-2.gif" alt=""/>`
 }
 
-export function ProfileComponent(user, projects, profileId) {
+export function renderProfileComponent(user, projects, githubRepos, profileId) {
     return `
-        <div class="details-wrapper col-md-8 d-md-inline-flex py-4 mt-3">
-            <div class="details-wrapper-helper col-12 p-md-4">
+        <div class="details-wrapper col-md-8 d-md-inline-flex px-0 py-4 mt-3">
+            <div class="details-wrapper-helper px-0 col-12 p-md-4">
                 <div class="skills ">
-                    <p class="mb-1">Languages I know</p>
-                    <div class="border rounded p-3">
-                        ${skillsComponents(user.skills)}
+                    <h6 class="mb-2">Languages I know</h6>
+                    <div class="border rounded p-md-2 m-md-2">
+                        ${renderSkillsComponents(user.skills)}
                     </div>
                 </div>
                 <div class="github mt-4">
-                    <p class="mb-1">Github</p>
-                    <div class="">
-                        <div id="repos" class="list-group border rounded p-3">
-                            ${GitHubInfo(user.githubUsername)}
-                        </div>
+                    <h6 class="mb-1">Github</h6>
+                    <div id="repos" class="list-group p-md-2">
+                        ${renderGithubInfo(githubRepos)}
                     </div>
                 </div>
                 <div class="current-projects mt-4">
-                    <p class="mb-1">Ongoing Projects</p>
-                    <div class="row d-flex justify-content-around p-2">
-                             ${(!(projects.error)) ?
-                                projects.map(project => `${printOutProject(project, profileId)}`).join('')
-                                : 'Your projects will go here.'}
+                    <h6 class="mb-1">Ongoing Projects</h6>
+                    <div class="row d-flex justify-content-around p-md-2 mx-0">
+                         ${renderProjects(projects, profileId)}
                     </div>
                 </div>
-                ${(user.id === profileId )?
-                `<a id="createProject" class=" btn btn-light btn-block col-12 border-dark mt-4"
-                                data-user-id="${user.id}" href="#">Create New Project</a>`
-                :``}
+                <div class="mt-2">
+                    ${renderCreateProjectButton(user, profileId)}
+                </div>
             </div>
         </div>
     `;
 }
 
-export function skillsComponents(skills) {
-    console.log(skills)
+function renderProjects(projects, profileId) {
+    return (!(projects.error))
+        ? projects.map(project => `${renderProject(project, profileId)} `).join('')
+        : `<div class="border rounded p-2 col-12">Your projects will go here.</div>`;
+}
+
+function renderCreateProjectButton(user, profileId) {
+    return (user.id === profileId)
+        ? `<a id="createProject" class=" btn btn-light btn-block col-12 border-dark mt-4" data-user-id="${user.id}" 
+             href="#">Create New Project</a>`
+        : ``
+}
+
+export function renderSkillsComponents(skills) {
     let skillComponent = '';
     if (skills) {
-        skills.map(
-            skill => skillComponent = skillComponent
-                + `<span class="badge badge-pill badge-secondary my-1 mt-0 mb-0 p-2 m-2">${skill.name}</span>`)
+        skills.map(skill => skillComponent = skillComponent
+            + `<span class="badge badge-pill badge-secondary my-1 mt-0 mb-0 p-2 m-2">${skill.name}</span>`)
     } else {
         skillComponent = 'Your skills will go here.'
     }
-
     return skillComponent;
 }
 
 export function ProfileEvent() {
-    editProfile();
+    profileCardEvents();
     creatProjectClickEvent();
-
     ProjectsEvents();
-
-    addSideNavProfileEvents();
-}
-
-function editProfile() {
-    $(".edit").click(function () {
-        createView("/editProfile")
-    })
 }
 
 function creatProjectClickEvent() {
     $("#createProject").click(function () {
-        createView("/project")
+        createView("/editProject")
     })
 }
-
-//TODO change the function name
-// export function showRepos(repos) {
-//     let repoComponent = '';
-//         (repos)?
-//             repos.slice(1,5).map((repo)=> {
-//                 repoComponent = repoComponent + `
-//                      <a href="${repo.html_url}" class="list-group-item list-group-item-action" data-link>
-//                         <div class="d-md-flex w-100 justify-content-between">
-//                             <h5 class="mb-1">${repo.name}</h5>
-//                             <small class="text-muted">Updated at</small>
-//                         </div>
-//                         <small class="text-muted">${repo.language}</small>
-//                     </a> `
-//             }):
-//             repoComponent ='Repositories from github will go here.'
-//     console.log(repoComponent)
-//     return repoComponent;
-// }

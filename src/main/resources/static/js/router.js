@@ -4,12 +4,12 @@ import Error404 from "./views/errors.js";
 import Login from "./views/Login.js";
 import LoginEvent, {LogoutEvent} from "./auth.js";
 import Register, {RegisterEvent} from "./views/Register.js";
-import ProfileView, {ProfileEvent} from "./views/Profile.js";
-import EditProjectComponent, {EditProjectEvent} from "./views/EditProject.js";
+import ProfileView from "./views/Profile.js";
+import EditProjectComponent, {EditProjectEvents} from "./views/EditProject.js";
 import ProjectsView, {ProjectsViewEvents} from "./views/Projects.js";
-import Members, {MembersEvent} from "./views/Members.js";
+import Members, {MembersEvents} from "./views/Members.js";
 import EditProfile, {EditProfileEvent} from "./views/EditProfile.js";
-import ProjectView, {ProjectEvents} from "./views/Project.js";
+import ProjectView from "./views/Project.js";
 
 /**
  * Returns the route object for a specific route based on the given URI
@@ -65,7 +65,6 @@ export default function router(URI) {
             },
             uri: '/profile',
             title: "Profile",
-            viewEvent: ProfileEvent
         },
         '/project': {
             returnView: ProjectView,
@@ -94,13 +93,17 @@ export default function router(URI) {
             },
             uri: '/members',
             title: "Members",
-            viewEvent: MembersEvent
+            viewEvent: MembersEvents
         },
         '/editProject': {
             returnView: EditProjectComponent,
-            state: {},
+            state: {
+                user: "/api/users/me",
+                skills:"/api/skills"
+            },
             uri: '/editProject',
-            title: "Project"
+            title: "Project",
+            viewEvent:EditProjectEvents
         },
         '/editProfile': {
             returnView: EditProfile,

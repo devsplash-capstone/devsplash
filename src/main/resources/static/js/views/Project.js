@@ -1,36 +1,37 @@
-import {memberClickEvent, printOutUsers} from "./Members.js";
-import {sideNavProfileComponent} from "./SideNavProfile.js";
+import {memberClickFetchEvent, renderMember} from "./Members.js";
+import {RenderProfileCardComponent} from "./ProfileCard.js";
 import {PageContentView} from "./partials/content.js";
-import {skillsComponents} from "./Profile.js";
+import {renderSkillsComponents} from "./Profile.js";
 
 export default function ProjectView(props) {
-    let membersPage = sideNavProfileComponent(props.user, props.user.id) + ProjectComponent(props.project);
+    let membersPage = RenderProfileCardComponent(props.user, props.user.id) + renderProjectComponent(props.project);
     return PageContentView(membersPage)
 }
 
-// where are we calling ProjectComponent other than router.js?
-export function ProjectComponent(project) {
-    console.log("inside project component")
-    console.log(project)
-
+/**
+ * Renders project details - project name, description, created by, join button
+ * @param project
+ * @returns {string}
+ */
+export function renderProjectComponent(project) {
     return `
-        <div class="details-wrapper col-md-9 d-md-inline-flex border rounded py-4 mt-3">
+        <div class="details-wrapper col-md-8 d-md-inline-flex border rounded py-4 mt-3">
             <div class="details-wrapper-helper col-12">
-                <div class="current-projects mt-4">
+                <div class="current-projects mt-4 p-md-3">
                     <h3>${project.name}</h3>
                     <p>${project.description}</p>
-                    <h6>Created by </h6>
-                    <div class="list-group">
-                        ${printOutUsers(project.user)}
+                    <div class="list-group mt-4">
+                        <p class="mb-1">Created by </p>
+                        ${renderMember(project.user)}
                     </div>
                 </div>
-                <div class="skills ">
+                <div class="skills pt-3 p-md-3">
                     <p class="mb-1">Skills Required</p>
                     <div class="border rounded p-3">
-                        ${skillsComponents(project.skills)}
+                        ${renderSkillsComponents(project.skills)}
                     </div>
                 </div>
-                <form action="projects.html">
+                <form class="pt-3 p-md-3">
                     <button class="btn btn-light btn-block col-12 border-dark mt-3" id="joinProject">Join Project
                     </button>
                 </form>
@@ -39,15 +40,9 @@ export function ProjectComponent(project) {
 `;
 }
 
-// calls ALL functions within project.js
+/**
+ * Adds click event for creator
+ */
 export function ProjectEvents() {
-    memberClickEvent();
-}
-
-//TODO: complete project join function
-function ProjectJoinRequestEvent() {
-    $("#joinProject").click(function () {
-        console.log("join project still in progress!")
-    })
-
+    memberClickFetchEvent();
 }

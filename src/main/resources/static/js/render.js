@@ -1,6 +1,5 @@
 import Footer from "./views/partials/Footer.js";
 import NavbarView from "./views/partials/Navbar.js";
-import {PageContentView} from "./views/partials/content.js";
 
 /**
  * Pushes the current URI to the URL bar and sets the HTML of the app div.
