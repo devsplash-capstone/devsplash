@@ -1,38 +1,30 @@
-import {addSideNavProfileEvents, sideNavProfileComponent} from "./SideNavProfile.js";
+import {profileCardEvents, RenderProfileCardComponent} from "./ProfileCard.js";
 import {PageContentView} from "./partials/content.js";
 import {getHeaders} from "../auth.js";
 import fetchData from "../fetchData.js";
 import render from "../render.js";
-import ProfileView, {ProfileEvent, skillsComponents} from "./Profile.js";
-
+import ProfileView from "./Profile.js";
 
 export default function Members(props) {
-    let membersPage = sideNavProfileComponent(props.user, props.user.id) + membersList(props.users, "Members");
+    let membersPage = RenderProfileCardComponent(props.user, props.user.id) + renderMembersComponent(props.users, "Members");
     return PageContentView(membersPage)
 }
 
-export function printOutUsers(member) {
+/**
+ * Renders members list, adds label for the list
+ * @param members
+ * @param label - List name
+ * @returns {string}
+ */
+export function renderMembersComponent(members, label = '') {
     return `
-            <a href="#" class="memberView list-group-item list-group-item-action" data-member-id=${member.id}>
-                <div class="d-md-flex w-100 justify-content-between">
-                    <h5 class="mb-1">${member.firstname} ${member.lastname}</h5>
-                    <small>${member.displayName}</small>
-                </div>
-                <small>${member.skills.map(skill => " " + skill.name)}</small>
-            </a>
-        `
-}
-
-export function membersList(members, label=''){
-    return `
-        <div class="details-wrapper col-md-8 d-md-inline-flex py-4 mt-3">
-            <div class="details-wrapper-helper col-12">
-                <div class="current-members mt-4 m-md-4">
+        <div class="details-wrapper col-md-8 d-md-inline-flex px-0 px-md-4 py-4 mt-3">
+            <div class="details-wrapper-helper px-0 col-12">
+                <div class="current-members px-0 mt-4 m-md-4">
                     <h3 class="mb-4">${label}</h3>
                     <div class="mt-4">
                         <div class="list-group">
-                            ${(members)?members.map(member => `${printOutUsers(member)}`).join('')
-                                :'List of all members will go here.'}
+                            ${renderMembers(members)}
                         </div>
                     </div>
                 </div>
@@ -41,28 +33,54 @@ export function membersList(members, label=''){
     `;
 }
 
-
-
-export function MembersEvent(){
-    addSideNavProfileEvents();
-
-    memberClickEvent();
+/**
+ * Renders members
+ * @param member
+ * @returns {string}
+ */
+export function renderMember(member) {
+    return `<a href="#" class="memberView list-group-item list-group-item-action" data-member-id="${member.id}">
+                <div class="d-md-flex w-100 justify-content-between">
+                    <h5 class="mb-1">${member.firstname} ${member.lastname}</h5>
+                    <small>${member.displayName}</small>
+                </div>
+                <small>${member.skills.map(skill => " " + skill.name)}</small>
+            </a>
+        `;
 }
 
-export function memberClickEvent() {
+/**
+ * Render member
+ * @param members
+ * @returns {*|string}
+ */
+function renderMembers(members) {
+    return (members)
+        ? members.map(member => `${renderMember(member)}`).join('')
+        : '<div class="border rounded p-2">List of all members will go here.</div>';
+}
+
+/**
+ * Adds profile card events and member click event
+ */
+export function MembersEvents() {
+    profileCardEvents();
+    memberClickFetchEvent();
+}
+
+export function memberClickFetchEvent() {
     $(".memberView").click(function () {
         const id = $(this).attr("data-member-id");
 
-        const route =  {
+        const route = {
             returnView: ProfileView,
             state: {
                 user: "/api/users/me",
                 member: `/api/users/findById/${id}`,
-                projects:`/api/projects/findByUserId/${id}`
+                projects: `/api/projects/findByUserId/${id}`
             },
             uri: '/profile',
             title: "Member's Profile",
-            viewEvent:ProfileEvent
         }
 
         const request = {
