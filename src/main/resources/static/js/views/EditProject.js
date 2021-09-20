@@ -64,7 +64,11 @@ function renderAndHighlightSkills(props) {
 }
 
 export function renderSkills(skills) {
-    return skills.map(skill => `<option value="${skill.id}">${skill.name}</option>`)
+    if (skills){
+        return skills.map(skill => `<option value="${skill.id}">${skill.name}</option>`)
+    }else{
+        return "";
+    }
 }
 
 export function renderAndSelectSkills(skillsList, selectedSkills) {
