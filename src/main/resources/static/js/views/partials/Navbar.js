@@ -5,7 +5,7 @@ export default function NavbarView(props) {
                     <div class="header-wrapper bg-light">
                         <div class="header">
                             <nav class="navbar navbar-expand-md navbar-light container-xl">
-                                <a class="navbar-brand nav-link" href="/" data-link><img src="../../../assets/devsplash_0.png" alt="" class="logo"></a>
+                                <a class="navbar-brand nav-link" href="/" data-link><img src="../../../assets/devsplash_0.png" alt="" class="logo" /></a>
                                 <button class="navbar-toggler" type="button" data-toggle="collapse"
                                         data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                                         aria-expanded="false" aria-label="Toggle navigation">
