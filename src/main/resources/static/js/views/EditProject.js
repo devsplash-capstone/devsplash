@@ -63,7 +63,7 @@ function renderAndHighlightSkills(props) {
     return (isNew(props)) ? renderSkills(props.skills) : renderAndSelectSkills(props.skills, props.project.skills)
 }
 
-function renderSkills(skills) {
+export function renderSkills(skills) {
     return skills.map(skill => `<option value="${skill.id}">${skill.name}</option>`)
 }
 
