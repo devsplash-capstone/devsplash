@@ -175,50 +175,68 @@ function cancelRegistration() {
 
 function RegisterValidation() {
     $("#error-messages").empty();
+    $("#firstname").css("border", "1px solid #D3D3D3")
+    $("#lastname").css("border", "1px solid #D3D3D3")
+    $("#display-name").css("border", "1px solid #D3D3D3")
+    $("#email").css("border", "1px solid #D3D3D3")
+    $("#password").css("border", "1px solid #D3D3D3")
+    $("#confirm-password").css("border", "1px solid #D3D3D3")
+    $("#github-name").css("border", "1px solid #D3D3D3")
     let errorMessages = '';
     if ($("#firstname").val() === "" || $("#firstname").val().trim() === "") {
         errorMessages = errorMessages + "Please enter your first name<br>"
+        $("#firstname").css("border", "1px solid #ff0000")
     }
 
     if ($("#firstname").val().length > 100) {
         errorMessages = errorMessages + "Too many characters";
+        $("#firstname").css("border", "1px solid #ff0000")
     }
 
     if ($("#lastname").val() === "" || $("#lastname").val().trim() === "") {
         errorMessages = errorMessages + "Please enter your last name<br>"
+        $("#lastname").css("border", "1px solid #ff0000")
     }
 
     if ($("#lastname").val().length > 100) {
         errorMessages = errorMessages + "Too many characters";
+        $("#lastname").css("border", "1px solid #ff0000")
     }
 
     if ($("#display-name").val() === "" || $("#display-name").val().trim() === "") {
         errorMessages = errorMessages + "Please enter your username<br>"
+        $("#display-name").css("border", "1px solid #ff0000")
     }
 
     if ($("#display-name").val().length > 100) {
         errorMessages = errorMessages + "Too many characters";
+        $("#display-name").css("border", "1px solid #ff0000")
     }
 
     if ($("#email").val() === "" || $("#email").val().trim() === "") {
         errorMessages = errorMessages + "Please enter your email<br>"
+        $("#email").css("border", "1px solid #ff0000")
     }
 
     if ($("#email").val().length > 100) {
         errorMessages = errorMessages + "Too many characters";
+        $("#email").css("border", "1px solid #ff0000")
     }
 
     if ($("#password").val() === "" || $("#password").val().trim() === "") {
         errorMessages = errorMessages + "confirm password<br>"
+        $("#password").css("border", "1px solid #ff0000")
     }
 
     if ($("#confirm-password").val().length > 100) {
         errorMessages = errorMessages + "Too many characters";
+        $("#confirm-password").css("border", "1px solid #ff0000")
     }
 
     if ($("#github-name").val()){
         if ($("#github-name").val().length > 100) {
             errorMessages = errorMessages + "Too many characters";
+            $("#github-name").css("border", "1px solid #ff0000")
         }
     }
 
