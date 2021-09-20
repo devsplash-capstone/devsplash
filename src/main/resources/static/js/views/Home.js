@@ -8,8 +8,8 @@ export default function Home(props) {
             <div class="row featurette mt-5 pt-5 align-self-center">
                 <h3>Already a member?</h3>
                 <div class="ml-2">
-                    <form action="DevsplashMockup/profile.html">
-                        <button class="btn btn-secondary">Log in</button>
+                    <form>
+                        <a class="btn btn-secondary" href="/login" data-link>Log in</a>
                     </form>
                 </div>
             </div>
@@ -24,8 +24,8 @@ export default function Home(props) {
                     <p class="lead">Members can use their background and skill sets to match with available
                         projects.</p>
                     <div class="m-2">
-                        <form action="DevsplashMockup/signup.html">
-                            <button class="btn btn-secondary">Sign up!</button>
+                        <form>
+                            <a class="btn btn-secondary" href="/register" data-link>Sign up!</a>
                         </form>
                     </div>
 
