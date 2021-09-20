@@ -58,21 +58,23 @@ export default function EditProfile(props) {
                                                                required/>
                                                     </div>
                                                 </div>
+                                                
                                                 <div class="col-md-6 mb-4">
                                                     <div class="form-outline">
+                                                        <label class="form-label font-weight-bold required" for="password">Password</label>
+                                                        <input type="password" id="password"
+                                                               class="form-control form-control-lg form" 
+                                                               value="${(props.user.password)?props.user.password:''}"
+                                                               required/>
+                                                    </div>
+                                                    <div class="col-md-6 mb-4">
+                                                    <div class="form-outline d-none">
                                                         <label class="form-label font-weight-bold required" for="email">Email</label>
                                                         <input type="text" id="email"
                                                                class="form-control form-control-lg form" value="${props.user.email}"
                                                                required/>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-6 mb-4">
-                                                    <div class="form-outline">
-                                                        <label class="form-label font-weight-bold required" for="password">Password</label>
-                                                        <input type="password" id="password"
-                                                               class="form-control form-control-lg form"
-                                                               required/>
-                                                    </div>
                                                 </div>
                                                 <div class="col-md-6 mb-4">
                                                     <div class="form-outline">
@@ -167,12 +169,13 @@ function editProfileSave() {
                 firstname: $("#first-name").val(),
                 lastname: $("#last-name").val(),
                 displayName: $("#display-name").val(),
-                email: $("#email").val().trim(),
+                email: $("#email").val(),
                 id: $(this).attr("data-id"),
                 aboutMe: $("#about-me").val(),
                 imgUrl: $("#profile-img").val(),
                 skills: skills,
-                githubUsername: $("#github-name").val()
+                githubUsername: $("#github-name").val(),
+                password: $("#password").val()
             }
             console.log("user is being saved");
             let request = {
@@ -225,24 +228,31 @@ function editProfileDelete() {
 
 function editProfileValidate() {
     $("#error-messages").empty();
+    $("#first-name").css("border", "1px solid #D3D3D3")
+    $("#last-name").css("border", "1px solid #D3D3D3")
+    $("#display-name").css("border", "1px solid #D3D3D3")
+    $("#password").css("border", "1px solid #D3D3D3")
+    $("#confirm-password").css("border", "1px solid #D3D3D3")
     let errorMessages = '';
     if ($("#first-name").val() === "" || $("#first-name").val().trim() === "") {
         errorMessages = errorMessages + "Please enter your first name<br>";
+        $("#first-name").css("border", "1px solid #ff0000")
     }
     if ($("#last-name").val() === "" || $("#last-name").val().trim() === "") {
         errorMessages = errorMessages + "Please enter your last name<br>";
+        $("#last-name").css("border", "1px solid #f00")
     }
     if ($("#display-name").val() === "" || $("#display-name").val().trim() === "") {
         errorMessages = errorMessages + "Please enter your username<br>";
-    }
-    if ($("#email").val() === "" || $("#email").val().trim() === "") {
-        errorMessages = errorMessages + "Please enter your email<br>";
+        $("#display-name").css("border", "1px solid #f00")
     }
     if ($("#password").val() === "" || $("#password").val().trim() === "") {
         errorMessages = errorMessages + "Please enter your password<br>";
+        $("#password").css("border", "1px solid #f00")
     }
     if ($("#confirm-password").val() === "" || $("#confirm-password").val().trim() === "") {
         errorMessages = errorMessages + "Please confirm your password<br>";
+        $("#confirm-password").css("border", "1px solid #f00")
     }
     if ($("#confirm-password").val() !== $("#password").val()) {
         errorMessages = errorMessages + "Please check that passwords match<br>";

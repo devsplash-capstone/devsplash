@@ -40,7 +40,7 @@ public class UsersController {
     @PutMapping
     private void updateUser(@RequestBody User user) {
         User oldUser = usersRepository.getById(user.getId());
-        user.setPassword(oldUser.getPassword());
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         usersRepository.save(user);
     }
 
