@@ -14,16 +14,16 @@ export default function NavbarView(props) {
                                 <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
                                     <ul class="navbar-nav ml-auto">
                                         <li class="nav-item px-3">
-                                            <a class="nav-link" href="/profile" data-link>Home</a>
+                                            <a class="nav-link" href="/profile" data-link><i class="bi bi-house-door"></i> Home</a>
                                         </li>
                                         <li class="nav-item px-3">
-                                            <a class="nav-link" href="/members" data-link>Members</a>
+                                            <a class="nav-link" href="/members" data-link><i class="bi bi-people"></i> Members</a>
                                         </li>
                                         <li class="nav-item px-3">
-                                            <a class="nav-link" href="/projects" data-link>Projects</a>
+                                            <a class="nav-link" href="/projects" data-link><i class="bi bi-kanban"></i> Projects</a>
                                         </li>
                                         <li class="nav-item px-3">
-                                            <a class="nav-link" href="/logout" data-link>Signout</a>
+                                            <a class="nav-link" href="/logout" data-link><i class="bi bi-box-arrow-right"></i></i> Signout</a>
                                         </li>
                                     </ul>
                                 </div>
