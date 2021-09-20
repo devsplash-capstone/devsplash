@@ -214,10 +214,18 @@ function RegisterValidation() {
     if ($("#confirm-password").val().length > 100) {
         errorMessages = errorMessages + "Too many characters";
     }
+
+    if ($("#github-name").val()){
+        if ($("#github-name").val().length > 100) {
+            errorMessages = errorMessages + "Too many characters";
+        }
+    }
+
     if (errorMessages) {
         $("#error-messages").append(errorMessages)
         return false;
     }
+
     return true;
 }
 
