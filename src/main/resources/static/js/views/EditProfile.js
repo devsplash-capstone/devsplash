@@ -166,15 +166,15 @@ function editProfileSave() {
                 skills.push({id: $(this).val()});
             });
             let user = {
-                firstname: $("#first-name").val(),
-                lastname: $("#last-name").val(),
-                displayName: $("#display-name").val(),
-                email: $("#email").val(),
+                firstname: $("#first-name").val().trim(),
+                lastname: $("#last-name").val().trim(),
+                displayName: $("#display-name").val().trim(),
+                email: $("#email").val().trim(),
                 id: $(this).attr("data-id"),
-                aboutMe: $("#about-me").val(),
+                aboutMe: $("#about-me").val().trim(),
                 imgUrl: $("#profile-img").val(),
                 skills: skills,
-                githubUsername: $("#github-name").val(),
+                githubUsername: $("#github-name").val().trim(),
                 password: $("#password").val()
             }
             console.log("user is being saved");
@@ -256,6 +256,8 @@ function editProfileValidate() {
     }
     if ($("#confirm-password").val() !== $("#password").val()) {
         errorMessages = errorMessages + "Please check that passwords match<br>";
+        $("#password").css("border", "1px solid #ff0000")
+        $("#confirm-password").css("border", "1px solid #ff0000")
     }
     if (errorMessages !== ""){
         $("#error-messages").append(errorMessages)

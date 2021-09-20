@@ -1,5 +1,5 @@
 import {memberClickFetchEvent, renderMember} from "./Members.js";
-import {RenderProfileCardComponent} from "./ProfileCard.js";
+import {profileCardEvents, RenderProfileCardComponent} from "./ProfileCard.js";
 import {PageContentView} from "./partials/content.js";
 import {renderSkillsComponents} from "./Profile.js";
 
@@ -45,4 +45,5 @@ export function renderProjectComponent(project) {
  */
 export function ProjectEvents() {
     memberClickFetchEvent();
+    profileCardEvents();
 }
