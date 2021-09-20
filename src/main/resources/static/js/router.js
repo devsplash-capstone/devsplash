@@ -11,6 +11,13 @@ import Members, {MembersEvents} from "./views/Members.js";
 import EditProfile, {EditProfileEvent} from "./views/EditProfile.js";
 import ProjectView from "./views/Project.js";
 
+function validateUser(obj) {
+    if (localStorage.getItem("access_token")){
+        obj.user ="/api/users/me"
+    }
+    return obj;
+}
+
 /**
  * Returns the route object for a specific route based on the given URI
  * @param URI
@@ -39,7 +46,7 @@ export default function router(URI) {
         '/register': {
             returnView: Register,
             state: {
-                skills: "/api/skills"
+                 skills: "/api/skills"
             },
             uri: '/register',
             title: 'Register',
@@ -89,10 +96,9 @@ export default function router(URI) {
         },
         '/members': {
             returnView: Members,
-            state: {
-                user: "/api/users/me",
+            state: validateUser({
                 users: "/api/users"
-            },
+            }),
             uri: '/members',
             title: "Members",
             viewEvent: MembersEvents
