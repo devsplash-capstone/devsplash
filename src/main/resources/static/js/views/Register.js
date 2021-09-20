@@ -1,6 +1,7 @@
 import createView from "../createView.js";
+import {renderSkills} from "./EditProject.js";
 
-export default function Register(registration) {
+export default function Register(props) {
     return `
            
         <div class="content-wrapper pt-md-4">
@@ -101,14 +102,7 @@ export default function Register(registration) {
                                                     <label class="form-label font-weight-bold" for="skills">Languages
                                                         I know</label>
                                                     <select id="skills" class="col-12 custom-select overflow-auto" multiple>
-                                                        <option value="1">Java</option>
-                                                        <option value="2">HTML</option>
-                                                        <option value="3">JS</option>
-                                                        <option value="4">CSS</option>
-                                                        <option value="1">Java</option>
-                                                        <option value="2">HTML</option>
-                                                        <option value="3">JS</option>
-                                                        <option value="4">CSS</option>
+                                                        ${renderSkills(props.skills)}
                                                     </select>
                                                     <p class="instruction mt-1">Hold cmd to select more than one skill (ctrl for pc)</p>
                                                 </div>
