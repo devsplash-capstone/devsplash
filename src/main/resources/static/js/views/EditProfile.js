@@ -9,6 +9,7 @@
 //TODO: add two new columns img URL, about me, make fields other than display name not required
 
 import createView from "../createView.js";
+import {renderAndSelectSkills} from "./EditProject.js";
 
 export default function EditProfile(props) {
     return `
@@ -86,7 +87,7 @@ export default function EditProfile(props) {
                                                         <label class="form-label font-weight-bold" for="github-name">Github
                                                             name</label>
                                                         <input type="text" id="github-name"
-                                                               class="form-control form-control-lg form"/>
+                                                               class="form-control form-control-lg form" value="${(props.user.githubUsername)?props.user.githubUsername:''}"/>
                                                     </div>
                                                 </div>
                                             </div>
@@ -113,9 +114,7 @@ export default function EditProfile(props) {
                                                     <label class="form-label font-weight-bold" for="github-name">Languages
                                                         I know</label>
                                                     <select id="skills" class="col-12 custom-select overflow-auto" multiple>
-                                                        ${(props.skills) ? props.skills.map(skill =>
-                                                      `<option value="${skill.id}">${skill.name}</option>`
-                                                          ) : 'Skills required for the project will go here.'}
+                                                        ${renderAndSelectSkills(props.skills, props.user.skills)}
                                                      </select>
                                                      <p class="instruction mt-1">Hold cmd to select more than one skill (ctrl for pc)</p>
                                                 </div>
@@ -172,7 +171,8 @@ function editProfileSave() {
                 id: $(this).attr("data-id"),
                 aboutMe: $("#about-me").val(),
                 imgUrl: $("#profile-img").val(),
-                skills: skills
+                skills: skills,
+                githubUsername: $("#github-name").val()
             }
             console.log("user is being saved");
             let request = {
