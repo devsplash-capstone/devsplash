@@ -39,7 +39,7 @@ export default function router(URI) {
         '/register': {
             returnView: Register,
             state: {
-                skills: "/api/skills"
+                // skills: "/api/skills"
             },
             uri: '/register',
             title: 'Register',

@@ -84,8 +84,7 @@ export default function Register(props) {
                                                         <label class="form-label font-weight-bold" for="about-me">About Me</label>
                                                         <textarea id="about-me"
                                                                   class="form-control form-control-lg"
-                                                                  required>
-                                                        </textarea>
+                                                                  required></textarea>
                                                     </div>
                                                 </div>
                                                 <div class="col-12 mb-4">
@@ -157,8 +156,10 @@ export function RegisterEvent() {
 
             fetch(`${DOMAIN_NAME}/api/users/create`, request).then(
                 (response) => {
+                    console.log(response)
                     createView("/login");
-                });
+                })
+                .catch(error => console.error(error));
         }
     })
 
@@ -167,7 +168,7 @@ export function RegisterEvent() {
 
 function cancelRegistration() {
     $("#cancel").click(function () {
-        createView(("/register"))
+        createView(("/"))
     })
 }
 
