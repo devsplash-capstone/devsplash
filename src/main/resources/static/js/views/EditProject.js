@@ -67,7 +67,7 @@ function renderSkills(skills) {
     return skills.map(skill => `<option value="${skill.id}">${skill.name}</option>`)
 }
 
-function renderAndSelectSkills(skillsList, selectedSkills) {
+export function renderAndSelectSkills(skillsList, selectedSkills) {
     let skills = '';
     const selected = new Map();
     selectedSkills.map(skill => selected.set(skill.id, `<option value="${skill.id}" selected>${skill.name}</option>`))
