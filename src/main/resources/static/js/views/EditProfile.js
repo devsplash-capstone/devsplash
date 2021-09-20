@@ -64,7 +64,6 @@ export default function EditProfile(props) {
                                                         <label class="form-label font-weight-bold required" for="password">Password</label>
                                                         <input type="password" id="password"
                                                                class="form-control form-control-lg form" 
-                                                               value="${(props.user.password)?props.user.password:''}"
                                                                required/>
                                                     </div>
                                                     <div class="col-md-6 mb-4">
