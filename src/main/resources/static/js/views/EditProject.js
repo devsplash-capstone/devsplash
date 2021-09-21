@@ -211,20 +211,15 @@ export function saveProjectFetchEvent() {
 
     function editProjectValidate() {
         $("#error-messages").empty();
-        $("#skills").css("border", "1px solid #D3D3D3")
         $("#name").css("border", "1px solid #D3D3D3")
         $("#description").css("border", "1px solid #D3D3D3")
         let errorMessages = '';
-        if ($("#skills").val() === "" || $("#skills").val() === "") {
-            errorMessages = errorMessages + "Please choose a skill<br>";
-            $("#skills").css("border", "1px solid #f00")
-        }
-        if ($("#name").val() === "" || $("#name").val() === "") {
-            errorMessages = errorMessages + "Please add a Project name<br>";
+        if ($("#name").val() === "" || $("#name").val().trim() === "") {
+            errorMessages = errorMessages + "Please add a name for your project<br>";
             $("#name").css("border", "1px solid #f00")
         }
-        if ($("#description").val() === "" || $("#description").val() === "") {
-            errorMessages = errorMessages + "Please add a description<br>";
+        if ($("#description").val() === "" || $("#description").val().trim() === "") {
+            errorMessages = errorMessages + "Please add description<br>";
             $("#description").css("border", "1px solid #f00")
         }
         if (errorMessages !== "") {
