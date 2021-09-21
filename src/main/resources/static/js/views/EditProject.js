@@ -64,9 +64,9 @@ function renderAndHighlightSkills(props) {
 }
 
 export function renderSkills(skills) {
-    if (skills){
+    if (skills) {
         return skills.map(skill => `<option value="${skill.id}">${skill.name}</option>`)
-    }else{
+    } else {
         return "";
     }
 }
@@ -164,38 +164,75 @@ function deleteProjectFetchEvent() {
 export function saveProjectFetchEvent() {
     $(".saveProject").click(function () {
         console.log("inside click")
-        let skills = [];
-        $.each($("#skills option:selected"), function () {
-            skills.push({id: $(this).val()});
-        });
+        {
+            if (editProjectValidate() === true) {
+                let skills = [];
+                $.each($("#skills option:selected"), function () {
+                    skills.push({id: $(this).val()});
+                });
 
-        let project = {
-            name: $("#name").val(),
-            description: $("#description").val(),
-            user: {
-                id: $(this).attr("data-user-id")
-            },
-            skills: skills
-        };
+                let project = {
+                    name: $("#name").val(),
+                    description: $("#description").val(),
+                    user: {
+                        id: $(this).attr("data-user-id")
+                    },
+                    skills: skills
+                };
 
-        //Set project id if editing project
-        if ($(this).attr("data-isNew") === "false")
-            project.id = $(this).attr("data-project-id")
+                //Set project id if editing project
+                if ($(this).attr("data-isNew") === "false")
+                    project.id = $(this).attr("data-project-id")
 
-        console.log(project)
-        const url = `${DOMAIN_NAME}/api/projects`;
-        const options = {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(project)
-        };
+                console.log(project)
+                const url = `${DOMAIN_NAME}/api/projects`;
+                const options = {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(project)
+                };
 
-        fetch(url, options)
-            .then(_ => {
-                createView("/profile")
-            })
-            .catch(error => console.error(error)); /* handle errors */
+                fetch(url, options)
+                    .then(_ => {
+                        createView("/profile")
+                    })
+                    .catch(error => console.error(error)); /* handle errors */
+            }
+        }
     });
+
+
+    // #skills
+    // #name
+    // #description
+    // #error-messages
+
+    function editProjectValidate() {
+        $("#error-messages").empty();
+        $("#skills").css("border", "1px solid #D3D3D3")
+        $("#name").css("border", "1px solid #D3D3D3")
+        $("#description").css("border", "1px solid #D3D3D3")
+        let errorMessages = '';
+        if ($("#skills").val() === "" || $("#skills").val() === "") {
+            errorMessages = errorMessages + "Please choose a skill<br>";
+            $("#skills").css("border", "1px solid #f00")
+        }
+        if ($("#name").val() === "" || $("#name").val() === "") {
+            errorMessages = errorMessages + "Please add a Project name<br>";
+            $("#name").css("border", "1px solid #f00")
+        }
+        if ($("#description").val() === "" || $("#description").val() === "") {
+            errorMessages = errorMessages + "Please add a description<br>";
+            $("#description").css("border", "1px solid #f00")
+        }
+        if (errorMessages !== "") {
+            $("#error-messages").append(errorMessages)
+            return false;
+        }
+        return true;
+    }
+
+
 }
