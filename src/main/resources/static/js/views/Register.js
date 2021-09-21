@@ -1,6 +1,7 @@
 import createView from "../createView.js";
+import {renderSkills} from "./EditProject.js";
 
-export default function Register(registration) {
+export default function Register(props) {
     return `
            
         <div class="content-wrapper pt-md-4">
@@ -39,18 +40,16 @@ export default function Register(registration) {
                                             <div class="row">
                                                 <div class="col-md-6 mb-4">
                                                     <div class="form-outline">
-                                                        <label class="form-label required font-weight-bold" for="display-name">Display
-                                                            name</label>
+                                                        <label class="form-label required font-weight-bold" for="display-name">Username</label>
                                                         <input type="text" id="display-name" pattern="(?=.*\d).*(?=[a-z])(?=.*[A-Z]).{0,}" title="Must have at least one capital letter and one number"
                                                                class="form-control form-control-lg" required/>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6 mb-4">
                                                     <div class="form-outline">
-                                                        <label class="form-label required font-weight-bold" for="github-name">Github
+                                                        <label class="form-label font-weight-bold" for="github-name">Github
                                                             name</label>
-                                                        <input type="text" id="github-name" pattern="(?=.*\d).*(?=[a-z])(?=.*[A-Z]).{0,}" title="Must match Github username"
-                                                               class="form-control form-control-lg"/>
+                                                        <input type="text" id="github-name" class="form-control form-control-lg"/>
                                                     </div>
                                                 </div>
                                                 
@@ -85,8 +84,7 @@ export default function Register(registration) {
                                                         <label class="form-label font-weight-bold" for="about-me">About Me</label>
                                                         <textarea id="about-me"
                                                                   class="form-control form-control-lg"
-                                                                  required>
-                                                        </textarea>
+                                                                  required></textarea>
                                                     </div>
                                                 </div>
                                                 <div class="col-12 mb-4">
@@ -103,14 +101,7 @@ export default function Register(registration) {
                                                     <label class="form-label font-weight-bold" for="skills">Languages
                                                         I know</label>
                                                     <select id="skills" class="col-12 custom-select overflow-auto" multiple>
-                                                        <option value="1">Java</option>
-                                                        <option value="2">HTML</option>
-                                                        <option value="3">JS</option>
-                                                        <option value="3">JS</option>
-                                                        <option value="1">Java</option>
-                                                        <option value="2">HTML</option>
-                                                        <option value="3">JS</option>
-                                                        <option value="3">JS</option>
+                                                        ${renderSkills(props.skills)}
                                                     </select>
                                                     <p class="instruction mt-1">Hold cmd to select more than one skill (ctrl for pc)</p>
                                                 </div>
@@ -124,15 +115,6 @@ export default function Register(registration) {
                                                         type="submit">Cancel
                                                 </button>
                                             </div>
-
-                                            <div class="row mt-5 mb-3 border border-danger rounded mx-auto">
-                                                <button class="btn btn-light btn-block col-12 col-md-10 border-dark mx-auto mt-5"
-                                                        type="submit">Delete Profile
-                                                </button>
-                                                <small class="col-12 col-md-12 mt-1 mb-5 text-center text-danger">This
-                                                    change will be permanent.</small>
-                                            </div>
-
                                         </form>
                                     </div>
                                 </div>
@@ -149,12 +131,22 @@ export default function Register(registration) {
 export function RegisterEvent() {
     $("#save").click(function () {
         if (RegisterValidation()) {
+
+            let skills = [];
+            $.each($("#skills option:selected"), function () {
+                skills.push({id: $(this).val()});
+            });
+
             let user = {
                 email: $("#email").val(),
                 firstname: $("#firstname").val(),
                 lastname: $("#lastname").val(),
                 displayName: $("#display-name").val(),
-                password: $("#password").val()
+                password: $("#password").val(),
+                skills: skills,
+                githubUsername: $("#github-name").val(),
+                aboutMe: $("#about-me").val(),
+                profileImg : $("#profile-img").val()
             }
             let request = {
                 method: "POST",
@@ -164,8 +156,10 @@ export function RegisterEvent() {
 
             fetch(`${DOMAIN_NAME}/api/users/create`, request).then(
                 (response) => {
+                    console.log(response)
                     createView("/login");
-                });
+                })
+                .catch(error => console.error(error));
         }
     })
 
@@ -174,65 +168,83 @@ export function RegisterEvent() {
 
 function cancelRegistration() {
     $("#cancel").click(function () {
-        createView(("/register"))
+        createView(("/"))
     })
 }
 
 
 function RegisterValidation() {
     $("#error-messages").empty();
+    $("#firstname").css("border", "1px solid #D3D3D3")
+    $("#lastname").css("border", "1px solid #D3D3D3")
+    $("#display-name").css("border", "1px solid #D3D3D3")
+    $("#email").css("border", "1px solid #D3D3D3")
+    $("#password").css("border", "1px solid #D3D3D3")
+    $("#confirm-password").css("border", "1px solid #D3D3D3")
+    $("#github-name").css("border", "1px solid #D3D3D3")
     let errorMessages = '';
     if ($("#firstname").val() === "" || $("#firstname").val().trim() === "") {
         errorMessages = errorMessages + "Please enter your first name<br>"
+        $("#firstname").css("border", "1px solid #ff0000")
     }
 
     if ($("#firstname").val().length > 100) {
         errorMessages = errorMessages + "Too many characters";
+        $("#firstname").css("border", "1px solid #ff0000")
     }
 
     if ($("#lastname").val() === "" || $("#lastname").val().trim() === "") {
         errorMessages = errorMessages + "Please enter your last name<br>"
+        $("#lastname").css("border", "1px solid #ff0000")
     }
 
     if ($("#lastname").val().length > 100) {
         errorMessages = errorMessages + "Too many characters";
+        $("#lastname").css("border", "1px solid #ff0000")
     }
 
     if ($("#display-name").val() === "" || $("#display-name").val().trim() === "") {
         errorMessages = errorMessages + "Please enter your username<br>"
+        $("#display-name").css("border", "1px solid #ff0000")
     }
 
     if ($("#display-name").val().length > 100) {
         errorMessages = errorMessages + "Too many characters";
-    }
-
-    if ($("#github-name").val() === "" || $("#github-name").val().trim() === "") {
-        errorMessages = errorMessages + "Please enter your github name<br>"
-    }
-
-    if ($("#github-name").val().length > 100) {
-        errorMessages = errorMessages + "Too many characters";
+        $("#display-name").css("border", "1px solid #ff0000")
     }
 
     if ($("#email").val() === "" || $("#email").val().trim() === "") {
         errorMessages = errorMessages + "Please enter your email<br>"
+        $("#email").css("border", "1px solid #ff0000")
     }
 
     if ($("#email").val().length > 100) {
         errorMessages = errorMessages + "Too many characters";
+        $("#email").css("border", "1px solid #ff0000")
     }
 
     if ($("#password").val() === "" || $("#password").val().trim() === "") {
         errorMessages = errorMessages + "confirm password<br>"
+        $("#password").css("border", "1px solid #ff0000")
     }
 
     if ($("#confirm-password").val().length > 100) {
         errorMessages = errorMessages + "Too many characters";
+        $("#confirm-password").css("border", "1px solid #ff0000")
     }
+
+    if ($("#github-name").val()){
+        if ($("#github-name").val().length > 100) {
+            errorMessages = errorMessages + "Too many characters";
+            $("#github-name").css("border", "1px solid #ff0000")
+        }
+    }
+
     if (errorMessages) {
         $("#error-messages").append(errorMessages)
         return false;
     }
+
     return true;
 }
 

@@ -9,6 +9,7 @@
 //TODO: add two new columns img URL, about me, make fields other than display name not required
 
 import createView from "../createView.js";
+import {renderAndSelectSkills} from "./EditProject.js";
 
 export default function EditProfile(props) {
     return `
@@ -57,21 +58,22 @@ export default function EditProfile(props) {
                                                                required/>
                                                     </div>
                                                 </div>
+                                                
                                                 <div class="col-md-6 mb-4">
                                                     <div class="form-outline">
+                                                        <label class="form-label font-weight-bold required" for="password">Password</label>
+                                                        <input type="password" id="password"
+                                                               class="form-control form-control-lg form" 
+                                                               required/>
+                                                    </div>
+                                                    <div class="col-md-6 mb-4">
+                                                    <div class="form-outline d-none">
                                                         <label class="form-label font-weight-bold required" for="email">Email</label>
                                                         <input type="text" id="email"
                                                                class="form-control form-control-lg form" value="${props.user.email}"
                                                                required/>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-6 mb-4">
-                                                    <div class="form-outline">
-                                                        <label class="form-label font-weight-bold required" for="password">Password</label>
-                                                        <input type="password" id="password"
-                                                               class="form-control form-control-lg form"
-                                                               required/>
-                                                    </div>
                                                 </div>
                                                 <div class="col-md-6 mb-4">
                                                     <div class="form-outline">
@@ -86,7 +88,7 @@ export default function EditProfile(props) {
                                                         <label class="form-label font-weight-bold" for="github-name">Github
                                                             name</label>
                                                         <input type="text" id="github-name"
-                                                               class="form-control form-control-lg form"/>
+                                                               class="form-control form-control-lg form" value="${(props.user.githubUsername)?props.user.githubUsername:''}"/>
                                                     </div>
                                                 </div>
                                             </div>
@@ -113,9 +115,7 @@ export default function EditProfile(props) {
                                                     <label class="form-label font-weight-bold" for="github-name">Languages
                                                         I know</label>
                                                     <select id="skills" class="col-12 custom-select overflow-auto" multiple>
-                                                        ${(props.skills) ? props.skills.map(skill =>
-                                                      `<option value="${skill.id}">${skill.name}</option>`
-                                                          ) : 'Skills required for the project will go here.'}
+                                                        ${renderAndSelectSkills(props.skills, props.user.skills)}
                                                      </select>
                                                      <p class="instruction mt-1">Hold cmd to select more than one skill (ctrl for pc)</p>
                                                 </div>
@@ -165,14 +165,16 @@ function editProfileSave() {
                 skills.push({id: $(this).val()});
             });
             let user = {
-                firstname: $("#first-name").val(),
-                lastname: $("#last-name").val(),
-                displayName: $("#display-name").val(),
+                firstname: $("#first-name").val().trim(),
+                lastname: $("#last-name").val().trim(),
+                displayName: $("#display-name").val().trim(),
                 email: $("#email").val().trim(),
                 id: $(this).attr("data-id"),
-                aboutMe: $("#about-me").val(),
+                aboutMe: $("#about-me").val().trim(),
                 imgUrl: $("#profile-img").val(),
-                skills: skills
+                skills: skills,
+                githubUsername: $("#github-name").val().trim(),
+                password: $("#password").val()
             }
             console.log("user is being saved");
             let request = {
@@ -225,27 +227,36 @@ function editProfileDelete() {
 
 function editProfileValidate() {
     $("#error-messages").empty();
+    $("#first-name").css("border", "1px solid #D3D3D3")
+    $("#last-name").css("border", "1px solid #D3D3D3")
+    $("#display-name").css("border", "1px solid #D3D3D3")
+    $("#password").css("border", "1px solid #D3D3D3")
+    $("#confirm-password").css("border", "1px solid #D3D3D3")
     let errorMessages = '';
     if ($("#first-name").val() === "" || $("#first-name").val().trim() === "") {
         errorMessages = errorMessages + "Please enter your first name<br>";
+        $("#first-name").css("border", "1px solid #ff0000")
     }
     if ($("#last-name").val() === "" || $("#last-name").val().trim() === "") {
         errorMessages = errorMessages + "Please enter your last name<br>";
+        $("#last-name").css("border", "1px solid #f00")
     }
     if ($("#display-name").val() === "" || $("#display-name").val().trim() === "") {
         errorMessages = errorMessages + "Please enter your username<br>";
-    }
-    if ($("#email").val() === "" || $("#email").val().trim() === "") {
-        errorMessages = errorMessages + "Please enter your email<br>";
+        $("#display-name").css("border", "1px solid #f00")
     }
     if ($("#password").val() === "" || $("#password").val().trim() === "") {
         errorMessages = errorMessages + "Please enter your password<br>";
+        $("#password").css("border", "1px solid #f00")
     }
     if ($("#confirm-password").val() === "" || $("#confirm-password").val().trim() === "") {
         errorMessages = errorMessages + "Please confirm your password<br>";
+        $("#confirm-password").css("border", "1px solid #f00")
     }
     if ($("#confirm-password").val() !== $("#password").val()) {
         errorMessages = errorMessages + "Please check that passwords match<br>";
+        $("#password").css("border", "1px solid #ff0000")
+        $("#confirm-password").css("border", "1px solid #ff0000")
     }
     if (errorMessages !== ""){
         $("#error-messages").append(errorMessages)

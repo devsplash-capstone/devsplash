@@ -8,8 +8,8 @@ export default function Home(props) {
             <div class="row featurette mt-5 pt-5 align-self-center">
                 <h3>Already a member?</h3>
                 <div class="ml-2">
-                    <form action="DevsplashMockup/profile.html">
-                        <button class="btn btn-secondary">Log in</button>
+                    <form>
+                        <a class="btn btn-secondary" href="/login" data-link>Log in</a>
                     </form>
                 </div>
             </div>
@@ -24,8 +24,8 @@ export default function Home(props) {
                     <p class="lead">Members can use their background and skill sets to match with available
                         projects.</p>
                     <div class="m-2">
-                        <form action="DevsplashMockup/signup.html">
-                            <button class="btn btn-secondary">Sign up!</button>
+                        <form>
+                            <a class="btn btn-secondary" href="/register" data-link>Sign up!</a>
                         </form>
                     </div>
 
@@ -46,7 +46,7 @@ export default function Home(props) {
                         with the goal of collaborating on projects or learning new skills.</p>
                 </div>
                 <div class="col-md-5 order-md-1">
-                    <img class="featurette-image img-fluid mx-auto" src="https://envato-shoebox-0.imgix.net/5817/5f40-ebdb-48d5-b950-e889f3c4d37e/IMG_3992.jpg?auto=compress%2Cformat&fit=max&mark=https%3A%2F%2Felements-assets.envato.com%2Fstatic%2Fwatermark2.png&markalign=center%2Cmiddle&markalpha=18&w=1600&s=173fc01bad4a57ea116f57088c39d29a"
+                    <img class="featurette-image img-fluid mx-auto" src="https://media.istockphoto.com/photos/always-brainstorming-picture-id1184334685?k=20&m=1184334685&s=612x612&w=0&h=K5ADo3hUhIXJnQUTymQM1J1aq5syuy3kL7yDbjs_tg4="
                          alt="Generic placeholder image">
                 </div>
             </div>

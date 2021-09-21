@@ -1,5 +1,5 @@
 import {memberClickFetchEvent, renderMember} from "./Members.js";
-import {RenderProfileCardComponent} from "./ProfileCard.js";
+import {profileCardEvents, RenderProfileCardComponent} from "./ProfileCard.js";
 import {PageContentView} from "./partials/content.js";
 import {renderSkillsComponents} from "./Profile.js";
 
@@ -18,7 +18,7 @@ export function renderProjectComponent(project) {
         <div class="details-wrapper col-md-8 d-md-inline-flex border rounded py-4 mt-3">
             <div class="details-wrapper-helper col-12">
                 <div class="current-projects mt-4 p-md-3">
-                    <h3>${project.name}</h3>
+                    <h3><i class="bi bi-journal-code"></i> ${project.name}</h3>
                     <p>${project.description}</p>
                     <div class="list-group mt-4">
                         <p class="mb-1">Created by </p>
@@ -45,4 +45,5 @@ export function renderProjectComponent(project) {
  */
 export function ProjectEvents() {
     memberClickFetchEvent();
+    profileCardEvents();
 }

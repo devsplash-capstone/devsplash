@@ -63,11 +63,15 @@ function renderAndHighlightSkills(props) {
     return (isNew(props)) ? renderSkills(props.skills) : renderAndSelectSkills(props.skills, props.project.skills)
 }
 
-function renderSkills(skills) {
-    return skills.map(skill => `<option value="${skill.id}">${skill.name}</option>`)
+export function renderSkills(skills) {
+    if (skills){
+        return skills.map(skill => `<option value="${skill.id}">${skill.name}</option>`)
+    }else{
+        return "";
+    }
 }
 
-function renderAndSelectSkills(skillsList, selectedSkills) {
+export function renderAndSelectSkills(skillsList, selectedSkills) {
     let skills = '';
     const selected = new Map();
     selectedSkills.map(skill => selected.set(skill.id, `<option value="${skill.id}" selected>${skill.name}</option>`))

@@ -5,7 +5,7 @@ export default function NavbarView(props) {
                     <div class="header-wrapper bg-light">
                         <div class="header">
                             <nav class="navbar navbar-expand-md navbar-light container-xl">
-                                <a class="navbar-brand" href="#">Devsplash</a>
+                                <a class="navbar-brand nav-link" href="/" data-link><img src="../../../assets/devsplash_0.png" alt="" class="logo" /></a>
                                 <button class="navbar-toggler" type="button" data-toggle="collapse"
                                         data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                                         aria-expanded="false" aria-label="Toggle navigation">
@@ -14,16 +14,16 @@ export default function NavbarView(props) {
                                 <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
                                     <ul class="navbar-nav ml-auto">
                                         <li class="nav-item px-3">
-                                            <a class="nav-link" href="/profile" data-link>Home</a>
+                                            <a class="nav-link" href="/profile" data-link><i class="bi bi-house-door"></i> Home</a>
                                         </li>
                                         <li class="nav-item px-3">
-                                            <a class="nav-link" href="/members" data-link>Members</a>
+                                            <a class="nav-link" href="/members" data-link><i class="bi bi-people"></i> Members</a>
                                         </li>
                                         <li class="nav-item px-3">
-                                            <a class="nav-link" href="/projects" data-link>Projects</a>
+                                            <a class="nav-link" href="/projects" data-link><i class="bi bi-kanban"></i> Projects</a>
                                         </li>
                                         <li class="nav-item px-3">
-                                            <a class="nav-link" href="/logout" data-link>Signout</a>
+                                            <a class="nav-link" href="/logout" data-link><i class="bi bi-box-arrow-right"></i></i> Signout</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -36,7 +36,7 @@ export default function NavbarView(props) {
                     <div class="header-wrapper bg-light">
                         <div class="header">
                             <nav class="navbar navbar-expand-md navbar-light container-xl">
-                                <a class="navbar-brand" href="#">Devsplash</a>
+                                 <a class="navbar-brand nav-link" href="/" data-link><img src="../../../assets/devsplash_0.png" alt="" class="logo"></a>
                                 <button class="navbar-toggler" type="button" data-toggle="collapse"
                                         data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                                         aria-expanded="false" aria-label="Toggle navigation">

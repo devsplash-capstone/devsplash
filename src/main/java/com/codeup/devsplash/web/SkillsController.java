@@ -2,9 +2,7 @@ package com.codeup.devsplash.web;
 
 import com.codeup.devsplash.data.skills.Skill;
 import com.codeup.devsplash.data.skills.SkillsRepository;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -18,7 +16,12 @@ public class SkillsController {
     }
 
     @GetMapping
-    private List<Skill> getProjects() {
+    private List<Skill> getSkills() {
         return skillsRepository.findAll();
+    }
+
+    @PostMapping
+    private void addSkills(@RequestBody Skill skill){
+        skillsRepository.save(skill);
     }
 }
