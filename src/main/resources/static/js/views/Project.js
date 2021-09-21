@@ -26,7 +26,7 @@ export function renderProjectComponent(project) {
                     </div>
                 </div>
                 <div class="skills pt-3 p-md-3">
-                    <p class="mb-1">Skills Required</p>
+                    <p class="mb-1">Skills Required for Project</p>
                     <div class="border rounded p-3">
                         ${renderSkillsComponents(project.skills)}
                     </div>
