@@ -8,6 +8,13 @@ img {
     width: 180px;
 }
 
+.logo-link {
+    background: url("../assets/devsplash_0.png") no-repeat;
+    background-size: contain;
+    width: 145px;
+    height: 35px;
+}
+
 .required:after {
     content: " *";
     color: red;
