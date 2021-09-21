@@ -21,6 +21,7 @@ export function EditProjectComponent(props) {
                 <div class="mx-auto pt-2">
                     <h5>${pageHeader}</h5>
                     <form>
+                        <p id="error-messages"></p>
                         <div class="form-group mt-4">
                             <label for="name" class="required">Project Name</label>
                             <input class="form-control" id="name" aria-describedby="project name" 
@@ -40,8 +41,8 @@ export function EditProjectComponent(props) {
                         
                         <div class="row justify-content-around pt-3">
                             ${renderSaveButton(props)}
-                            <button class="cancel btn btn-light btn-block col-10 col-md-5 border-dark mt-2"
-                                    >Cancel
+                            <button class="cancel btn btn-light btn-block col-10 col-md-5 border-dark mt-2">
+                                    Cancel
                             </button>
                         </div>
                         
