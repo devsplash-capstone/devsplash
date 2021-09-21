@@ -204,7 +204,6 @@ export function saveProjectFetchEvent() {
     });
 
 
-    // #skills
     // #name
     // #description
     // #error-messages
