@@ -19,11 +19,4 @@ export default function render(props, route) {
     if (route.viewEvent){
         route.viewEvent();
     }
-    browserHistory();
-}
-
-function browserHistory(){
-    let landingPage = document.getElementById('app');
-    landingPage.addEventListener('click', history.back);
-
 }
