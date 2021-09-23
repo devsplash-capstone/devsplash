@@ -5,10 +5,7 @@ export default function Home(props) {
            <main role="main">
 
             <!-- START THE FEATURETTES -->
-            <div class="row featurette mt-5 ml-1 pt-5 align-self-center">
-             
-                </div>
-            </div>
+           
             <hr class="featurette-divider">
 
             <div class="row featurette">

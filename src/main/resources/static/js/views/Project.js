@@ -14,7 +14,6 @@ export default function ProjectView(props) {
  * @returns {string}
  */
 export function renderProjectComponent(project) {
-    console.log(project.github)
     return `
         <div class="details-wrapper col-md-8 d-md-inline-flex border rounded py-4 mt-3">
             <div class="details-wrapper-helper col-12">
@@ -56,7 +55,7 @@ export function ProjectEvents() {
 }
 
 /**
- * Adds github link if github link is present
+ * Adds github link for project if github link is present
  */
 function renderProjectLinks(link) {
    return (link)
