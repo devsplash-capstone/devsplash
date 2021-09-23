@@ -40,10 +40,10 @@ export function EditProjectComponent(props) {
                         </div>
                         
                         <div class="row justify-content-around pt-3">
-                            ${renderSaveButton(props)}
                             <button class="cancel btn btn-light btn-block col-10 col-md-5 border-dark mt-2">
                                     Cancel
                             </button>
+                            ${renderSaveButton(props)}
                         </div>
                         
                         ${renderDeleteButton(props)}

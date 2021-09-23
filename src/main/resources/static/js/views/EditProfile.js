@@ -122,11 +122,11 @@ export default function EditProfile(props) {
                                             </div>
 
                                             <div class="row pt-3">
-                                                <button id="save-btn" class="btn btn-light btn-block col-12 col-md-6 border-dark mt-2"
-                                                        type="submit" data-id="${props.user.id}">Save
-                                                </button>
                                                 <button id="cancel-btn" class="btn btn-light btn-block col-12 col-md-6 border-dark mt-2"
                                                         type="submit">Cancel
+                                                </button>
+                                                <button id="save-btn" class="btn btn-light btn-block col-12 col-md-6 border-dark mt-2"
+                                                        type="submit" data-id="${props.user.id}">Save
                                                 </button>
                                             </div>
 
