@@ -11,13 +11,19 @@ export default function render(props, route) {
     const title = `Devsplash - ${route.title}`;
     history.pushState(props, title, route.uri);
     document.title = title;
-
+    // document.getElement(app).addEventListener("click", history.back);
     // add view and navbar to DOM
     app.innerHTML = `${NavbarView(props)} ${route.returnView(props)} ${Footer(null)}`;
-
 
     // add events AFTER view is added to DOM
     if (route.viewEvent){
         route.viewEvent();
     }
+    browserHistory();
+}
+
+function browserHistory(){
+    let landingPage = document.getElementById('app');
+    landingPage.addEventListener('click', history.back);
+
 }
