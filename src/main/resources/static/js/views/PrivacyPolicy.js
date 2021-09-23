@@ -3,7 +3,7 @@ export default function PrivacyPolicy(){
     return `
    
 
-      <div data-custom-class="body container">PRIVACY NOTICE- Devsplash does not save any of the user's information. Any and all information shown on the user profile can be deleted at any given time without the approval of Devsplash</div>
+      <div data-custom-class="body container">PRIVACY NOTICE- Devsplash does not save any of the user's information. Any and all information shown on the user profile can be deleted at any given time without the approval of Devsplash.</div>
       
     </style>
   
