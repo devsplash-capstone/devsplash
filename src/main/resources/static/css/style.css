@@ -8,6 +8,11 @@ img {
     width: 180px;
 }
 
+.login-logo {
+    height: auto;
+    width: auto;
+}
+
 .logo-link {
     background: url("../assets/devsplash_0.png") no-repeat;
     background-size: contain;
