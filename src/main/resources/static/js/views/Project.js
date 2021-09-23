@@ -14,6 +14,7 @@ export default function ProjectView(props) {
  * @returns {string}
  */
 export function renderProjectComponent(project) {
+    console.log(project.github)
     return `
         <div class="details-wrapper col-md-8 d-md-inline-flex border rounded py-4 mt-3">
             <div class="details-wrapper-helper col-12">
@@ -31,6 +32,12 @@ export function renderProjectComponent(project) {
                         ${renderSkillsComponents(project.skills)}
                     </div>
                 </div>
+                 <div class="links pt-3 p-md-3">
+                    <p class="mb-1">Documents for Project</p>
+                    <div class="border rounded p-3">
+                        ${renderProjectLinks(project.github)}
+                    </div>
+                </div>
                 <form class="pt-3 p-md-3">
                     <button class="btn btn-light btn-block col-12 border-dark mt-3" id="joinProject">Join Project
                     </button>
@@ -46,4 +53,13 @@ export function renderProjectComponent(project) {
 export function ProjectEvents() {
     memberClickFetchEvent();
     profileCardEvents();
+}
+
+/**
+ * Adds github link if github link is present
+ */
+function renderProjectLinks(link) {
+   return (link)
+       ? ` <a class="nav-link" href="${link}"><h1><i class="bi bi-github"></i></h1></a>`
+       : "Document links for this project will go here"
 }

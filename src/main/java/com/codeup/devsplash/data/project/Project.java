@@ -21,6 +21,9 @@ public class Project {
     @Column(nullable = false)
     private String description;
 
+    @Column
+    private String github;
+
     @ManyToOne
     private User user;
 
@@ -36,11 +39,12 @@ public class Project {
     public Project() {
     }
 
-    public Project(Long id, String name, String description, User user) {
+    public Project(Long id, String name, String description, User user, String github) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.user = user;
+        this.github = github;
     }
 
     public Long getId() {
@@ -81,5 +85,13 @@ public class Project {
 
     public void setSkills(Collection<Skill> skills) {
         this.skills = skills;
+    }
+
+    public String getGithub() {
+        return github;
+    }
+
+    public void setGithub(String github) {
+        this.github = github;
     }
 }
