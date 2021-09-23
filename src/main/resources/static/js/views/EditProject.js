@@ -32,13 +32,19 @@ export function EditProjectComponent(props) {
                             <textarea  class="form-control" id="description">${(props.project) ? (props.project.description) : ''}</textarea>
                         </div>
                         <div class="form-group mt-4">
-                            <label class="form-label font-weight-bold" for="github-name">Required skills</label>
+                            <label class="form-label" for="github-name">Required skills</label>
                             <select id="skills" class="col-12 custom-select overflow-auto" multiple>
                                 ${renderAndHighlightSkills(props)}
                             </select>
                             <p class="instruction mt-1">Hold cmd to select more than one skill (ctrl for pc)</p>
                         </div>
-                        
+                        <div class="form-group mt-4">
+                            <label for="github">Github Link</label>
+                            <input class="form-control" id="github" aria-describedby="github input" 
+                            value="${(props.project.github) ? (props.project.github) : ''}">
+                            <p class="instruction mt-1">If you already have a repository for this project on GitHub, paste it here!</p>
+                        </div>
+
                         <div class="row justify-content-around pt-3">
                             <button class="cancel btn btn-light btn-block col-10 col-md-5 border-dark mt-2">
                                     Cancel
@@ -178,7 +184,8 @@ export function saveProjectFetchEvent() {
                     user: {
                         id: $(this).attr("data-user-id")
                     },
-                    skills: skills
+                    skills: skills,
+                    github: $("#github").val()
                 };
 
                 //Set project id if editing project

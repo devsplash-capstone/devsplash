@@ -5,14 +5,7 @@ export default function Home(props) {
            <main role="main">
 
             <!-- START THE FEATURETTES -->
-            <div class="row featurette mt-5 ml-1 pt-5 align-self-center">
-                <h3>Already a member?</h3>
-                <div class="ml-2">
-                    <form>
-                        <a class="btn btn-secondary" href="/login" data-link>Log in</a>
-                    </form>
-                </div>
-            </div>
+           
             <hr class="featurette-divider">
 
             <div class="row featurette">
@@ -23,11 +16,7 @@ export default function Home(props) {
                     </h2>
                     <p class="lead">Members can use their background and skill sets to match with available
                         projects.</p>
-                    <div class="m-2">
-                        <form>
-                            <a class="btn btn-secondary" href="/register" data-link>Sign up!</a>
-                        </form>
-                    </div>
+                   
 
                 </div>
                 <div class="col-md-5">
