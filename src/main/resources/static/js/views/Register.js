@@ -98,8 +98,7 @@ export default function Register(props) {
                                             </div>
                                             <div class="row">
                                                 <div class="col-12 mb-4">
-                                                    <label class="form-label font-weight-bold" for="skills">Languages
-                                                        I know</label>
+                                                    <label class="form-label font-weight-bold" for="skills">Skills I Have</label>
                                                     <select id="skills" class="col-12 custom-select overflow-auto" multiple>
                                                         ${renderSkills(props.skills)}
                                                     </select>
@@ -108,11 +107,11 @@ export default function Register(props) {
                                             </div>
 
                                             <div class="row pt-3">
-                                                <button id="save" class="btn btn-light btn-block col-12 col-md-6 border-dark mt-2"
-                                                        type="submit">Save
-                                                </button>
                                                 <button id="cancel" class="btn btn-light btn-block col-12 col-md-6 border-dark mt-2"
                                                         type="submit">Cancel
+                                                </button>
+                                                <button id="save" class="btn btn-light btn-block col-12 col-md-6 border-dark mt-2"
+                                                        type="submit">Save
                                                 </button>
                                             </div>
                                         </form>

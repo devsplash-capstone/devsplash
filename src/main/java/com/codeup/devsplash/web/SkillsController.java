@@ -24,4 +24,9 @@ public class SkillsController {
     private void addSkills(@RequestBody Skill skill){
         skillsRepository.save(skill);
     }
+
+    @PutMapping("{id}")
+    private void updateSkillsById(@RequestBody Skill skill) {
+        skillsRepository.save(skill);
+    }
 }

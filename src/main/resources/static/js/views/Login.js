@@ -6,8 +6,8 @@ export default function Login() {
             </head>
             <main>
                  <div class=" container row row-cols-1 mx-auto mt-3">
-                     <div class ="col-12 col-md-8 shadow-lg border mx-auto">
-                        <h1 class="text-center mt-3">Devsplash</h1>
+                     <div class ="col-12 col-md-8 shadow-lg border text-center mx-auto">
+                         <img src="../../assets/devsplash_0.png" alt="devsplash_logo" class="text-center mt-3 login-logo">
                         <h6 class="text-center mt-3">Sign In</h6>
                         <div class="col-10 col-md-8 col-lg-6 m-3 mt-1  p-4 mx-auto">
                             <p id="message" class="text-danger text-center"></p>
