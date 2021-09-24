@@ -4,8 +4,13 @@ import {PageContentView} from "./partials/content.js";
 import {renderSkillsComponents} from "./Profile.js";
 
 export default function ProjectView(props) {
-    let membersPage = RenderProfileCardComponent(props.user, props.user.id) + renderProjectComponent(props.project);
-    return PageContentView(membersPage)
+    let projectPage;
+    if(props.user){
+        projectPage = RenderProfileCardComponent(props.user, props.user.id) + renderProjectComponent(props.project);
+    }else{
+        projectPage = renderProjectComponent(props.project);
+    }
+    return PageContentView(projectPage)
 }
 
 /**

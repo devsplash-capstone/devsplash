@@ -4,9 +4,15 @@ import {getHeaders} from "../auth.js";
 import fetchData from "../fetchData.js";
 import render from "../render.js";
 import ProfileView from "./Profile.js";
+import {validateUser} from "../router.js";
 
 export default function Members(props) {
-    let membersPage = RenderProfileCardComponent(props.user, props.user.id) + renderMembersComponent(props.users, "Members");
+    let membersPage;
+    if(props.user) {
+        membersPage = RenderProfileCardComponent(props.user, props.user.id) + renderMembersComponent(props.users, "Members");
+    }else{
+        membersPage = renderMembersComponent(props.users, "Members");
+    }
     return PageContentView(membersPage)
 }
 
@@ -75,13 +81,14 @@ export function memberClickFetchEvent() {
         const route = {
             returnView: ProfileView,
             state: {
-                user: "/api/users/me",
                 member: `/api/users/findById/${id}`,
                 projects: `/api/projects/findByUserId/${id}`
             },
             uri: '/profile',
             title: "Member's Profile",
         }
+
+        route.state = validateUser(route.state);
 
         const request = {
             headers: getHeaders()

@@ -170,44 +170,40 @@ function deleteProjectFetchEvent() {
 
 export function saveProjectFetchEvent() {
     $(".saveProject").click(function () {
-        console.log("inside click")
-        {
-            if (editProjectValidate() === true) {
-                let skills = [];
-                $.each($("#skills option:selected"), function () {
-                    skills.push({id: $(this).val()});
-                });
+        if (editProjectValidate() === true) {
+            let skills = [];
+            $.each($("#skills option:selected"), function () {
+                skills.push({id: $(this).val()});
+            });
 
-                let project = {
-                    name: $("#name").val(),
-                    description: $("#description").val(),
-                    user: {
-                        id: $(this).attr("data-user-id")
-                    },
-                    skills: skills,
-                    github: $("#github").val()
-                };
+            let project = {
+                name: $("#name").val(),
+                description: $("#description").val(),
+                user: {
+                    id: $(this).attr("data-user-id")
+                },
+                skills: skills,
+                github: $("#github").val()
+            };
 
-                //Set project id if editing project
-                if ($(this).attr("data-isNew") === "false")
-                    project.id = $(this).attr("data-project-id")
+            //Set project id if editing project
+            if ($(this).attr("data-isNew") === "false")
+                project.id = $(this).attr("data-project-id")
 
-                console.log(project)
-                const url = `${DOMAIN_NAME}/api/projects`;
-                const options = {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(project)
-                };
+            const url = `${DOMAIN_NAME}/api/projects`;
+            const options = {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(project)
+            };
 
-                fetch(url, options)
-                    .then(_ => {
-                        createView("/profile")
-                    })
-                    .catch(error => console.error(error)); /* handle errors */
-            }
+            fetch(url, options)
+                .then(_ => {
+                    createView("/profile")
+                })
+                .catch(error => console.error(error)); /* handle errors */
         }
     });
 

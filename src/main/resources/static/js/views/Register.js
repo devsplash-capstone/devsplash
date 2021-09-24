@@ -155,7 +155,6 @@ export function RegisterEvent() {
 
             fetch(`${DOMAIN_NAME}/api/users/create`, request).then(
                 (response) => {
-                    console.log(response)
                     createView("/login");
                 })
                 .catch(error => console.error(error));
