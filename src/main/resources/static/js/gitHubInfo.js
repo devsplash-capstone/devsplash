@@ -12,7 +12,8 @@ import {PageContentView} from "./views/partials/content.js";
  */
 export default function RenderProfileWithGithubInfo(props) {
     //To check if it's user's profile or member's profile
-    let profileId = props.user.id;
+    //if user is not logged in set profile id to 0
+    let profileId = (props.user)? props.user.id : 0;
     let user = (props.member) ? props.member : props.user ;
 
     // Set github information only if github information provided, Note: Github has null user

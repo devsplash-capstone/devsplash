@@ -6,9 +6,15 @@ import {profileCardEvents, RenderProfileCardComponent} from "./ProfileCard.js";
 import {PageContentView} from "./partials/content.js";
 import {memberClickFetchEvent} from "./Members.js";
 import ProjectView, {ProjectEvents} from "./Project.js";
+import {validateUser} from "../router.js";
 
 export default function ProjectsView(props) {
-    let projectsPage = RenderProfileCardComponent(props.user, props.user.id) + renderProjectsComponent(props.projects, props.user.id)
+    let projectsPage;
+    if(props.user){
+        projectsPage = RenderProfileCardComponent(props.user, props.user.id) + renderProjectsComponent(props.projects, props.user.id)
+    }else{
+        projectsPage = renderProjectsComponent(props.projects, 0)
+    }
     return PageContentView(projectsPage)
 }
 
@@ -102,13 +108,14 @@ export function projectClickFetchEvent() {
         const route = {
             returnView: ProjectView,
             state: {
-                user: "/api/users/me",
                 project: `/api/projects/findById/${id}`,
             },
             uri: '/project',
             title: "Project",
             viewEvent: ProjectEvents
         }
+        // if user is not logged in
+        route.state = validateUser(route.state);
 
         const request = {
             headers: getHeaders()
@@ -129,6 +136,8 @@ export function projectClickFetchEvent() {
 export function editProjectClickFetchEvent() {
 
     $(".projectEditLink").click(function () {
+
+
 
         const id = $(this).attr("data-id");
         const route = {
