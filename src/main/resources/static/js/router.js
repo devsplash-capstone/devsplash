@@ -31,12 +31,14 @@ export default function router(URI) {
             uri: '/',
             title: 'Home'
         },
+        // TODO: if not still using '/loading', then remove it
         '/loading': {
             returnView: Loading,
             state: {},
             uri: location.pathname,
             title: 'Loading...'
         },
+        // TODO: probably remove this -> just redirect to splash page if the route doesn't exist
         '/error': {
             returnView: Error404,
             state: {},
@@ -100,6 +102,7 @@ export default function router(URI) {
             title: "Members",
             viewEvent: MembersEvents
         },
+        // TODO: why does this need to be a separate view from the project itself?
         '/editProject': {
             returnView: EditProjectComponent,
             state: {
@@ -110,6 +113,7 @@ export default function router(URI) {
             title: "Project",
             viewEvent:EditProjectEvents
         },
+        // TODO: why does this need to be a separate view from the profile itself?
         '/editProfile': {
             returnView: EditProfile,
             state: {

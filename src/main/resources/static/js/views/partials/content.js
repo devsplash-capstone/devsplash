@@ -1,3 +1,4 @@
+//TODO: this returns a component, not render
 /**
  * Renders main page content
  * @param content - views to be displayed inside the main content area

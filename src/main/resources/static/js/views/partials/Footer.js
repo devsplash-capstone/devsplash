@@ -1,3 +1,5 @@
+
+// TODO: give this a summary and remove the 'props' param if its not needed
 export default function Footer(props) {
     return `
         <footer class="my-5 pt-3 text-muted text-center text-small">

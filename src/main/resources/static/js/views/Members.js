@@ -6,6 +6,8 @@ import render from "../render.js";
 import ProfileView from "./Profile.js";
 import {validateUser} from "../router.js";
 
+
+// TODO: this function appears in almost every view file. Is there a way to write it once and re-use?
 export default function Members(props) {
     let membersPage;
     if(props.user) {
@@ -39,6 +41,7 @@ export function renderMembersComponent(members, label = '') {
     `;
 }
 
+// TODO: this function returns a component, it does not render anything
 /**
  * Renders members
  * @param member
@@ -55,6 +58,7 @@ export function renderMember(member) {
         `;
 }
 
+// TODO: this function returns a component, it does not render anything
 /**
  * Render member
  * @param members

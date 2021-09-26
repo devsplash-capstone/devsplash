@@ -8,7 +8,7 @@ import javax.persistence.*;
 import java.util.Collection;
 
 @Entity
-@Table(name = "Skills")
+@Table(name = "Skills") // TODO: 'Skills' should be lowercase
 public class Skill {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,7 +22,7 @@ public class Skill {
 
     @ManyToMany(mappedBy = "skills")
     @JsonIgnore
-    private Collection<User> user;
+    private Collection<User> user; // TODO: what is the purpose of this collection of users? -> name the field as such
 
     @ManyToMany(mappedBy = "skills")
     @JsonIgnore
@@ -31,12 +31,14 @@ public class Skill {
     public Skill() {
     }
 
+    // TODO: remove unused constructors
     public Skill(Long id, String name, String description) {
         this.id = id;
         this.name = name;
         this.description = description;
     }
 
+    // TODO: remove unused constructors
     public Skill(Long id, String name, String description, Collection<User> user) {
         this.id = id;
         this.name = name;

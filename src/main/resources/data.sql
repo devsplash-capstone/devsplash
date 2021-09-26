@@ -1,3 +1,6 @@
+-- TODO: Should this file be pushed up to github? You can simply run it on the droplet from your local machine
+--  I would consider removing and sharing privately between team members
+
 USE
 devsplash_db;
 Delete

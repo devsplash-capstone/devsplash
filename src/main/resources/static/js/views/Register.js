@@ -2,6 +2,8 @@ import createView from "../createView.js";
 import {renderSkills} from "./EditProject.js";
 
 export default function Register(props) {
+    // TODO: there is a LOT of HTML in this function.
+    //  -> Consider having one function to return the container and another to fill in the inner pieces
     return `
            
         <div class="content-wrapper pt-md-4">
@@ -11,6 +13,7 @@ export default function Register(props) {
                         <div class="row d-flex justify-content-center align-items-center h-100">
                             <div class="col">
                                 <div class="card card-registration my-3 border-0">
+<!-- TODO: this would be a good place to break apart -->
                                     <div class="row g-0">
 
                                         <form class="card-body px-md-5">
@@ -102,6 +105,7 @@ export default function Register(props) {
                                                     <select id="skills" class="col-12 custom-select overflow-auto" multiple>
                                                         ${renderSkills(props.skills)}
                                                     </select>
+                                                    <!-- TODO: really need a way to select many at once without additional keyboard bindings -->
                                                     <p class="instruction mt-1">Hold cmd to select more than one skill (ctrl for pc)</p>
                                                 </div>
                                             </div>
@@ -129,6 +133,9 @@ export default function Register(props) {
 
 export function RegisterEvent() {
     $("#save").click(function () {
+
+        // TODO: instead of waiting until they submit the entire form, validate the controls as they input
+        //  -> attach a validation function to each input. Then, by the time the save button is clicked, you don't need to validate anything or put the user through re-entering data
         if (RegisterValidation()) {
 
             let skills = [];
@@ -171,7 +178,12 @@ function cancelRegistration() {
 }
 
 
+
+// TODO: This function returns a boolean and should be named as such (ie: isValid() or validated())
+//  -> also, needs summary description
 function RegisterValidation() {
+
+    // TODO: don't call on the form controls until you need them
     $("#error-messages").empty();
     $("#firstname").css("border", "1px solid #D3D3D3")
     $("#lastname").css("border", "1px solid #D3D3D3")
@@ -181,6 +193,10 @@ function RegisterValidation() {
     $("#confirm-password").css("border", "1px solid #D3D3D3")
     $("#github-name").css("border", "1px solid #D3D3D3")
     let errorMessages = '';
+
+    // TODO: a LOT of repeated code here. You could write one function which validates any string parameter
+    //  -> you are validating the firstname, lastname, email, password the exact same way
+    //  -> write a function which will accept one string and validate that param the same way. Will reduce all of this code to basically 4 lines
     if ($("#firstname").val() === "" || $("#firstname").val().trim() === "") {
         errorMessages = errorMessages + "Please enter your first name<br>"
         $("#firstname").css("border", "1px solid #ff0000")

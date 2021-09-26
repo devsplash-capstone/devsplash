@@ -2,6 +2,7 @@ package com.codeup.devsplash.data.project;
 
 import com.codeup.devsplash.data.skills.Skill;
 import com.codeup.devsplash.data.user.User;
+// TODO: remove unused import statement
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
@@ -21,6 +22,7 @@ public class Project {
     @Column(nullable = false)
     private String description;
 
+    // TODO: 'github' doesn't tell me much about the purpose of the field
     @Column
     private String github;
 
@@ -39,6 +41,7 @@ public class Project {
     public Project() {
     }
 
+    // TODO: remove unused constructors
     public Project(Long id, String name, String description, User user, String github) {
         this.id = id;
         this.name = name;

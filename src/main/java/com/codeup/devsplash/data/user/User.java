@@ -41,12 +41,16 @@ public class User {
     @Column
     private String githubUsername;
 
+    // TODO: Are we using 'role'?
     public enum Role {USER, ADMIN};
 
+    // TODO: Are we using 'role'?
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Role role = Role.USER;
 
+
+    // TODO: this field appears to be unused -> is it used and just not referenced in the code?
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "user")
     @JsonIgnoreProperties({"user"})
     private Collection<Project> projects;
@@ -59,6 +63,9 @@ public class User {
             uniqueConstraints = @UniqueConstraint(columnNames = {"user_id","skill_id"})
     )
     private Collection<Skill> skills;
+
+    // TODO: one public, empty constructor is needed here
+
 
     public void setId(Long id) {
         this.id = id;

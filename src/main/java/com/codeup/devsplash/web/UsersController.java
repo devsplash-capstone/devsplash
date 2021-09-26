@@ -29,6 +29,7 @@ public class UsersController {
 
     @GetMapping("/me")
     private User getLoggedInUser(OAuth2Authentication auth) {
+        // TODO: need try/catch around calls to .get()
         return usersRepository.findByEmail(auth.getName()).get();
     }
 
@@ -39,6 +40,7 @@ public class UsersController {
 
     @PutMapping
     private void updateUser(@RequestBody User user) {
+        // TODO: oldUser is not called anywhere -> remove if not needed
         User oldUser = usersRepository.getById(user.getId());
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         usersRepository.save(user);
@@ -51,6 +53,7 @@ public class UsersController {
 
     @GetMapping("findById/{id}")
     private User getMemberById(@PathVariable Long id) {
+        // TODO: need try/catch around calls to .get()
         return usersRepository.findById(id).get();
     }
 }

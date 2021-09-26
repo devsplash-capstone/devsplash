@@ -1,5 +1,8 @@
 import createView from "../createView.js";
 
+
+// TODO: overall, this file seems to draw on much of the same logic and flow as 'Profile.js'
+//  -> Consider finding a way to make the code of both generic and scalable enough so as to reduce repeated code
 /**
  * RenderProfileCardComponent method renders Profile component with members information.
  * It adds "Send Email" if a member is rendered or adds "edit profile" if logged in member

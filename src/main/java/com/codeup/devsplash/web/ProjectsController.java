@@ -28,6 +28,7 @@ public class ProjectsController {
 
     @GetMapping("/byMe")
     private List<Project> getProjectsByLoggedInUser(OAuth2Authentication auth) {
+        // TODO: need try/catch around calls to .get()
         User loggedInUser = usersRepository.findByEmail(auth.getName()).get();
         return projectsRepository.findByUser_id(loggedInUser.getId());
     }
@@ -39,6 +40,7 @@ public class ProjectsController {
 
     @GetMapping("findById/{id}")
     private Project getProjectById(@PathVariable Long id) {
+        // TODO: need try/catch around calls to .get()
         return projectsRepository.findById(id).get();
     }
 

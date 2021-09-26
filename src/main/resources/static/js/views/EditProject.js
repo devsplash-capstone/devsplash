@@ -2,6 +2,11 @@ import createView from "../createView.js";
 import {profileCardEvents, RenderProfileCardComponent} from "./ProfileCard.js";
 import {PageContentView} from "./partials/content.js";
 
+
+// TODO: Overall, I'm not sure all-new source code JUST for editing a project is wise.
+//  -> Can lead to a lot of tech debt and unnecessary maintenance of the code
+//  -> Consider finding a way to use MUCH more of the existing code from Project.js (make that code generic enough to be re-used)
+//  -> A new view for editing is fine, *duplicating* the code from Project.js is not
 export default function EditProjectView(props) {
     let profilePage = RenderProfileCardComponent(props.user, props.user.id) + EditProjectComponent(props)
     return PageContentView(profilePage)

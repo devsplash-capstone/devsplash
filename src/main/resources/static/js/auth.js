@@ -27,6 +27,7 @@ export default function LoginEvent() {
             },
             request).then((data) => {
             if (data.route.error) {
+                // TODO: is there a difference in 'route.error' and 'route.error_description'
                 $("#message").text(data.route.error_description);
             } else {
                 setTokens(data);
@@ -38,6 +39,8 @@ export default function LoginEvent() {
 
 }
 
+
+//TODO: need description
 export function LogoutEvent() {
     deleteTokens();
     createView("/")
@@ -74,10 +77,11 @@ function setTokens(responseData) {
     }
 }
 
+
+//TODO: group this function with 'LogoutEvent' above
 /**
  * Attempts to delete the token on sign out
  */
-
 function deleteTokens() {
     localStorage.removeItem("access_token");
     console.log("Access token deleted");

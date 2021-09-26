@@ -8,9 +8,13 @@
 
 //TODO: add two new columns img URL, about me, make fields other than display name not required
 
+// TODO: get rid of TODO's which are done or not needed
+
 import createView from "../createView.js";
 import {renderAndSelectSkills} from "./EditProject.js";
 
+
+// TODO: same as EditProject. A new view is fine for editing, but there is much room for improvement on reducing duplicated code
 export default function EditProfile(props) {
     return `
     <body>
@@ -222,6 +226,9 @@ function editProfileDelete() {
     })
 }
 
+
+// TODO: same as in creating a project, profile, etc. A lot of duplicated code.
+//  -> You could have a single function across the entire frontend for validating any string the same way
 function editProfileValidate() {
     $("#error-messages").empty();
     $("#first-name").css("border", "1px solid #D3D3D3")

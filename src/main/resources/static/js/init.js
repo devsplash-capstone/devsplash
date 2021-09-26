@@ -5,10 +5,10 @@ import createView from './createView.js';
  */
 function loadViewOnPageRequest() {
     window.addEventListener('DOMContentLoaded', function() {
-        //TODO: Switched to location.pathname so the route would be accurate to current view
         createView(location.pathname);
     });
 
+    // TODO: check with Tristan -> he has a good solve for this if its still an issue
     window.addEventListener('popstate', function(){
         history.back();
     });
@@ -27,6 +27,7 @@ function addListenerToNavLinks() {
     });
 }
 
+// TODO: give this a description and move to the top of the file
 export default function init() {
     loadViewOnPageRequest();
     addListenerToNavLinks();

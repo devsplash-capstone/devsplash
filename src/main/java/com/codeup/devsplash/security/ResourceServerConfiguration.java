@@ -33,6 +33,7 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
+                // TODO: remove commented code if not needed
 //                .antMatchers("/api/users")
 //                .hasAnyAuthority("ADMIN", "USER")
 //                .antMatchers("/api/posts")

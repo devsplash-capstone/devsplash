@@ -3,6 +3,8 @@ import {profileCardEvents, RenderProfileCardComponent} from "./ProfileCard.js";
 import {PageContentView} from "./partials/content.js";
 import {renderSkillsComponents} from "./Profile.js";
 
+
+// TODO: needs summary description and there is an opportunity to reduce duplicated code
 export default function ProjectView(props) {
     let projectPage;
     if(props.user){
@@ -51,6 +53,7 @@ export function renderProjectComponent(project) {
 `;
 }
 
+// TODO: make a more meaningful description
 /**
  * Adds click event for creator
  */

@@ -1,4 +1,6 @@
 export default function NavbarView(props) {
+
+    // TODO: extract the two navbar template literals to two functions which describe the purpose of each (mobile and desktop?)
     if (localStorage.getItem("access_token")){
             return `
                     <div class="header-wrapper bg-light">

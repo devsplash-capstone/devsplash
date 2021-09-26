@@ -2,6 +2,8 @@ import {renderProfileComponent, ProfileEvent} from "./views/Profile.js";
 import {RenderProfileCardComponent} from "./views/ProfileCard.js";
 import {PageContentView} from "./views/partials/content.js";
 
+
+// TODO: this function is not async and the name is a bit long. Consider a more succinct name like 'GetRepoComponents()'
 /**
  * RenderProfileWithGithubInfo is async function.
  * Checks if member's profile or logged in user's profile.
@@ -22,12 +24,15 @@ export default function RenderProfileWithGithubInfo(props) {
         .then(function (res) {
             return res.json();
         }).then(repos => {
+            //TODO the below logic needs to be extracted to another function
+            //  -> also, appears to be mostly duplicated
         if (user.githubUsername)
             return RenderProfileCardComponent(user, profileId) + renderProfileComponent(user, props.projects, repos, profileId)
         else
             return RenderProfileCardComponent(user, profileId) + renderProfileComponent(user, props.projects, null, profileId)
 
     }).then(profilePageView => {
+        // TODO: the below code needs to be extracted to another function
         let pageContentView = PageContentView(profilePageView)
         $("#loadingGif").remove()
         $(".header-wrapper").append(pageContentView)
@@ -35,6 +40,7 @@ export default function RenderProfileWithGithubInfo(props) {
     });
 }
 
+// TODO: clean up this summary -> It returns components, not render or append to the DOM
 /**
  * Renders only 3 github repos. If repos not available returns message.
  * @param repos - github repos
@@ -53,8 +59,10 @@ export function renderGithubInfo(repos) {
         }).join('')
     else
         return `<div class="border rounded p-2">Github information not provided or is incorrect.</div>`
+        // TODO: the above message could be a bit more warm. Seems rather corporate right now
 }
 
+// TODO: needs description
 function getDate(githubDate){
     return githubDate.substring(0, 10);
 }

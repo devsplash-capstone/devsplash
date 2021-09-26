@@ -1,4 +1,5 @@
 export default function Login() {
+    // TODO: won't the index.html already have a head tag plus render.js appends the title to the tab?
     return `
             <head>
                 <meta charset="UTF-8"/>

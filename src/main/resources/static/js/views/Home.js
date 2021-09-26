@@ -5,7 +5,6 @@ export default function Home(props) {
            <main role="main">
 
             <!-- START THE FEATURETTES -->
-           
             <hr class="featurette-divider">
 
             <div class="row featurette">

@@ -9,7 +9,11 @@ import ProjectView, {ProjectEvents} from "./Project.js";
 import {validateUser} from "../router.js";
 
 export default function ProjectsView(props) {
+    // TODO: go ahead and add the renderProjectsComponent to the 'projectsPage' before any checks are done
+    //  -> THEN, if there is a user id, add the rest (and update the projects component to include the user id)
+    //  -> it will be less code and far more flexible
     let projectsPage;
+
     if (props.user) {
         projectsPage = RenderProfileCardComponent(props.user, props.user.id) + renderProjectsComponent(props.projects, props.user.id)
     } else {
@@ -41,6 +45,7 @@ function renderProjectsComponent(projects, loggedInUserId) {
         `;
 }
 
+// TODO: this function returns a component, it does not render anything
 /**
  * Renders search bar
  * @returns {string}
@@ -50,6 +55,8 @@ function renderSearchBar() {
              <a class="search col-4 form-control search btn btn-light btn-block border-dark" href="#">Search</a>`
 }
 
+
+// TODO: this function returns a component, it does not render anything
 /**
  * Renders projects, and gives edit link for project if valid user
  * @param projects
@@ -62,6 +69,8 @@ function renderProjects(projects, loggedInUserId) {
         : `<div class="border rounded p-2">All the projects will go here.</div>`
 }
 
+
+// TODO: this function returns a component, it does not render anything
 /**
  * Renders project, and gives edit link for project if valid user
  * @param project
@@ -85,6 +94,8 @@ export function renderProject(project, loggedInUserId) {
             `
 }
 
+
+// TODO: this function returns a component, it does not render anything
 /**
  * Renders project edit link for logged in user has created the project
  * @param project
@@ -97,6 +108,8 @@ function renderEditProjectLink(project, loggedInUserId) {
         : ``
 }
 
+
+// TODO: include this in the overall re-think of duplicated functions
 /**
  * Adds projects and profile card events.
  */
@@ -111,6 +124,8 @@ export function ProjectsViewEvents() {
 function projectSearchEvent() {
 
     $("#search-input").keyup(function () {
+
+        // TODO: 'projects' is not used until line 146, so group them together and extract to another function
         let projects;
 
         //Get all the projects
@@ -118,6 +133,8 @@ function projectSearchEvent() {
 
         let searchTerm = $("#search-input").val()
 
+        // TODO: instead of an 'if' statement, just pass searchTerm to .toggleClass in via logical OR (||) or use a ternary
+        //  -> a few less lines of code to write
         //Hide projects if Search term is given
         if (searchTerm)
             $(this).parent().siblings(".projects").children(".project").toggleClass("d-none", true)
@@ -129,6 +146,7 @@ function projectSearchEvent() {
         projectString = searchByName(projects, searchTerm, projectString);
 
         $(this).parent().siblings(".projects").children(".searchResultProject").remove();
+        // TODO: this is redundant. You have already checked for 'searchTerm' by this point
         if (searchTerm) {
             $(this).parent().siblings(".projects").append(projectString);
             projectSearchResultEvent()
@@ -137,6 +155,8 @@ function projectSearchEvent() {
     })
 }
 
+
+// TODO: a lot of duplicated code between projectSearchResultEvent and ProjectEvents
 /**
  * Adds events for search results for project, member, edit project
  */
@@ -156,6 +176,8 @@ export function ProjectsEvents() {
     projectSearchEvent();
 }
 
+
+// TODO: a lot of duplicated code between projectClickFetchEvent and EditProjectClickEvent
 /**
  * Fetches information for selected project and forwards to Project details page
  */
@@ -223,12 +245,18 @@ export function editProjectClickFetchEvent() {
 function searchByName(projects, searchTerm, projectString) {
     //Created new search div tags if search term is in name
     for (let i = 0; i < projects.length; i++) {
+
+        // TODO: seems a little convoluted and fragile
+        //  -> You shouldn't need to dig down 5 layers into the DOM to find a project name
+        //  -> This could easily break if ever there is nothing in 'projects'
+        //  -> perhaps just query the DOM for a class?
         let projectName = projects[i].children[0].children[0].childNodes[0].innerHTML.toLowerCase()
         if (projectName.includes(searchTerm.toLowerCase())) {
             projectString = projectString +
                 '<div class="searchResultProject card col-12  px-3 px-md-0">' + projects[i].innerHTML + '</div>'
         }
     }
+    // TODO: 'no results' for what? Make this message more meaningful
     if (!projectString)
         projectString = `<div class="searchResultProject card col-12 p-3">No results found!</div>`;
     return projectString;
