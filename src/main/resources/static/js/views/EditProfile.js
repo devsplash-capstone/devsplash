@@ -157,7 +157,6 @@ export function EditProfileEvent() {
 }
 
 function editProfileSave() {
-    console.log($("#first-name").val())
     $("#save-btn").click(function () {
         if(editProfileValidate() === true) {
             let skills = [];
@@ -176,7 +175,6 @@ function editProfileSave() {
                 githubUsername: $("#github-name").val().trim(),
                 password: $("#password").val()
             }
-            console.log("user is being saved");
             let request = {
                 method: "PUT",
                 headers: {"Content-type": "application/json"},
@@ -184,7 +182,6 @@ function editProfileSave() {
             }
             fetch(`${DOMAIN_NAME}/api/users/`, request)
                 .then(res => {
-                    console.log(res.status);
                     createView("/profile")
                 }).catch(error => {
                 console.log(error);
