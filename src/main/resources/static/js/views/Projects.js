@@ -6,24 +6,48 @@ import {profileCardEvents, RenderProfileCardComponent} from "./ProfileCard.js";
 import {PageContentView} from "./partials/content.js";
 import {memberClickFetchEvent} from "./Members.js";
 import ProjectView, {ProjectEvents} from "./Project.js";
+import {validateUser} from "../router.js";
 
 export default function ProjectsView(props) {
-    let projectsPage = RenderProfileCardComponent(props.user, props.user.id) + renderProjectsComponent(props.projects, props.user.id)
+    let projectsPage;
+    if (props.user) {
+        projectsPage = RenderProfileCardComponent(props.user, props.user.id) + renderProjectsComponent(props.projects, props.user.id)
+    } else {
+        projectsPage = renderProjectsComponent(props.projects, 0)
+    }
     return PageContentView(projectsPage)
 }
 
+/**
+ * Renders project list, and search bar
+ * @param projects
+ * @param loggedInUserId
+ * @returns {string}
+ */
 function renderProjectsComponent(projects, loggedInUserId) {
     return `<div class="details-wrapper col-md-8 d-md-inline-flex py-4 pt-md-0 px-0 m-md-3">
                 <div class="details-wrapper-helper col-12 px-0 p-md-4">
-                    <div class="current-projects px-0 mt-4 mt-md-0 p-md-4">
-                        <h3 class="mb-4">Explore Projects</h3>
-                        <div class="row d-flex justify-content-around mx-0">
+                    <div class="projects-w-search px-0 mt-4 mt-md-0 p-md-4">
+                        <h3 class="mb-2">Explore Projects</h3>
+                        <div class="search row mb-2 justify-content-between mx-0">
+                            ${renderSearchBar()}
+                        </div>
+                        <div class="projects row d-flex justify-content-around mx-0">
                            ${renderProjects(projects, loggedInUserId)}
                         </div>
                     </div>
                 </div>
             </div>
         `;
+}
+
+/**
+ * Renders search bar
+ * @returns {string}
+ */
+function renderSearchBar() {
+    return `<input type="text" id="search-input" class="col-7 form-control" placeholder="Search projects..." >
+             <a class="search col-4 form-control search btn btn-light btn-block border-dark" href="#">Search</a>`
 }
 
 /**
@@ -38,7 +62,6 @@ function renderProjects(projects, loggedInUserId) {
         : `<div class="border rounded p-2">All the projects will go here.</div>`
 }
 
-
 /**
  * Renders project, and gives edit link for project if valid user
  * @param project
@@ -47,7 +70,7 @@ function renderProjects(projects, loggedInUserId) {
  */
 export function renderProject(project, loggedInUserId) {
     return `
-            <div class="card col-12  px-3 px-md-0">
+            <div class="card project col-12  px-3 px-md-0">
                 <div class="card-body px-0 px-md-3">
                     <a href="#" class="projectViewLink" data-id="${project.id}"><h5 class="card-title">${project.name}</h5></a>
                     <a href="#">
@@ -83,12 +106,54 @@ export function ProjectsViewEvents() {
 }
 
 /**
+ * Adds search input keyup event and click events for Project name, and creator of project
+ */
+function projectSearchEvent() {
+
+    $("#search-input").keyup(function () {
+        let projects;
+
+        //Get all the projects
+        projects = ($(this).parent().siblings(".projects").children(".project"))
+
+        let searchTerm = $("#search-input").val()
+
+        //Hide projects if Search term is given
+        if (searchTerm)
+            $(this).parent().siblings(".projects").children(".project").toggleClass("d-none", true)
+        else {
+            $(this).parent().siblings(".projects").children(".project").toggleClass("d-none", false)
+        }
+
+        let projectString = ''
+        projectString = searchByName(projects, searchTerm, projectString);
+
+        $(this).parent().siblings(".projects").children(".searchResultProject").remove();
+        if (searchTerm) {
+            $(this).parent().siblings(".projects").append(projectString);
+            projectSearchResultEvent()
+        }
+
+    })
+}
+
+/**
+ * Adds events for search results for project, member, edit project
+ */
+function projectSearchResultEvent() {
+    projectClickFetchEvent();
+    editProjectClickFetchEvent();
+    memberClickFetchEvent();
+}
+
+/**
  * Adds project, edit project and member click events.
  */
 export function ProjectsEvents() {
     projectClickFetchEvent();
     editProjectClickFetchEvent();
     memberClickFetchEvent();
+    projectSearchEvent();
 }
 
 /**
@@ -102,13 +167,14 @@ export function projectClickFetchEvent() {
         const route = {
             returnView: ProjectView,
             state: {
-                user: "/api/users/me",
                 project: `/api/projects/findById/${id}`,
             },
             uri: '/project',
             title: "Project",
             viewEvent: ProjectEvents
         }
+        // if user is not logged in
+        route.state = validateUser(route.state);
 
         const request = {
             headers: getHeaders()
@@ -154,3 +220,16 @@ export function editProjectClickFetchEvent() {
     });
 }
 
+function searchByName(projects, searchTerm, projectString) {
+    //Created new search div tags if search term is in name
+    for (let i = 0; i < projects.length; i++) {
+        let projectName = projects[i].children[0].children[0].childNodes[0].innerHTML.toLowerCase()
+        if (projectName.includes(searchTerm.toLowerCase())) {
+            projectString = projectString +
+                '<div class="searchResultProject card col-12  px-3 px-md-0">' + projects[i].innerHTML + '</div>'
+        }
+    }
+    if (!projectString)
+        projectString = `<div class="searchResultProject card col-12 p-3">No results found!</div>`;
+    return projectString;
+}

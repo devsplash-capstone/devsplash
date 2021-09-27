@@ -10,7 +10,6 @@ function loadViewOnPageRequest() {
     });
 
     window.addEventListener('popstate', function(){
-        console.log(history.getState);
         history.back();
     });
 }

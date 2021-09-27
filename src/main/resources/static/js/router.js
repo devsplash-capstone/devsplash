@@ -11,7 +11,7 @@ import Members, {MembersEvents} from "./views/Members.js";
 import EditProfile, {EditProfileEvent} from "./views/EditProfile.js";
 import ProjectView from "./views/Project.js";
 
-function validateUser(obj) {
+export function validateUser(obj) {
     if (localStorage.getItem("access_token")){
         obj.user ="/api/users/me"
     }
@@ -68,28 +68,25 @@ export default function router(URI) {
         },
         '/profile': {
             returnView: ProfileView,
-            state: {
-                user: "/api/users/me",
+            state: validateUser({
                 projects: "/api/projects/byMe"
-            },
+            }),
             uri: '/profile',
             title: "Profile",
         },
         '/project': {
             returnView: ProjectView,
-            state: {
-                user: "/api/users/me",
+            state: validateUser({
                 skills: "/api/skills"
-            },
+            }),
             uri: '/project',
             title: "Project"
         },
         '/projects': {
             returnView: ProjectsView,
-            state: {
-                user: "/api/users/me",
+            state: validateUser({
                 projects: "/api/projects"
-            },
+            }),
             uri: '/projects',
             title: "Projects",
             viewEvent: ProjectsViewEvents
