@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class ViewController {
-    @RequestMapping({"/", "/home","/register","/profile", "/login", "/viewproject", "/projects", "/members"})
+    @RequestMapping({"/", "/home","/register","/profile", "/login", "/viewproject", "/projects", "/members", "/aboutus"})
     public String showView() {
         return "forward:/index.html";
     }

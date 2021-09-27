@@ -25,6 +25,23 @@ img {
     margin-right: 1em;
 }
 
+.card-container{
+    margin-bottom: 155px;
+    margin-top: 135px;
+}
+
+
+
+.about-img {
+    height: auto;
+    padding: 1em;
+}
+
+.card {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
 .logo-link {
     background: url("../assets/devsplash_0.png") no-repeat;
     background-size: contain;
