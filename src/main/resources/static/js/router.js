@@ -9,7 +9,7 @@ import EditProjectComponent, {EditProjectEvents} from "./views/EditProject.js";
 import ProjectsView, {ProjectsViewEvents} from "./views/Projects.js";
 import Members, {MembersEvents} from "./views/Members.js";
 import EditProfile, {EditProfileEvent} from "./views/EditProfile.js";
-import ProjectView from "./views/Project.js";
+import ProjectView, {ProjectEvents} from "./views/Project.js";
 
 export function validateUser(obj) {
     if (localStorage.getItem("access_token")){
@@ -119,6 +119,15 @@ export default function router(URI) {
             uri: '/editProfile',
             title: 'Edit Profile',
             viewEvent: EditProfileEvent
+        },
+        '/ProjectMembers': {
+            returnView: ProjectView,
+            state: {
+                user: '/api/users/join',
+                projects: '/api/projects/findByMe'
+            },
+            uri: '/project',
+            viewEvent: ProjectEvents
         }
     };
 

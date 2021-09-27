@@ -3,6 +3,8 @@ package com.codeup.devsplash.web;
 
 import com.codeup.devsplash.data.projectMembers.ProjectMember;
 import com.codeup.devsplash.data.projectMembers.ProjectMembersRepository;
+import com.codeup.devsplash.data.user.UsersRepository;
+import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
@@ -12,14 +14,18 @@ import java.util.Collection;
 public class ProjectMembersController {
 
     private final ProjectMembersRepository projectMembersRepository;
+    private final  UsersRepository usersRepository;
 
-    public ProjectMembersController(ProjectMembersRepository projectMembersRepository) {
+    public ProjectMembersController(ProjectMembersRepository projectMembersRepository, UsersRepository usersRepository) {
         this.projectMembersRepository = projectMembersRepository;
+        this.usersRepository = usersRepository;
     }
 
     @PostMapping
-    private void memberJoiningProject(@RequestBody ProjectMember newProjectMember) {
+    private void memberJoiningProject(@RequestBody ProjectMember newProjectMember, OAuth2Authentication auth) {
 //        ProjectMember member = new ProjectMember(newProjectMember.getUser(), newProjectMember.getProject());
+
+        newProjectMember.setUser(usersRepository.findByEmail(auth.getName()).get());
         projectMembersRepository.save(newProjectMember);
     }
 

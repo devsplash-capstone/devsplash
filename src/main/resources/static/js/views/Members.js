@@ -45,6 +45,7 @@ export function renderMembersComponent(members, label = '') {
  * @returns {string}
  */
 export function renderMember(member) {
+    console.log(member);
     return `<a href="#" class="memberView list-group-item list-group-item-action" data-member-id="${member.id}">
                 <div class="d-md-flex w-100 justify-content-between">
                     <h5 class="mb-1">${member.firstname} ${member.lastname}</h5>
