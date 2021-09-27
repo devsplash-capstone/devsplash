@@ -132,7 +132,7 @@ export default function EditProfile(props) {
 
                                             <div class="row mt-5 mb-3 border border-danger rounded mx-auto">
                                                 <button id="delete-btn" class="btn btn-light btn-block col-12 col-md-10 border-dark mx-auto mt-5"
-                                                        type="submit" data-id="${props.user.id}">Delete Profile
+                                                        type="submit" data-toggle="modal" data-target="#deleteModal" data-id="${props.user.id}">Delete Profile
                                                 </button>
                                                 <small class="col-12 col-md-12 mt-1 mb-5 text-center text-danger">This
                                                     change will be permanent.</small>
@@ -146,6 +146,26 @@ export default function EditProfile(props) {
                     </div>
                 </section>
             </div>
+        </div>
+        <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+              <img src="../../assets/devsplash_mini.png" alt="d-logo" class="w-auto h-auto modal-image" >
+                <h5 class="modal-title modal-title-edit" id="deleteModalLabel">Delete your profile?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                Are you sure you want to delete your profile? This cannot be undone.
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-danger" id="delete-btn-final">Delete Profile</button>
+              </div>
+            </div>
+          </div>
         </div>
     `
 }
@@ -201,27 +221,24 @@ function editProfileCancel() {
 }
 
 function editProfileDelete() {
-    $("#delete-btn").click(function () {
+    $("#delete-btn-final").click(function () {
 
-        let youSure = confirm("Are you sure you would like to delete your account? This is permanent.");
-        if (youSure === true) {
-            let request = {
-                method: "DELETE",
-                headers: {"Content-Type": "application/json"},
-            }
-
-            let id = $(this)
-                .attr("data-id")
-
-            fetch(`${DOMAIN_NAME}/api/users/${id}`, request)
-                .then(res => {
-                    createView("/");
-                })
-                .catch(error => {
-                    console.log(error)
-                    createView("/profile")
-                })
+        let request = {
+            method: "DELETE",
+            headers: {"Content-Type": "application/json"},
         }
+
+        let id = $(this)
+            .attr("data-id")
+
+        fetch(`${DOMAIN_NAME}/api/users/${id}`, request)
+            .then(res => {
+                createView("/");
+            })
+            .catch(error => {
+                console.log(error)
+                createView("/profile")
+            })
     })
 }
 
