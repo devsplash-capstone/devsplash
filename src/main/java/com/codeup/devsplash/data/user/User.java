@@ -47,7 +47,7 @@ public class User {
     @Column(nullable = false)
     private Role role = Role.USER;
 
-    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "user")
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "user") // ***\\
     @JsonIgnoreProperties({"user"})
     private Collection<Project> projects;
 
