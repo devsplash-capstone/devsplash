@@ -139,18 +139,16 @@ export default function router(URI) {
             uri: '/PrivacyPolicy',
             title: 'PrivacyPolicy',
         },
-            '/aboutus': {
-                returnView: AboutUsView,
-                state: {
+        '/aboutus': {
+            returnView: AboutUsView,
+            state: {
                 uri: '/aboutus',
                 title: 'About Us',
                 // viewEvent: AboutUsEvents
             }
         }
     }
+
+    return routes[URI];
+
 }
-
-
-
-//     return routes[URI];
-// }

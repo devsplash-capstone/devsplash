@@ -100,14 +100,24 @@ function joinProjectEvent() {
             headers: getHeaders()
         }
 
-    fetchData(route.state, request)
-        .then((props) => {
-            render(props, route);
-        })
-        .catch(error => console.error(error));
+        fetchData(route.state, request)
+            .then((props) => {
+                render(props, route);
+            })
+            .catch(error => console.error(error));
+
+        const url = "/project";
+        const options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        };
+        fetch(url, options)
+            .then(response => console.log(response))
+            .catch(error => console.error(error))
+
     })
-
-
 
 }
 
