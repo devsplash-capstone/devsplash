@@ -46,8 +46,7 @@ function renderProjectsComponent(projects, loggedInUserId) {
  * @returns {string}
  */
 function renderSearchBar() {
-    return `<input type="text" id="search-input" class="col-7 form-control" placeholder="Search projects..." >
-             <a class="search col-4 form-control search btn btn-light btn-block border-dark" href="#">Search</a>`
+    return `<input type="text" id="search-input" class="col-12 form-control" placeholder="Search projects by name..." >`
 }
 
 /**
