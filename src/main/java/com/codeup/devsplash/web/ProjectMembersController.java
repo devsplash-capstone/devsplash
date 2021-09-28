@@ -23,13 +23,10 @@ public class ProjectMembersController {
     }
 
     @PostMapping
-    private void memberJoiningProject(@RequestBody Long id, OAuth2Authentication auth) {
-        ProjectMember member = new ProjectMember();
-        Project project = new Project();
-        project.setId(id);
-        member.setProject(project);
-        member.setUser(usersRepository.findByEmail(auth.getName()).get());
-        projectMembersRepository.save(member);
+    private void memberJoiningProject(@RequestBody ProjectMember projectMember) {
+        System.out.println(projectMember.getProject().getId());
+        System.out.println(projectMember.getUser().getId());
+        projectMembersRepository.save(projectMember);
     }
 
     @GetMapping("/byProjectId/{projectId}")

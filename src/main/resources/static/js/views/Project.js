@@ -2,17 +2,13 @@ import {memberClickFetchEvent, renderMember} from "./Members.js";
 import {profileCardEvents, RenderProfileCardComponent} from "./ProfileCard.js";
 import {PageContentView} from "./partials/content.js";
 import {renderSkillsComponents} from "./Profile.js";
-import fetchData from "../fetchData.js";
-import render from "../render.js";
-import {getHeaders} from "../auth.js";
-import {validateUser} from "../router.js";
 import createView from "../createView.js";
 
 export default function ProjectView(props) {
     console.log(props)
     let projectPage;
     if (props.user) {
-        projectPage = RenderProfileCardComponent(props.user, props.user.id) + renderProjectComponent(props.project);
+        projectPage = RenderProfileCardComponent(props.user, props.user.id) + renderProjectComponent(props.project, props.user.id);
     } else {
         projectPage = renderProjectComponent(props.project);
     }
@@ -24,7 +20,7 @@ export default function ProjectView(props) {
  * @param project
  * @returns {string}
  */
-export function renderProjectComponent(project) {
+export function renderProjectComponent(project, userId= 0) {
     // fetchData()
     console.log(project);
     console.log(project.description);
@@ -64,7 +60,8 @@ export function renderProjectComponent(project) {
                  </div>
                 </div>
                 <form class="pt-3 p-md-3">
-                    <button class="btn btn-light btn-block col-12 border-dark mt-3" data-project-id="${project.id}" id="joinProject">Join Project
+                    <button class="btn btn-light btn-block col-12 border-dark mt-3" data-project-id=${project.id}
+                    data-user-id = ${userId} id="joinProject">Join Project
                     </button>
                 </form>
             </div>
@@ -84,15 +81,16 @@ function renderProjectLinks(link) {
 function joinProjectEvent() {
     $("#joinProject").click(function () {
         const id = $(this).attr("data-project-id");
+        const userId = $(this).attr("data-user-id");
         const url = `${DOMAIN_NAME}/api/projectMembers`;
         const options = {
             method: 'POST',
+            project: member,
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(id)
-        };
-
+        }
         fetch(url, options)
             .then(_ => {
                 createView("/profile")
