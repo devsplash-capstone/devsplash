@@ -5,7 +5,7 @@ export default function Footer(props) {
             <ul class="list-inline">
                 <li class="list-inline-item"><a href="#">Privacy</a></li>
                 <li class="list-inline-item"><a href="#">Terms</a></li>
-                <li class="list-inline-item"><a href="#">Support</a></li>
+                <li class="list-inline-item"><a href="/aboutus" data-link>About Us</a></li>
                 <li class="list-inline-item"><a href="#">faqs</a></li>
             </ul>
         </footer>
