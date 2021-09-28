@@ -58,6 +58,26 @@ export function EditProjectComponent(props) {
                 </div>
             </div>
         </div>
+        <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+              <img src="../../assets/devsplash_mini.png" alt="d-logo" class="w-auto h-auto modal-image" >
+                <h5 class="modal-title modal-title-edit" id="deleteModalLabel">Delete your project?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                Are you sure you want to delete this project? This cannot be undone.
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-danger" id="deleteProject">Delete Project</button>
+              </div>
+            </div>
+          </div>
+        </div>
 `;
 }
 
@@ -125,7 +145,7 @@ function renderDeleteButton(props) {
     return (!isNew(props))
         ? `<div class="row mt-5 mb-3 border border-danger rounded mx-auto">
             <button class="btn btn-light btn-block col-10 border-dark mx-auto mt-5" data-project-id="${props.project.id}"
-                id="deleteProject">Delete Project</button>
+                id="deleteProjectBtn" data-toggle="modal" data-target="#deleteModal">Delete Project</button>
             <small class="col-12 col-md-12 mt-1 mb-5 text-center text-danger">This change will be permanent.</small>
            </div>`
         : ''
