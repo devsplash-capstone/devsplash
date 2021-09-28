@@ -123,6 +123,7 @@ export default function router(URI) {
             title: 'Edit Profile',
             viewEvent: EditProfileEvent
         },
+<<<<<<< HEAD
         '/ProjectMembers': {
             returnView: ProjectView,
             state: {
@@ -146,6 +147,14 @@ export default function router(URI) {
                 title: 'About Us',
                 // viewEvent: AboutUsEvents
             }
+=======
+        '/aboutus': {
+            returnView: AboutUsView,
+            state: {},
+            uri: '/aboutus',
+            title: 'About Us',
+            // viewEvent: AboutUsEvents
+>>>>>>> 23c7e6efbbc6933685883152cd63b2293b86aa8b
         }
     }
 }

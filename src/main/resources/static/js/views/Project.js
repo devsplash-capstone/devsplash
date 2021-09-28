@@ -106,6 +106,9 @@ function joinProjectEvent() {
         })
         .catch(error => console.error(error));
     })
+
+
+
 }
 
 function newProjectMemberList() {
