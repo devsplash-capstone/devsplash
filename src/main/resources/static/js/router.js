@@ -9,13 +9,10 @@ import EditProjectComponent, {EditProjectEvents} from "./views/EditProject.js";
 import ProjectsView, {ProjectsViewEvents} from "./views/Projects.js";
 import Members, {MembersEvents} from "./views/Members.js";
 import EditProfile, {EditProfileEvent} from "./views/EditProfile.js";
-<<<<<<< HEAD
 import ProjectView, {ProjectEvents} from "./views/Project.js";
 import PrivacyPolicy from "./views/PrivacyPolicy.js";
-=======
 import ProjectView from "./views/Project.js";
 import AboutUsView from "./views/AboutUs.js";
->>>>>>> 23c7e6efbbc6933685883152cd63b2293b86aa8b
 
 export function validateUser(obj) {
     if (localStorage.getItem("access_token")){
