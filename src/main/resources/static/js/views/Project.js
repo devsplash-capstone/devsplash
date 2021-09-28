@@ -6,6 +6,7 @@ import fetchData from "../fetchData.js";
 import render from "../render.js";
 import {getHeaders} from "../auth.js";
 import {validateUser} from "../router.js";
+import createView from "../createView.js";
 
 export default function ProjectView(props) {
     console.log(props)
@@ -83,43 +84,23 @@ function renderProjectLinks(link) {
 function joinProjectEvent() {
     $("#joinProject").click(function () {
         const id = $(this).attr("data-project-id");
-        const route = {
-            returnView: ProjectView,
-            state: {
-                project: `/api/project/findByMe/${id}`,
-            },
-            Uri: '/project',
-            title: 'Project',
-            viewEvent: ProjectEvents
-        }
-        console.log("This is join project");
-
-        route.state = ProjectView(route.state);
-
-        const request = {
-            headers: getHeaders()
-        }
-
-        fetchData(route.state, request)
-            .then((props) => {
-                render(props, route);
-            })
-            .catch(error => console.error(error));
-
-        const url = "/project";
+        const url = `${DOMAIN_NAME}/api/projectMembers`;
         const options = {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json',
+                'Content-Type': 'application/json'
             },
+            body: JSON.stringify(id)
         };
+
         fetch(url, options)
-            .then(response => console.log(response))
-            .catch(error => console.error(error))
-
+            .then(_ => {
+                createView("/profile")
+            })
+            .catch(error => console.error(error)); /* handle errors */
     })
-
 }
+
 
 function newProjectMemberList() {
     memberClickFetchEvent();

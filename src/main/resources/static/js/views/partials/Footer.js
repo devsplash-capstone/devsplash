@@ -9,8 +9,6 @@ export default function Footer(props) {
                 <li class="list-inline-item"><a href="#">Terms</a></li>
                 <li class="list-inline-item"><a href="/aboutus" data-link>About Us</a></li>
                 <li class="list-inline-item"><a href="#">Faqs</a></li>
-
-                <li class="list-inline-item"><a href="#">faqs</a></li>
             </ul>
         </footer>
     `;
