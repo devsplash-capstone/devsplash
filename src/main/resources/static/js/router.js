@@ -11,12 +11,11 @@ import Members, {MembersEvents} from "./views/Members.js";
 import EditProfile, {EditProfileEvent} from "./views/EditProfile.js";
 import ProjectView, {ProjectEvents} from "./views/Project.js";
 import PrivacyPolicy from "./views/PrivacyPolicy.js";
-import ProjectView from "./views/Project.js";
 import AboutUsView from "./views/AboutUs.js";
 
 export function validateUser(obj) {
-    if (localStorage.getItem("access_token")){
-        obj.user ="/api/users/me"
+    if (localStorage.getItem("access_token")) {
+        obj.user = "/api/users/me"
     }
     return obj;
 }
@@ -123,8 +122,7 @@ export default function router(URI) {
             title: 'Edit Profile',
             viewEvent: EditProfileEvent
         },
-<<<<<<< HEAD
-        '/ProjectMembers': {
+        '/projectMembers': {
             returnView: ProjectView,
             state: {
                 user: '/api/users/join',
@@ -133,31 +131,25 @@ export default function router(URI) {
             uri: '/project',
             viewEvent: ProjectEvents
         },
-        'PrivacyPolicy': {
+        '/privacyPolicy': {
             returnView: PrivacyPolicy,
             state: {
                 user: '/PrivacyPolicy'
             },
             uri: '/PrivacyPolicy',
             title: 'PrivacyPolicy',
+        },
             '/aboutus': {
                 returnView: AboutUsView,
-                state: {},
+                state: {
                 uri: '/aboutus',
                 title: 'About Us',
                 // viewEvent: AboutUsEvents
             }
-=======
-        '/aboutus': {
-            returnView: AboutUsView,
-            state: {},
-            uri: '/aboutus',
-            title: 'About Us',
-            // viewEvent: AboutUsEvents
->>>>>>> 23c7e6efbbc6933685883152cd63b2293b86aa8b
         }
     }
 }
+
 
 
 //     return routes[URI];
