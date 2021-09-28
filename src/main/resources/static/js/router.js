@@ -10,6 +10,7 @@ import ProjectsView, {ProjectsViewEvents} from "./views/Projects.js";
 import Members, {MembersEvents} from "./views/Members.js";
 import EditProfile, {EditProfileEvent} from "./views/EditProfile.js";
 import ProjectView, {ProjectEvents} from "./views/Project.js";
+import PrivacyPolicy from "./views/PrivacyPolicy.js";
 
 export function validateUser(obj) {
     if (localStorage.getItem("access_token")){
@@ -128,6 +129,14 @@ export default function router(URI) {
             },
             uri: '/project',
             viewEvent: ProjectEvents
+        },
+        'PrivacyPolicy': {
+            returnView: PrivacyPolicy,
+            state: {
+                user: '/PrivacyPolicy'
+            },
+            uri: '/PrivacyPolicy',
+            title: 'PrivacyPolicy',
         }
     };
 
