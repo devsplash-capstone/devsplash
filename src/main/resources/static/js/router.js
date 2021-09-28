@@ -52,7 +52,7 @@ export default function router(URI) {
         '/register': {
             returnView: Register,
             state: {
-                 skills: "/api/skills"
+                skills: "/api/skills"
             },
             uri: '/register',
             title: 'Register',
@@ -110,23 +110,22 @@ export default function router(URI) {
             returnView: EditProjectComponent,
             state: {
                 user: "/api/users/me",
-                skills:"/api/skills"
+                skills: "/api/skills"
             },
             uri: '/editProject',
             title: "Project",
-            viewEvent:EditProjectEvents
+            viewEvent: EditProjectEvents
         },
         '/editProfile': {
             returnView: EditProfile,
             state: {
                 user: "/api/users/me",
-                skills:"/api/skills"
+                skills: "/api/skills"
             },
             uri: '/editProfile',
             title: 'Edit Profile',
             viewEvent: EditProfileEvent
         },
-<<<<<<< HEAD
         '/ProjectMembers': {
             returnView: ProjectView,
             state: {
@@ -143,16 +142,17 @@ export default function router(URI) {
             },
             uri: '/PrivacyPolicy',
             title: 'PrivacyPolicy',
-=======
-        '/aboutus': {
-            returnView: AboutUsView,
-            state: {},
-            uri: '/aboutus',
-            title: 'About Us',
-            // viewEvent: AboutUsEvents
->>>>>>> 23c7e6efbbc6933685883152cd63b2293b86aa8b
+            '/aboutus': {
+                returnView: AboutUsView,
+                state: {},
+                uri: '/aboutus',
+                title: 'About Us',
+                // viewEvent: AboutUsEvents
+            }
         }
-    };
-
-    return routes[URI];
+    }
 }
+
+
+//     return routes[URI];
+// }
