@@ -1,29 +1,39 @@
-import {memberClickFetchEvent, renderMember} from "./Members.js";
+import {memberClickFetchEvent, renderMember, renderMembers} from "./Members.js";
 import {profileCardEvents, RenderProfileCardComponent} from "./ProfileCard.js";
 import {PageContentView} from "./partials/content.js";
 import {renderSkillsComponents} from "./Profile.js";
 import createView from "../createView.js";
+import {getHeaders} from "../auth.js";
+import fetchData from "../fetchData.js";
+import render from "../render.js";
 
 export default function ProjectView(props) {
     console.log(props)
     let projectPage;
     if (props.user) {
-        projectPage = RenderProfileCardComponent(props.user, props.user.id) + renderProjectComponent(props.project, props.user.id);
+        projectPage = RenderProfileCardComponent(props.user, props.user.id) + renderProjectComponent(props.project, props.members, props.user.id);
     } else {
-        projectPage = renderProjectComponent(props.project);
+        projectPage = renderProjectComponent(props.project, props.members);
     }
     return PageContentView(projectPage)
+}
+
+function renderProjectMembers(members) {
+    console.log(members)
+    return (members)
+        ? members.map(member => `${(member.user)?renderMember(member.user):'<div class="border rounded p-2">List of all members will go here.</div>'}`).join('')
+        : '<div class="border rounded p-2">List of all members will go here.</div>';
 }
 
 /**
  * Renders project details - project name, description, created by, join button
  * @param project
+ * @param members
+ * @param userId
  * @returns {string}
  */
-export function renderProjectComponent(project, userId= 0) {
-    // fetchData()
-    console.log(project);
-    console.log(project.description);
+export function renderProjectComponent(project, members, userId= 0) {
+    console.log(members);
     return `
         <div class="details-wrapper col-md-8 d-md-inline-flex border rounded py-4 mt-3">
             <div class="details-wrapper-helper col-12">
@@ -31,7 +41,7 @@ export function renderProjectComponent(project, userId= 0) {
                     <h3><i class="bi bi-journal-code"></i> ${project.name}</h3>
                     <p>${project.description}</p>
                     <div class="list-group mt-4">
-                        <p class="mb-1">Created by </p>
+                        <p class="mb-1">Created by</p>
                         ${renderMember(project.user)}
                     </div>
                 </div>
@@ -43,13 +53,9 @@ export function renderProjectComponent(project, userId= 0) {
                 </div>
                 <div class="members mt-4">
                         <h6>Project Members</h6>
-                        <div class="">
+                        <div class="mt-4">
                             <div class="list-group">
-                                <a href="member.html" class="list-group-item list-group-item-action">
-                                    <div class="d-md-flex w-100 justify-content-between">
-                                        <h5 class="mb-1">${project.user.displayName}</h5>
-                                    </div>
-                                </a>
+                            ${renderProjectMembers(members)}
                             </div>
                         </div>
                  <div class="links pt-3 p-md-3">
@@ -81,29 +87,41 @@ function renderProjectLinks(link) {
 function joinProjectEvent() {
     $("#joinProject").click(function () {
         const id = $(this).attr("data-project-id");
-        const userId = $(this).attr("data-user-id");
-        const url = `${DOMAIN_NAME}/api/projectMembers`;
+        const url = `${DOMAIN_NAME}/api/projectMembers/${id}`;
         const options = {
             method: 'POST',
-            project: member,
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(id)
+            headers: getHeaders()
         }
         fetch(url, options)
             .then(_ => {
-                createView("/profile")
+                const route = {
+                    returnView: ProjectView,
+                    state: {
+                        user: "/api/users/me",
+                        project: `/api/projects/findById/${id}`,
+                        skills: "/api/skills",
+                        members: `/api/projectMembers/byProjectId/${id}`
+                    },
+                    uri: '/project',
+                    title: "Project",
+                }
+                const request = {
+                    headers: getHeaders()
+                }
+
+                fetchData(route.state, request)
+                    .then((props) => {
+                        render(props, route);
+                    })
+                    .catch(error => console.error(error)); /* handle errors */
             })
             .catch(error => console.error(error)); /* handle errors */
     })
 }
 
-
 function newProjectMemberList() {
     memberClickFetchEvent();
 }
-
 /**
  * Adds click event for creator
  */

@@ -45,7 +45,6 @@ export function renderMembersComponent(members, label = '') {
  * @returns {string}
  */
 export function renderMember(member) {
-    console.log(member);
     return `<a href="#" class="memberView list-group-item list-group-item-action" data-member-id="${member.id}">
                 <div class="d-md-flex w-100 justify-content-between">
                     <h5 class="mb-1">${member.firstname} ${member.lastname}</h5>
@@ -61,7 +60,7 @@ export function renderMember(member) {
  * @param members
  * @returns {*|string}
  */
-function renderMembers(members) {
+export function renderMembers(members) {
     return (members)
         ? members.map(member => `${renderMember(member)}`).join('')
         : '<div class="border rounded p-2">List of all members will go here.</div>';

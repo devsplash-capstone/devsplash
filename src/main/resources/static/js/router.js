@@ -76,14 +76,6 @@ export default function router(URI) {
             uri: '/profile',
             title: "Profile",
         },
-        '/project': {
-            returnView: ProjectView,
-            state: validateUser({
-                skills: "/api/skills"
-            }),
-            uri: '/project',
-            title: "Project"
-        },
         '/projects': {
             returnView: ProjectsView,
             state: validateUser({

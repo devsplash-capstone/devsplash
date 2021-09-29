@@ -8,5 +8,5 @@ import java.util.Collection;
 public interface ProjectMembersRepository extends JpaRepository<ProjectMember, Long> {
 
 
-    Collection<ProjectMember> getByProject(Long projectId);
+    Collection<ProjectMember> getByProjectId(Long projectId);
 }

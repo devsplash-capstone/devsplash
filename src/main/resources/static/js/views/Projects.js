@@ -166,7 +166,7 @@ export function projectClickFetchEvent() {
         const route = {
             returnView: ProjectView,
             state: {
-                project: `/api/projects/findById/${id}`,
+                project: `/api/projects/findById/${id}`
             },
             uri: '/project',
             title: "Project",
@@ -174,7 +174,7 @@ export function projectClickFetchEvent() {
         }
         // if user is not logged in
         route.state = validateUser(route.state);
-
+        route.state.members = `/api/projectMembers/byProjectId/${id}`
         const request = {
             headers: getHeaders()
         }
@@ -201,7 +201,7 @@ export function editProjectClickFetchEvent() {
             state: {
                 user: "/api/users/me",
                 project: `/api/projects/findById/${id}`,
-                skills: "/api/skills"
+                skills: "/api/skills",
             },
             uri: '/project',
             title: "Project",

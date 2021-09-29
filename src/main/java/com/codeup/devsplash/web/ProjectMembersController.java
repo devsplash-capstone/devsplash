@@ -4,6 +4,7 @@ package com.codeup.devsplash.web;
 import com.codeup.devsplash.data.project.Project;
 import com.codeup.devsplash.data.projectMembers.ProjectMember;
 import com.codeup.devsplash.data.projectMembers.ProjectMembersRepository;
+import com.codeup.devsplash.data.user.User;
 import com.codeup.devsplash.data.user.UsersRepository;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.web.bind.annotation.*;
@@ -22,15 +23,19 @@ public class ProjectMembersController {
         this.usersRepository = usersRepository;
     }
 
-    @PostMapping
-    private void memberJoiningProject(@RequestBody ProjectMember projectMember) {
-        System.out.println(projectMember.getProject().getId());
-        System.out.println(projectMember.getUser().getId());
+    @PostMapping("{projectId}")
+    private void memberJoiningProject(@PathVariable Long projectId, OAuth2Authentication auth) {
+        User loggedInUser = usersRepository.findByEmail(auth.getName()).get();
+        Project project = new Project();
+        project.setId(projectId);
+        ProjectMember projectMember = new ProjectMember();
+        projectMember.setUser(loggedInUser);
+        projectMember.setProject(project);
         projectMembersRepository.save(projectMember);
     }
 
     @GetMapping("/byProjectId/{projectId}")
     private Collection<ProjectMember> getProjectMembersByProjectId(@PathVariable Long projectId) {
-        return projectMembersRepository.getByProject(projectId);
+        return projectMembersRepository.getByProjectId(projectId);
     }
 }
