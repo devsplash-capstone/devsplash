@@ -19,7 +19,7 @@ export default function EditProfile(props) {
                 <section class="h-100 w-100 ">
                     <div class="container-xl border h-100">
                         <div class="row d-flex justify-content-center align-items-center h-100">
-                            <div class="col">
+                            <div class="col background-change">
                                 <div class="card card-registration my-3 border-0">
                                     <div class="row g-0">
                                         <form class="card-body px-md-5 needs-validation" action="profile.html" novalidate>

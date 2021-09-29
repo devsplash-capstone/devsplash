@@ -11,7 +11,7 @@ export default function ProfileView(props) {
 
 export function renderProfileComponent(user, projects, githubRepos, profileId) {
     return `
-        <div class="details-wrapper col-md-8 d-md-inline-flex px-0 py-4 mt-3">
+        <div class="details-wrapper col-md-8 d-md-inline-flex px-0 py-4 mt-3 change-background">
             <div class="details-wrapper-helper px-0 col-12 p-md-4" style="background-color: white">
                 <div class="skills ">
                     <h6 class="mb-2">Languages I know</h6>

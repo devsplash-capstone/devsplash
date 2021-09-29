@@ -16,7 +16,7 @@ export function EditProjectComponent(props) {
     let pageHeader = isNew(props) ? "Create New Project" : "Edit Project"
 
     return `
-        <div class="details-wrapper col-md-8 d-md-inline-flex py-4 mt-3">
+        <div class="details-wrapper col-md-8 d-md-inline-flex py-4 mt-3 change-background">
             <div class="details-wrapper-helper col-12 p-md-4">
                 <div class="mx-auto pt-2">
                     <h5>${pageHeader}</h5>

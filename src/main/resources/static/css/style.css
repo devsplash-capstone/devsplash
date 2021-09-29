@@ -18,8 +18,12 @@ img {
     margin-left: 1em;
 }
 
-section {
-    background-color: #5eafff !important;
+.change-background {
+    background-color: white;
+}
+
+.drip {
+    background-color: #85c2ff !important;
     overflow: hidden;
     height: 350px;
     width: 100%;
@@ -182,6 +186,7 @@ section {
 #background {
     background-image: url("../assets/Devsplash.png");
     background-size: contain;
+    min-height: 1000px;
 }
 
 .about-img {

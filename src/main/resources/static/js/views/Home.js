@@ -4,7 +4,7 @@ export default function Home(props) {
 
             <!-- START THE FEATURETTES -->
            
-           <section class="jumbotron">
+           <section class="jumbotron drip">
            <img src="../../assets/devsplash_0.png" alt="" class="test">
           <div class="drop div"></div>
           <div class="wave div"></div>
