@@ -14,8 +14,8 @@ import PrivacyPolicy from "./views/PrivacyPolicy.js";
 import AboutUsView from "./views/AboutUs.js";
 
 export function validateUser(obj) {
-    if (localStorage.getItem("access_token")){
-        obj.user ="/api/users/me"
+    if (localStorage.getItem("access_token")) {
+        obj.user = "/api/users/me"
     }
     return obj;
 }
@@ -122,7 +122,7 @@ export default function router(URI) {
             title: 'Edit Profile',
             viewEvent: EditProfileEvent
         },
-        '/ProjectMembers': {
+        '/projectMembers': {
             returnView: ProjectView,
             state: {
                 user: '/api/users/join',
@@ -131,21 +131,24 @@ export default function router(URI) {
             uri: '/project',
             viewEvent: ProjectEvents
         },
-        'PrivacyPolicy': {
+        '/privacyPolicy': {
             returnView: PrivacyPolicy,
             state: {
                 user: '/PrivacyPolicy'
             },
             uri: '/PrivacyPolicy',
             title: 'PrivacyPolicy',
-            '/aboutus': {
-                returnView: AboutUsView,
-                state: {},
+        },
+        '/aboutus': {
+            returnView: AboutUsView,
+            state: {
                 uri: '/aboutus',
                 title: 'About Us',
                 // viewEvent: AboutUsEvents
             }
         }
     }
-}
     return routes[URI];
+}
+
+
