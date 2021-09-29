@@ -1,11 +1,16 @@
 export default function Home(props) {
     return `
-        <body style="padding: 3.5rem">
-        <div id="app" class="container p-2">
            <main role="main">
 
             <!-- START THE FEATURETTES -->
            
+           <section class="jumbotron drip">
+           <img src="../../assets/devsplash_0.png" alt="" class="test">
+          <div class="drop div"></div>
+          <div class="wave div"></div>
+        </section>
+           
+           <div class="container">
             <hr class="featurette-divider">
 
             <div class="row featurette">
@@ -56,5 +61,7 @@ export default function Home(props) {
             </div>
 
             <hr class="featurette-divider">
+            
+            </div>
     `;
 }
