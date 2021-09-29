@@ -10,6 +10,7 @@ export default function Home(props) {
           <div class="wave div"></div>
         </section>
            
+           <div class="container">
             <hr class="featurette-divider">
 
             <div class="row featurette">
@@ -60,5 +61,7 @@ export default function Home(props) {
             </div>
 
             <hr class="featurette-divider">
+            
+            </div>
     `;
 }
