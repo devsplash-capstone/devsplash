@@ -12,7 +12,6 @@ import createView from "../createView.js";
 import {renderAndSelectSkills} from "./EditProject.js";
 
 export default function EditProfile(props) {
-    console.log(props)
     return `
     <body>
         <div class="content-wrapper pt-md-4">

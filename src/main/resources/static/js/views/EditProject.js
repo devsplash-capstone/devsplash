@@ -15,7 +15,6 @@ export default function EditProjectView(props) {
 export function EditProjectComponent(props) {
     let pageHeader = isNew(props) ? "Create New Project" : "Edit Project"
 
-    console.log(props)
     return `
         <div class="details-wrapper col-md-8 d-md-inline-flex py-4 mt-3 change-background">
             <div class="details-wrapper-helper col-12 p-md-4">
@@ -170,7 +169,6 @@ function EditProjectCancelEvent() {
 
 function deleteProjectFetchEvent() {
     $("#deleteProject").click(function () {
-        // $(".modal-open").toggleClass()
             let id = $("#deleteProjectBtn").attr("data-project-id");
             const url = `${DOMAIN_NAME}/api/projects/${id}`;
             const options = {
