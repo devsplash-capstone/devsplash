@@ -124,7 +124,7 @@ export default function router(URI) {
             uri: '/project',
             viewEvent: ProjectEvents
         },
-        '/privacyPolicy': {
+        '/PrivacyPolicy': {
             returnView: PrivacyPolicy,
             state: {
                 user: '/PrivacyPolicy'
