@@ -45,13 +45,6 @@ export default function Register(props) {
                                                                class="form-control form-control-lg" required/>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-6 mb-4">
-                                                    <div class="form-outline">
-                                                        <label class="form-label font-weight-bold" for="github-name">Github
-                                                            name</label>
-                                                        <input type="text" id="github-name" class="form-control form-control-lg"/>
-                                                    </div>
-                                                </div>
                                                 
                                                 <div class="col-md-6 mb-4">
                                                     <div class="form-outline">
@@ -64,7 +57,7 @@ export default function Register(props) {
                                                 
                                                 <div class="col-md-6 mb-4">
                                                     <div class="form-outline">
-                                                        <label class="form-label required font-weight-bold" for="password">Password (8 characters minimum)</label>
+                                                        <label class="form-label required font-weight-bold" for="password">Password</label>
                                                         <input type="password" id="password"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Password must have at least one uppercase letter, one number and one special character"
                                                                class="form-control form-control-lg"/>
                                                     </div>
@@ -75,6 +68,14 @@ export default function Register(props) {
                                                         <label class="form-label required font-weight-bold" for="confirm-password">Confirm Password</label>
                                                         <input type="password" id="confirm-password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" minlength="8" title="Password must match"
                                                                class="form-control form-control-lg"/>
+                                                    </div>
+                                                </div>
+                                                
+                                                  <div class="col-md-6 mb-4">
+                                                    <div class="form-outline">
+                                                        <label class="form-label font-weight-bold" for="github-name">Github
+                                                            name</label>
+                                                        <input type="text" id="github-name" class="form-control form-control-lg"/>
                                                     </div>
                                                 </div>
                                             </div>
