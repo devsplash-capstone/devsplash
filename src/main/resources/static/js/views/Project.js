@@ -10,7 +10,6 @@ import {validateUser} from "../router.js";
 import {editProjectClickFetchEvent} from "./Projects.js";
 
 export default function ProjectView(props) {
-    console.log(props)
     let projectPage;
     if (props.user) {
         projectPage = RenderProfileCardComponent(props.user, props.user.id) + renderProjectComponent(props.project, props.members, props.user.id);
@@ -21,7 +20,6 @@ export default function ProjectView(props) {
 }
 
 function renderProjectMembers(members) {
-    console.log(members)
     return (members.length !== 0)
         ? members.map(member => `${(member.user) ? renderMember(member.user) : '<div class="border rounded p-2">List of all members will go here.</div>'}`).join('')
         : '<div class="border rounded p-2">List of all members will go here.</div>';
@@ -33,8 +31,6 @@ function renderJoinProjectButton(project, userId, members) {
                     id="logInToJoinProject">Join Project
                 </button>`;
     } else if (project.user.id === userId) {
-        console.log("Project creator")
-
         return `<button class="projectEditLink btn btn-light btn-block col-12 border-dark mt-3"
                     data-id="${project.id}" id="editProject">Edit Project 
                 </button>`;
@@ -46,7 +42,6 @@ function renderJoinProjectButton(project, userId, members) {
                 userJoinedProject = true;
         })
         if (userJoinedProject) {
-            console.log("Already joined project")
             return ``;
         } else {
             return `<button class="btn btn-light btn-block col-12 border-dark mt-3" data-project-id="${project.id}"
@@ -68,7 +63,6 @@ function renderJoinProjectButton(project, userId, members) {
  * @returns {string}
  */
 export function renderProjectComponent(project, members, userId = 0) {
-    console.log(members);
     return `
         <div class="details-wrapper col-md-8 d-md-inline-flex border rounded py-4 mt-3 change-background">
             <div class="details-wrapper-helper col-12">
