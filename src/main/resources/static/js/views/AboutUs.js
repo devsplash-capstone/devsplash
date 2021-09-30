@@ -4,8 +4,8 @@ export default function AboutUsView(props) {
     return `
 <h1 style="text-align: center">Meet Our Team!</h1>
 <hr>
-<div class="card-container container d-flex justify-between">
-    <div class="card" style="width: 18rem;">
+<div class="card-container container d-flex justify-content-around row mx-auto">
+    <div class="card col-12 col-md-5 mb-md-2 col-lg-2" style="width: 18rem;">
         <img class="rounded-circle about-img" src="https://avatars.githubusercontent.com/u/71880210?v=4" alt="diamond_img">
         <div class="card-body">
             <h5 class="card-title">Diamond Meredith-Anderson</h5>
