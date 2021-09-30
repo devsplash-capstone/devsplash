@@ -60,7 +60,7 @@ export function renderMember(member) {
  * @param members
  * @returns {*|string}
  */
-function renderMembers(members) {
+export function renderMembers(members) {
     return (members)
         ? members.map(member => `${renderMember(member)}`).join('')
         : '<div class="border rounded p-2">List of all members will go here.</div>';
@@ -82,7 +82,8 @@ export function memberClickFetchEvent() {
             returnView: ProfileView,
             state: {
                 member: `/api/users/findById/${id}`,
-                projects: `/api/projects/findByUserId/${id}`
+                projects: `/api/projects/findByUserId/${id}`,
+                participatingProjects: `/api/projectMembers/byUserId/${id}`
             },
             uri: '/profile',
             title: "Member's Profile",

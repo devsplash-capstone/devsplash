@@ -250,6 +250,4 @@ export function saveProjectFetchEvent() {
         }
         return true;
     }
-
-
 }

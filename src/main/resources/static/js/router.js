@@ -9,13 +9,14 @@ import EditProjectComponent, {EditProjectEvents} from "./views/EditProject.js";
 import ProjectsView, {ProjectsViewEvents} from "./views/Projects.js";
 import Members, {MembersEvents} from "./views/Members.js";
 import EditProfile, {EditProfileEvent} from "./views/EditProfile.js";
-import ProjectView from "./views/Project.js";
+import ProjectView, {ProjectEvents} from "./views/Project.js";
+import PrivacyPolicy from "./views/PrivacyPolicy.js";
 import AboutUsView from "./views/AboutUs.js";
 import FaqView from "./views/Faq.js";
 
 export function validateUser(obj) {
-    if (localStorage.getItem("access_token")){
-        obj.user ="/api/users/me"
+    if (localStorage.getItem("access_token")) {
+        obj.user = "/api/users/me"
     }
     return obj;
 }
@@ -48,7 +49,7 @@ export default function router(URI) {
         '/register': {
             returnView: Register,
             state: {
-                 skills: "/api/skills"
+                skills: "/api/skills"
             },
             uri: '/register',
             title: 'Register',
@@ -71,18 +72,11 @@ export default function router(URI) {
         '/profile': {
             returnView: ProfileView,
             state: validateUser({
-                projects: "/api/projects/byMe"
+                projects: "/api/projects/byMe",
+                participatingProjects: "/api/projectMembers/byMe"
             }),
             uri: '/profile',
             title: "Profile",
-        },
-        '/project': {
-            returnView: ProjectView,
-            state: validateUser({
-                skills: "/api/skills"
-            }),
-            uri: '/project',
-            title: "Project"
         },
         '/projects': {
             returnView: ProjectsView,
@@ -106,29 +100,45 @@ export default function router(URI) {
             returnView: EditProjectComponent,
             state: {
                 user: "/api/users/me",
-                skills:"/api/skills"
+                skills: "/api/skills"
             },
             uri: '/editProject',
             title: "Project",
-            viewEvent:EditProjectEvents
+            viewEvent: EditProjectEvents
         },
         '/editProfile': {
             returnView: EditProfile,
             state: {
                 user: "/api/users/me",
-                skills:"/api/skills"
+                skills: "/api/skills"
             },
             uri: '/editProfile',
             title: 'Edit Profile',
             viewEvent: EditProfileEvent
         },
+        '/projectMembers': {
+            returnView: ProjectView,
+            state: {
+                user: '/api/users/join',
+                projects: '/api/projects/findByMe'
+            },
+            uri: '/project',
+            viewEvent: ProjectEvents
+        },
+        '/privacyPolicy': {
+            returnView: PrivacyPolicy,
+            state: {
+                user: '/PrivacyPolicy'
+            },
+            uri: '/PrivacyPolicy',
+            title: 'PrivacyPolicy',
+        },
         '/aboutus': {
             returnView: AboutUsView,
             state: {},
-            uri: '/aboutus',
-            title: 'About Us',
-            // viewEvent: AboutUsEvents
-        },
+                uri: '/aboutus',
+                title: 'About Us',
+            },
         '/faq':{
             returnView: FaqView,
             state:{},
@@ -136,7 +146,8 @@ export default function router(URI) {
             title: 'Faq',
 
         }
-    };
-
+    }
     return routes[URI];
 }
+
+
