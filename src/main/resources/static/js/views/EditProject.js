@@ -15,6 +15,7 @@ export default function EditProjectView(props) {
 export function EditProjectComponent(props) {
     let pageHeader = isNew(props) ? "Create New Project" : "Edit Project"
 
+    console.log(props)
     return `
         <div class="details-wrapper col-md-8 d-md-inline-flex py-4 mt-3 change-background">
             <div class="details-wrapper-helper col-12 p-md-4">
@@ -41,7 +42,7 @@ export function EditProjectComponent(props) {
                         <div class="form-group mt-4">
                             <label for="github">Github Link</label>
                             <input class="form-control" id="github" aria-describedby="github input" 
-                            value="${(props.project.github) ? (props.project.github) : ''}">
+                            value="${(props?.project?.github) ? (props.project.github) : ''}">
                             <p class="instruction mt-1">If you already have a repository for this project on GitHub, paste it here!</p>
                         </div>
 
@@ -73,7 +74,7 @@ export function EditProjectComponent(props) {
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-danger" id="deleteProject">Delete Project</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal" id="deleteProject">Delete Project</button>
               </div>
             </div>
           </div>
@@ -169,8 +170,8 @@ function EditProjectCancelEvent() {
 
 function deleteProjectFetchEvent() {
     $("#deleteProject").click(function () {
-        if (confirm("Do you want to delete project?")) {
-            let id = $(this).attr("data-project-id");
+        // $(".modal-open").toggleClass()
+            let id = $("#deleteProjectBtn").attr("data-project-id");
             const url = `${DOMAIN_NAME}/api/projects/${id}`;
             const options = {
                 method: 'DELETE',
@@ -184,7 +185,7 @@ function deleteProjectFetchEvent() {
                     createView("/profile")
                 })
                 .catch(error => console.error(error)); /* handle errors */
-        }
+
     })
 }
 

@@ -12,6 +12,7 @@ import createView from "../createView.js";
 import {renderAndSelectSkills} from "./EditProject.js";
 
 export default function EditProfile(props) {
+    console.log(props)
     return `
     <body>
         <div class="content-wrapper pt-md-4">
@@ -162,7 +163,7 @@ export default function EditProfile(props) {
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-danger" id="delete-btn-final">Delete Profile</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal" id="delete-btn-final">Delete Profile</button>
               </div>
             </div>
           </div>
@@ -225,7 +226,7 @@ function editProfileDelete() {
             headers: {"Content-Type": "application/json"},
         }
 
-        let id = $(this)
+        let id = $("#delete-btn")
             .attr("data-id")
 
         fetch(`${DOMAIN_NAME}/api/users/${id}`, request)
