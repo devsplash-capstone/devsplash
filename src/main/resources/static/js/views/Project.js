@@ -32,24 +32,28 @@ function renderJoinProjectButton(project, userId, members) {
         return `<button class="btn btn-light btn-block col-12 border-dark mt-3"
                     id="logInToJoinProject">Join Project
                 </button>`;
-    } else if (members.length !== 0) {
-        let userJoinedProject = false;
-        members.map(member => {
-           if( member.user.id === userId)
-               userJoinedProject = true;
-        })
-        if(userJoinedProject)
-            return ``;
-        console.log("Already joined project")
-
     } else if (project.user.id === userId) {
         console.log("Project creator")
 
         return `<button class="projectEditLink btn btn-light btn-block col-12 border-dark mt-3"
-                    data-id=${project.id} id="editProject">Edit Project 
+                    data-id="${project.id}" id="editProject">Edit Project 
                 </button>`;
 
-    }else {
+    }else if (members.length !== 0) {
+        let userJoinedProject = false;
+        members.map(member => {
+            if (member.user.id === userId)
+                userJoinedProject = true;
+        })
+        if (userJoinedProject) {
+            console.log("Already joined project")
+            return ``;
+        } else {
+            return `<button class="btn btn-light btn-block col-12 border-dark mt-3" data-project-id="${project.id}"
+                   data-user-id="${userId}" id="joinProject">Join Project
+            </button>`;
+        }
+    }  else {
         return `<button class="btn btn-light btn-block col-12 border-dark mt-3" data-project-id="${project.id}"
                    data-user-id="${userId}" id="joinProject">Join Project
             </button>`;
