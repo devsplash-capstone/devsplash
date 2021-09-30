@@ -61,19 +61,21 @@ export default function EditProfile(props) {
                                                 
                                                 <div class="col-md-6 mb-4">
                                                     <div class="form-outline">
+                                                        <label class="form-label font-weight-bold" for="github-name">Github
+                                                            name</label>
+                                                        <input type="text" id="github-name"
+                                                               class="form-control form-control-lg form" value="${(props.user.githubUsername)?props.user.githubUsername:''}"/>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 mb-4">
+                                                    <div class="form-outline">
                                                         <label class="form-label font-weight-bold required" for="password">Password</label>
                                                         <input type="password" id="password"
                                                                class="form-control form-control-lg form" 
                                                                required/>
                                                     </div>
-                                                    <div class="col-md-6 mb-4">
-                                                    <div class="form-outline d-none">
-                                                        <label class="form-label font-weight-bold required" for="email">Email</label>
-                                                        <input type="text" id="email"
-                                                               class="form-control form-control-lg form" value="${props.user.email}"
-                                                               required/>
-                                                    </div>
-                                                </div>
+                                                    
+                                                   
                                                 </div>
                                                 <div class="col-md-6 mb-4">
                                                     <div class="form-outline">
@@ -83,14 +85,14 @@ export default function EditProfile(props) {
                                                                required/>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-6 mb-4">
-                                                    <div class="form-outline">
-                                                        <label class="form-label font-weight-bold" for="github-name">Github
-                                                            name</label>
-                                                        <input type="text" id="github-name"
-                                                               class="form-control form-control-lg form" value="${(props.user.githubUsername)?props.user.githubUsername:''}"/>
-                                                    </div>
                                                 </div>
+                                                 <div class="col-md-6 mb-4">
+                                                    <div class="form-outline d-none">
+                                                        <label class="form-label font-weight-bold required" for="email">Email</label>
+                                                        <input type="text" id="email"
+                                                               class="form-control form-control-lg form" value="${props.user.email}"
+                                                               required/>
+                                                    </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-12 mb-4">
