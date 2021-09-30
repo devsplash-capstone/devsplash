@@ -22,19 +22,31 @@ export default function ProjectView(props) {
 function renderProjectMembers(members) {
     console.log(members)
     return (members.length !== 0)
-        ? members.map(member => `${(member.user)?renderMember(member.user):'<div class="border rounded p-2">List of all members will go here.</div>'}`).join('')
+        ? members.map(member => `${(member.user) ? renderMember(member.user) : '<div class="border rounded p-2">List of all members will go here.</div>'}`).join('')
         : '<div class="border rounded p-2">List of all members will go here.</div>';
 }
 
-function renderJoinProjectButton(project, userId) {
-    if(userId === 0){
+function renderJoinProjectButton(project, userId, members) {
+    if (userId === 0) {
         return `<button class="btn btn-light btn-block col-12 border-dark mt-3"
                     id="logInToJoinProject">Join Project
                 </button>`;
-    }
-    return `<button class="btn btn-light btn-block col-12 border-dark mt-3" data-project-id=${project.id}
-                   data-user-id=${userId} id="joinProject">Join Project
+    } else if (members.length !== 0) {
+        let userJoinedProject = false;
+        members.map(member => {
+           if( member.user.id === userId)
+               userJoinedProject = true;
+        })
+        if(userJoinedProject)
+            return ``;
+        console.log(members)
+        console.log("Already joined project")
+
+    } else {
+        return `<button class="btn btn-light btn-block col-12 border-dark mt-3" data-project-id="${project.id}"
+                   data-user-id="${userId}" id="joinProject">Join Project
             </button>`;
+    }
 }
 
 /**
@@ -44,7 +56,7 @@ function renderJoinProjectButton(project, userId) {
  * @param userId
  * @returns {string}
  */
-export function renderProjectComponent(project, members, userId= 0) {
+export function renderProjectComponent(project, members, userId = 0) {
     console.log(members);
     return `
         <div class="details-wrapper col-md-8 d-md-inline-flex border rounded py-4 mt-3 change-background">
@@ -76,7 +88,7 @@ export function renderProjectComponent(project, members, userId= 0) {
                     </div>
                 </div>
                 <form class="pt-3 p-md-3">
-                    ${renderJoinProjectButton(project, userId)}
+                    ${renderJoinProjectButton(project, userId, members)}
                 </form>
             </div>
         </div>
@@ -126,7 +138,7 @@ function joinProjectEvent() {
             .catch(error => console.error(error)); /* handle errors */
     })
 
-    $("#logInToJoinProject").click(function (){
+    $("#logInToJoinProject").click(function () {
         createView("/login")
     })
 }
@@ -135,14 +147,14 @@ function joinProjectEvent() {
  * this prevents the same USER from joining the SAME project & prevents VISITORS from joining ANY projects”
  */
 
-function requestToJoinProjectEvent(){
+function requestToJoinProjectEvent() {
     let member = validateUser();
-    $('#joinProject').click(function(){
-        if(member === true){
+    $('#joinProject').click(function () {
+        if (member === true) {
             return joinProjectEvent();
-        }else if(member === true && member === joinProjectEvent){
+        } else if (member === true && member === joinProjectEvent) {
             document.getElementById("joinProject").hidden;
-        } else if(!member === true) {
+        } else if (!member === true) {
             return createView("/register");
         }
 
@@ -152,6 +164,7 @@ function requestToJoinProjectEvent(){
 function newProjectMemberList() {
     memberClickFetchEvent();
 }
+
 /**
  * Adds click event for creator
  */
