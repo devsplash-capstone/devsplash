@@ -21,7 +21,7 @@ export default function ProjectView(props) {
 
 function renderProjectMembers(members) {
     console.log(members)
-    return (members)
+    return (members.length !== 0)
         ? members.map(member => `${(member.user)?renderMember(member.user):'<div class="border rounded p-2">List of all members will go here.</div>'}`).join('')
         : '<div class="border rounded p-2">List of all members will go here.</div>';
 }
@@ -52,19 +52,17 @@ export function renderProjectComponent(project, members, userId= 0) {
                         ${renderSkillsComponents(project.skills)}
                     </div>
                 </div>
-                <div class="members mt-4">
-                        <h6>Project Members</h6>
-                        <div class="mt-4">
-                            <div class="list-group">
-                            ${renderProjectMembers(members)}
-                            </div>
-                        </div>
+                <div class="members pt-3 p-md-3">
+                    <p class="mb-1">Project Members</p>
+                    <div class="list-group">
+                        ${renderProjectMembers(members)}
+                    </div>
+                 </div>
                  <div class="links pt-3 p-md-3">
                     <p class="mb-1">Documents for Project</p>
                     <div class="border rounded p-3">
                         ${renderProjectLinks(project.github)}
                     </div>
-                 </div>
                 </div>
                 <form class="pt-3 p-md-3">
                     <button class="btn btn-light btn-block col-12 border-dark mt-3" data-project-id=${project.id}
