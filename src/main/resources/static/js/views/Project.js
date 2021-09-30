@@ -26,6 +26,17 @@ function renderProjectMembers(members) {
         : '<div class="border rounded p-2">List of all members will go here.</div>';
 }
 
+function renderJoinProjectButton(project, userId) {
+    if(userId === 0){
+        return `<button class="btn btn-light btn-block col-12 border-dark mt-3"
+                    id="logInToJoinProject">Join Project
+                </button>`;
+    }
+    return `<button class="btn btn-light btn-block col-12 border-dark mt-3" data-project-id=${project.id}
+                   data-user-id=${userId} id="joinProject">Join Project
+            </button>`;
+}
+
 /**
  * Renders project details - project name, description, created by, join button
  * @param project
@@ -65,9 +76,7 @@ export function renderProjectComponent(project, members, userId= 0) {
                     </div>
                 </div>
                 <form class="pt-3 p-md-3">
-                    <button class="btn btn-light btn-block col-12 border-dark mt-3" data-project-id=${project.id}
-                    data-user-id=${userId} id="joinProject">Request to Join Project
-                    </button>
+                    ${renderJoinProjectButton(project, userId)}
                 </form>
             </div>
         </div>
@@ -115,6 +124,10 @@ function joinProjectEvent() {
                     .catch(error => console.error(error)); /* handle errors */
             })
             .catch(error => console.error(error)); /* handle errors */
+    })
+
+    $("#logInToJoinProject").click(function (){
+        createView("/login")
     })
 }
 
