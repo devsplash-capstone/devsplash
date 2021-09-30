@@ -66,7 +66,7 @@ function renderCreateProjectButton(user, profileId) {
 
 export function renderSkillsComponents(skills) {
     let skillComponent = '';
-    if (skills) {
+    if (skills.length > 0) {
         skills.map(skill => skillComponent = skillComponent
             + `<span class="badge badge-pill badge-secondary my-1 mt-0 mb-0 p-2 m-2">${skill.name}</span>`)
     } else {
