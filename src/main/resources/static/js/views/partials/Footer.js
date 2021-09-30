@@ -4,7 +4,6 @@ export default function Footer(props) {
             <p class="mb-1">&copy; 2021 Devsplash</p>
             <ul class="list-inline">
                 <li class="list-inline-item"><a href="#">Privacy</a></li>
-                <li class="list-inline-item"><a href="#">Terms</a></li>
                 <li class="list-inline-item"><a href="/aboutus" data-link>About Us</a></li>
                 <li class="list-inline-item"><a href="#">faqs</a></li>
             </ul>
