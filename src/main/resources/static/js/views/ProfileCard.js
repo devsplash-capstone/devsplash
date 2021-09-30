@@ -12,7 +12,7 @@ export function RenderProfileCardComponent(user, loggedInUserId) {
     let placeholderImg = 'https://via.placeholder.com/90x90.png?text=Visit+WhoIsHostingThisC/O';
     return `
         <div class="profile-wrapper col-md-3 d-md-inline-flex mr-md-3">
-            <div class="profile-wrapper-helper row p-2">
+            <div class="profile-wrapper-helper row p-2" style="background-color: white">
                 <div class="profile-image px-0 col-3 col-md-12">
                     <img src="${(user.imgUrl) ? user.imgUrl : placeholderImg}"
                          class="rounded-circle" alt="">

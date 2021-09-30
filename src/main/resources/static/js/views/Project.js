@@ -20,7 +20,7 @@ export default function ProjectView(props) {
  */
 export function renderProjectComponent(project) {
     return `
-        <div class="details-wrapper col-md-8 d-md-inline-flex border rounded py-4 mt-3">
+        <div class="details-wrapper col-md-8 d-md-inline-flex border rounded py-4 mt-3 change-background">
             <div class="details-wrapper-helper col-12">
                 <div class="current-projects mt-4 p-md-3">
                     <h3><i class="bi bi-journal-code"></i> ${project.name}</h3>

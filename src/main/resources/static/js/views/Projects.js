@@ -26,7 +26,7 @@ export default function ProjectsView(props) {
  */
 function renderProjectsComponent(projects, loggedInUserId) {
     return `<div class="details-wrapper col-md-8 d-md-inline-flex py-4 pt-md-0 px-0 m-md-3">
-                <div class="details-wrapper-helper col-12 px-0 p-md-4">
+                <div class="details-wrapper-helper col-12 px-0 p-md-4" style="background-color: white">
                     <div class="projects-w-search px-0 mt-4 mt-md-0 p-md-4">
                         <h3 class="mb-2">Explore Projects</h3>
                         <div class="search row mb-2 justify-content-between mx-0">
@@ -46,8 +46,7 @@ function renderProjectsComponent(projects, loggedInUserId) {
  * @returns {string}
  */
 function renderSearchBar() {
-    return `<input type="text" id="search-input" class="col-7 form-control" placeholder="Search projects..." >
-             <a class="search col-4 form-control search btn btn-light btn-block border-dark" href="#">Search</a>`
+    return `<input type="text" id="search-input" class="col-12 form-control" placeholder="Search projects by name..." >`
 }
 
 /**

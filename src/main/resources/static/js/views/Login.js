@@ -1,11 +1,6 @@
 export default function Login() {
     return `
-            <head>
-                <meta charset="UTF-8"/>
-                <title>Log In</title>
-            </head>
-            <main>
-                 <div class=" container row row-cols-1 mx-auto mt-3">
+                 <div class="row row-cols-1 mx-auto mt-3 w-100">
                      <div class ="col-12 col-md-8 shadow-lg border text-center mx-auto">
                          <img src="../../assets/devsplash_0.png" alt="devsplash_logo" class="text-center mt-3 login-logo">
                         <h6 class="text-center mt-3">Sign In</h6>
@@ -19,6 +14,5 @@ export default function Login() {
                         </div>
                      </div>
                  </div>
-            </main>
     `;
 }
