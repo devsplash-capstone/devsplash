@@ -19,7 +19,7 @@ export default function EditProfile(props) {
                 <section class="h-100 w-100 ">
                     <div class="container-xl border h-100">
                         <div class="row d-flex justify-content-center align-items-center h-100">
-                            <div class="col">
+                            <div class="col background-change">
                                 <div class="card card-registration my-3 border-0">
                                     <div class="row g-0">
                                         <form class="card-body px-md-5 needs-validation" action="profile.html" novalidate>
@@ -162,7 +162,7 @@ export default function EditProfile(props) {
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-danger" id="delete-btn-final">Delete Profile</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal" id="delete-btn-final">Delete Profile</button>
               </div>
             </div>
           </div>
@@ -225,7 +225,7 @@ function editProfileDelete() {
             headers: {"Content-Type": "application/json"},
         }
 
-        let id = $(this)
+        let id = $("#delete-btn")
             .attr("data-id")
 
         fetch(`${DOMAIN_NAME}/api/users/${id}`, request)

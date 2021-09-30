@@ -24,8 +24,8 @@ export default function Members(props) {
  */
 export function renderMembersComponent(members, label = '') {
     return `
-        <div class="details-wrapper col-md-8 d-md-inline-flex px-0 px-md-4 py-4 mt-3">
-            <div class="details-wrapper-helper px-0 col-12">
+        <div class="details-wrapper col-md-8 d-md-inline-flex px-0 px-md-4 py-4 mt-3" style="background-color: white">
+            <div class="details-wrapper-helper px-0 col-12" >
                 <div class="current-members px-0 mt-4 m-md-4">
                     <h3 class="mb-4">${label}</h3>
                     <div class="mt-4">
