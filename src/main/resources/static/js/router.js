@@ -71,7 +71,8 @@ export default function router(URI) {
         '/profile': {
             returnView: ProfileView,
             state: validateUser({
-                projects: "/api/projects/byMe"
+                projects: "/api/projects/byMe",
+                // user: "/api/projects/byUserId"
             }),
             uri: '/profile',
             title: "Profile",

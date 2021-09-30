@@ -6,6 +6,7 @@ import createView from "../createView.js";
 import {getHeaders} from "../auth.js";
 import fetchData from "../fetchData.js";
 import render from "../render.js";
+import {validateUser} from "../router.js";
 
 export default function ProjectView(props) {
     console.log(props)
@@ -67,7 +68,7 @@ export function renderProjectComponent(project, members, userId= 0) {
                 </div>
                 <form class="pt-3 p-md-3">
                     <button class="btn btn-light btn-block col-12 border-dark mt-3" data-project-id=${project.id}
-                    data-user-id = ${userId} id="joinProject">Join Project
+                    data-user-id=${userId} id="joinProject">Request to Join Project
                     </button>
                 </form>
             </div>
@@ -119,6 +120,24 @@ function joinProjectEvent() {
     })
 }
 
+/**
+ * this prevents the same USER from joining the SAME project & prevents VISITORS from joining ANY projects”
+ */
+// THIS CODE IS BROUGHT TO YOU BY DIAMOND AND RICARDO \\
+function requestToJoinProjectEvent(){
+    let member = validateUser();
+    $('#joinProject').click(function(){
+        if(member === true){
+            return joinProjectEvent();
+        }else if(member === true && member === joinProjectEvent){
+            document.getElementById("joinProject").hidden;
+        } else if(!member === true) {
+            return createView("/register");
+        }
+
+    })
+}
+
 function newProjectMemberList() {
     memberClickFetchEvent();
 }
@@ -129,4 +148,5 @@ export function ProjectEvents() {
     profileCardEvents();
     joinProjectEvent();
     newProjectMemberList();
+    requestToJoinProjectEvent();
 }
