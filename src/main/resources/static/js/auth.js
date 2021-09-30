@@ -78,7 +78,7 @@ function setTokens(responseData) {
  * Attempts to delete the token on sign out
  */
 
-function deleteTokens() {
+export function deleteTokens() {
     localStorage.removeItem("access_token");
     console.log("Access token deleted");
     localStorage.removeItem("refresh_token");
