@@ -123,7 +123,7 @@ function joinProjectEvent() {
 /**
  * this prevents the same USER from joining the SAME project & prevents VISITORS from joining ANY projects”
  */
-// THIS CODE IS BROUGHT TO YOU BY DIAMOND AND RICARDO \\
+
 function requestToJoinProjectEvent(){
     let member = validateUser();
     $('#joinProject').click(function(){
