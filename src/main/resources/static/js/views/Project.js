@@ -1,4 +1,4 @@
-import {memberClickFetchEvent, renderMember, renderMembers} from "./Members.js";
+import {memberClickFetchEvent, MembersEvents, renderMember, renderMembers} from "./Members.js";
 import {profileCardEvents, RenderProfileCardComponent} from "./ProfileCard.js";
 import {PageContentView} from "./partials/content.js";
 import {renderSkillsComponents} from "./Profile.js";
@@ -7,6 +7,7 @@ import {getHeaders} from "../auth.js";
 import fetchData from "../fetchData.js";
 import render from "../render.js";
 import {validateUser} from "../router.js";
+import {editProjectClickFetchEvent} from "./Projects.js";
 
 export default function ProjectView(props) {
     console.log(props)
@@ -39,10 +40,16 @@ function renderJoinProjectButton(project, userId, members) {
         })
         if(userJoinedProject)
             return ``;
-        console.log(members)
         console.log("Already joined project")
 
-    } else {
+    } else if (project.user.id === userId) {
+        console.log("Project creator")
+
+        return `<button class="projectEditLink btn btn-light btn-block col-12 border-dark mt-3"
+                    data-id=${project.id} id="editProject">Edit Project 
+                </button>`;
+
+    }else {
         return `<button class="btn btn-light btn-block col-12 border-dark mt-3" data-project-id="${project.id}"
                    data-user-id="${userId}" id="joinProject">Join Project
             </button>`;
@@ -124,6 +131,7 @@ function joinProjectEvent() {
                     },
                     uri: '/project',
                     title: "Project",
+                    viewEvent: MembersEvents
                 }
                 const request = {
                     headers: getHeaders()
@@ -141,24 +149,7 @@ function joinProjectEvent() {
     $("#logInToJoinProject").click(function () {
         createView("/login")
     })
-}
-
-/**
- * this prevents the same USER from joining the SAME project & prevents VISITORS from joining ANY projects”
- */
-
-function requestToJoinProjectEvent() {
-    let member = validateUser();
-    $('#joinProject').click(function () {
-        if (member === true) {
-            return joinProjectEvent();
-        } else if (member === true && member === joinProjectEvent) {
-            document.getElementById("joinProject").hidden;
-        } else if (!member === true) {
-            return createView("/register");
-        }
-
-    })
+    editProjectClickFetchEvent();
 }
 
 function newProjectMemberList() {
@@ -172,5 +163,4 @@ export function ProjectEvents() {
     profileCardEvents();
     joinProjectEvent();
     newProjectMemberList();
-    requestToJoinProjectEvent();
 }
