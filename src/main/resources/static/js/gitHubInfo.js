@@ -13,8 +13,8 @@ import {PageContentView} from "./views/partials/content.js";
 export default function RenderProfileWithGithubInfo(props) {
     //To check if it's user's profile or member's profile
     //if user is not logged in set profile id to 0
-    let profileId = (props.user)? props.user.id : 0;
-    let user = (props.member) ? props.member : props.user ;
+    let profileId = (props.user) ? props.user.id : 0;
+    let user = (props.member) ? props.member : props.user;
 
     // Set github information only if github information provided, Note: Github has null user
     const baseUri = `https://api.github.com/users/${user.githubUsername}/repos`;
@@ -23,9 +23,9 @@ export default function RenderProfileWithGithubInfo(props) {
             return res.json();
         }).then(repos => {
         if (user.githubUsername)
-            return RenderProfileCardComponent(user, profileId) + renderProfileComponent(user, props.projects, repos, profileId)
+            return RenderProfileCardComponent(user, profileId) + renderProfileComponent(user, props.projects, props.participatingProjects, repos, profileId)
         else
-            return RenderProfileCardComponent(user, profileId) + renderProfileComponent(user, props.projects, null, profileId)
+            return RenderProfileCardComponent(user, profileId) + renderProfileComponent(user, props.projects, props.participatingProjects, null, profileId)
 
     }).then(profilePageView => {
         let pageContentView = PageContentView(profilePageView)
@@ -48,13 +48,13 @@ export function renderGithubInfo(repos) {
                             <h5 class="mb-1">${repo.name}</h5>
                             <small class="text-muted">Updated@ ${getDate(repo.updated_at)}</small>
                         </div>
-                        <small class="text-muted">${(repo.language)? repo.language : ''}</small>
+                        <small class="text-muted">${(repo.language) ? repo.language : ''}</small>
                     </a> `
         }).join('')
     else
         return `<div class="border rounded p-2">Github information not provided or is incorrect.</div>`
 }
 
-function getDate(githubDate){
+function getDate(githubDate) {
     return githubDate.substring(0, 10);
 }

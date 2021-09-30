@@ -34,7 +34,7 @@ export default function NavbarView(props) {
     `;
         } else {
             return `
-                    <div class="header-wrapper bg-light">
+                    <div class="header-wrapper">
                         <div class="header">
                             <nav class="navbar navbar-expand-md navbar-light container-xl">
                                 <a class="navbar-brand nav-link logo-link" href="/" data-link>

@@ -12,6 +12,7 @@ import EditProfile, {EditProfileEvent} from "./views/EditProfile.js";
 import ProjectView, {ProjectEvents} from "./views/Project.js";
 import PrivacyPolicy from "./views/PrivacyPolicy.js";
 import AboutUsView from "./views/AboutUs.js";
+import FaqView from "./views/Faq.js";
 
 export function validateUser(obj) {
     if (localStorage.getItem("access_token")) {
@@ -72,7 +73,7 @@ export default function router(URI) {
             returnView: ProfileView,
             state: validateUser({
                 projects: "/api/projects/byMe",
-                // user: "/api/projects/byUserId"
+                participatingProjects: "/api/projectMembers/byMe"
             }),
             uri: '/profile',
             title: "Profile",
@@ -134,11 +135,16 @@ export default function router(URI) {
         },
         '/aboutus': {
             returnView: AboutUsView,
-            state: {
+            state: {},
                 uri: '/aboutus',
                 title: 'About Us',
-                // viewEvent: AboutUsEvents
-            }
+            },
+        '/faq':{
+            returnView: FaqView,
+            state:{},
+            uri: '/faq',
+            title: 'Faq',
+
         }
     }
     return routes[URI];

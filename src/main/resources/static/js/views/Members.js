@@ -82,7 +82,8 @@ export function memberClickFetchEvent() {
             returnView: ProfileView,
             state: {
                 member: `/api/users/findById/${id}`,
-                projects: `/api/projects/findByUserId/${id}`
+                projects: `/api/projects/findByUserId/${id}`,
+                participatingProjects: `/api/projectMembers/byUserId/${id}`
             },
             uri: '/profile',
             title: "Member's Profile",
