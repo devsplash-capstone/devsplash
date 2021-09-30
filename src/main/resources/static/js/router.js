@@ -11,7 +11,7 @@ import Members, {MembersEvents} from "./views/Members.js";
 import EditProfile, {EditProfileEvent} from "./views/EditProfile.js";
 import ProjectView from "./views/Project.js";
 import AboutUsView from "./views/AboutUs.js";
-import Faq from "./views/Faq";
+import FaqView from "./views/Faq.js";
 
 export function validateUser(obj) {
     if (localStorage.getItem("access_token")){
@@ -130,11 +130,11 @@ export default function router(URI) {
             // viewEvent: AboutUsEvents
         },
         '/faq':{
-            returnView: Faq,
+            returnView: FaqView,
             state:{},
             uri: '/faq',
             title: 'Faq',
-            // viewEvent: FaqEvent
+
         }
     };
 
