@@ -1,4 +1,4 @@
-import {memberClickFetchEvent, MembersEvents, renderMember, renderMembers} from "./Members.js";
+import {memberClickFetchEvent, MembersEvents, renderMember} from "./Members.js";
 import {profileCardEvents, RenderProfileCardComponent} from "./ProfileCard.js";
 import {PageContentView} from "./partials/content.js";
 import {renderSkillsComponents} from "./Profile.js";
@@ -6,7 +6,6 @@ import createView from "../createView.js";
 import {getHeaders} from "../auth.js";
 import fetchData from "../fetchData.js";
 import render from "../render.js";
-import {validateUser} from "../router.js";
 import {editProjectClickFetchEvent} from "./Projects.js";
 
 export default function ProjectView(props) {
