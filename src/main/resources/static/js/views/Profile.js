@@ -9,7 +9,7 @@ export default function ProfileView(props) {
     return `<img id="loadingGif" src="https://flevix.com/wp-content/uploads/2019/07/Color-Loading-2.gif" alt=""/>`
 }
 
-export function renderProfileComponent(user, projects, githubRepos, profileId) {
+export function renderProfileComponent(user, projects,participatingProjects, githubRepos, profileId) {
     return `
         <div class="details-wrapper col-md-8 d-md-inline-flex px-0 py-4 mt-3 change-background">
             <div class="details-wrapper-helper px-0 col-12 p-md-4" style="background-color: white">
@@ -31,12 +31,24 @@ export function renderProfileComponent(user, projects, githubRepos, profileId) {
                          ${renderProjects(projects, profileId)}
                     </div>
                 </div>
+                <div class="current-projects mt-4">
+                    <h6 class="mb-1">Participating on Projects</h6>
+                    <div class="row d-flex justify-content-around p-md-2 mx-0">
+                         ${renderParticipatingProjects(participatingProjects)}
+                    </div>
+                </div>
                 <div class="mt-2">
                     ${renderCreateProjectButton(user, profileId)}
                 </div>
             </div>
         </div>
     `;
+}
+
+function renderParticipatingProjects(projectMembers) {
+    return (projectMembers)
+        ? projectMembers.map(projectMember => `${renderProject(projectMember.project, 0)} `).join('')
+        : `<div class="border rounded p-2 col-12">The projects you are participating will go here.</div>`;
 }
 
 function renderProjects(projects, profileId) {

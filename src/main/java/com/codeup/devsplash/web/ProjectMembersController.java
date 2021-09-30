@@ -38,4 +38,15 @@ public class ProjectMembersController {
     private Collection<ProjectMember> getProjectMembersByProjectId(@PathVariable Long projectId) {
         return projectMembersRepository.getByProjectId(projectId);
     }
+
+    @GetMapping("/byMe")
+    private Collection<ProjectMember> getProjectMembersByMe(OAuth2Authentication auth) {
+        User loggedInUser = usersRepository.findByEmail(auth.getName()).get();
+        return projectMembersRepository.getByUserId(loggedInUser.getId());
+    }
+
+    @GetMapping("/byUserId/{userId}")
+    private Collection<ProjectMember> getProjectMembersByUserId(@PathVariable Long userId) {
+        return projectMembersRepository.getByUserId(userId);
+    }
 }
