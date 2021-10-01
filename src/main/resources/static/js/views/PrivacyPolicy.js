@@ -4,7 +4,7 @@ export default function PrivacyPolicy(props) {
         <div class="d-flex justify-content-center mx-auto mt-5">
                 <h3>Privacy Policy</h3>
         </div>
-        <br>
+        <hr>
         <div class="d-flex justify-content-center mx-auto mt-2">
             <div>
             <a class="link-file" src="Footer"></a>
