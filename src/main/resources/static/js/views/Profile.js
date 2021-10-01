@@ -52,7 +52,7 @@ function renderParticipatingProjects(projectMembers) {
 }
 
 function renderProjects(projects, profileId) {
-    return (!(projects.error))
+    return (projects.length > 0)
         ? projects.map(project => `${renderProject(project, profileId)} `).join('')
         : `<div class="border rounded p-2 col-12">Your projects will go here.</div>`;
 }
