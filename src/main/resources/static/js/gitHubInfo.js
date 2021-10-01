@@ -41,18 +41,21 @@ export default function RenderProfileWithGithubInfo(props) {
  * @returns {string|*}
  */
 export function renderGithubInfo(repos) {
-    if (repos)
-        return repos.slice(1, 4).map((repo) => {
-            return `<a href="${repo.html_url}" class="list-group-item list-group-item-action border rounded">
+    if (!repos.message){
+        if (repos)
+            return repos.slice(1, 4).map((repo) => {
+                return `<a href="${repo.html_url}" class="list-group-item list-group-item-action border rounded">
                         <div class="d-md-flex w-100 justify-content-between">
                             <h5 class="mb-1">${repo.name}</h5>
                             <small class="text-muted">Updated@ ${getDate(repo.updated_at)}</small>
                         </div>
                         <small class="text-muted">${(repo.language) ? repo.language : ''}</small>
                     </a> `
-        }).join('')
-    else
-        return `<div class="border rounded p-2">Github information not provided or is incorrect.</div>`
+            }).join('')
+        else
+            return `<div class="border rounded p-2">Github information not provided or is incorrect.</div>`
+    }else
+        return `<div class="border rounded p-2">Github information is incorrect.</div>`
 }
 
 function getDate(githubDate) {

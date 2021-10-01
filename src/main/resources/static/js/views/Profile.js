@@ -46,7 +46,7 @@ export function renderProfileComponent(user, projects,participatingProjects, git
 }
 
 function renderParticipatingProjects(projectMembers) {
-    return (projectMembers)
+    return (projectMembers.length > 0)
         ? projectMembers.map(projectMember => `${renderProject(projectMember.project, 0)} `).join('')
         : `<div class="border rounded p-2 col-12">The projects you are participating will go here.</div>`;
 }
@@ -66,7 +66,7 @@ function renderCreateProjectButton(user, profileId) {
 
 export function renderSkillsComponents(skills) {
     let skillComponent = '';
-    if (skills) {
+    if (skills.length > 0) {
         skills.map(skill => skillComponent = skillComponent
             + `<span class="badge badge-pill badge-secondary my-1 mt-0 mb-0 p-2 m-2">${skill.name}</span>`)
     } else {

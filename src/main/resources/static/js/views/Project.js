@@ -1,4 +1,4 @@
-import {memberClickFetchEvent, MembersEvents, renderMember, renderMembers} from "./Members.js";
+import {memberClickFetchEvent, MembersEvents, renderMember} from "./Members.js";
 import {profileCardEvents, RenderProfileCardComponent} from "./ProfileCard.js";
 import {PageContentView} from "./partials/content.js";
 import {renderSkillsComponents} from "./Profile.js";
@@ -6,11 +6,9 @@ import createView from "../createView.js";
 import {getHeaders} from "../auth.js";
 import fetchData from "../fetchData.js";
 import render from "../render.js";
-import {validateUser} from "../router.js";
 import {editProjectClickFetchEvent} from "./Projects.js";
 
 export default function ProjectView(props) {
-    console.log(props)
     let projectPage;
     if (props.user) {
         projectPage = RenderProfileCardComponent(props.user, props.user.id) + renderProjectComponent(props.project, props.members, props.user.id);
@@ -21,7 +19,6 @@ export default function ProjectView(props) {
 }
 
 function renderProjectMembers(members) {
-    console.log(members)
     return (members.length !== 0)
         ? members.map(member => `${(member.user) ? renderMember(member.user) : '<div class="border rounded p-2">List of all members will go here.</div>'}`).join('')
         : '<div class="border rounded p-2">List of all members will go here.</div>';
@@ -32,24 +29,25 @@ function renderJoinProjectButton(project, userId, members) {
         return `<button class="btn btn-light btn-block col-12 border-dark mt-3"
                     id="logInToJoinProject">Join Project
                 </button>`;
-    } else if (members.length !== 0) {
-        let userJoinedProject = false;
-        members.map(member => {
-           if( member.user.id === userId)
-               userJoinedProject = true;
-        })
-        if(userJoinedProject)
-            return ``;
-        console.log("Already joined project")
-
     } else if (project.user.id === userId) {
-        console.log("Project creator")
-
         return `<button class="projectEditLink btn btn-light btn-block col-12 border-dark mt-3"
-                    data-id=${project.id} id="editProject">Edit Project 
+                    data-id="${project.id}" id="editProject">Edit Project 
                 </button>`;
 
-    }else {
+    }else if (members.length !== 0) {
+        let userJoinedProject = false;
+        members.map(member => {
+            if (member.user.id === userId)
+                userJoinedProject = true;
+        })
+        if (userJoinedProject) {
+            return ``;
+        } else {
+            return `<button class="btn btn-light btn-block col-12 border-dark mt-3" data-project-id="${project.id}"
+                   data-user-id="${userId}" id="joinProject">Join Project
+            </button>`;
+        }
+    }  else {
         return `<button class="btn btn-light btn-block col-12 border-dark mt-3" data-project-id="${project.id}"
                    data-user-id="${userId}" id="joinProject">Join Project
             </button>`;
@@ -64,7 +62,6 @@ function renderJoinProjectButton(project, userId, members) {
  * @returns {string}
  */
 export function renderProjectComponent(project, members, userId = 0) {
-    console.log(members);
     return `
         <div class="details-wrapper col-md-8 d-md-inline-flex border rounded py-4 mt-3 change-background">
             <div class="details-wrapper-helper col-12">
