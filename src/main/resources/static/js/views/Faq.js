@@ -15,7 +15,7 @@ export default function FaqView(props) {
             </h2>
         </div>
 
-        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+        <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
             <div class="card-body">
                 Devsplash is a place where developers can come together and collaborate on new project ideas. After
                 registering and becoming a member, you can create a project and join other member's projects as
@@ -65,7 +65,7 @@ export default function FaqView(props) {
             </h2>
         </div>
 
-        <div id="collapseFour" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+        <div id="collapseFour" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
             <div class="card-body">
                 We want to talk to you too! You can connect with any one of the admins by navigating to the
                 About Us page and using any one of the links we have provided on that page. We look forward to
@@ -83,7 +83,7 @@ export default function FaqView(props) {
             </h2>
         </div>
 
-        <div id="collapseFive" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+        <div id="collapseFive" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
             <div class="card-body">
                 Communication is important! We aim to integrate that feature in our next update! We
                 apologize for any inconvenience!
@@ -100,7 +100,7 @@ export default function FaqView(props) {
             </h2>
         </div>
 
-        <div id="collapseSix" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+        <div id="collapseSix" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
             <div class="card-body">
                 We're sorry to see you go! You can delete your profile by navigating to your profile page,
                 click Edit Profile and the delete feature will be accessible there. Please note, that once you
@@ -118,7 +118,7 @@ export default function FaqView(props) {
             </h2>
         </div>
 
-        <div id="collapseSeven" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+        <div id="collapseSeven" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
             <div class="card-body">
                 We're sorry that you may be experiencing a negative situation with another member! It is our
                 priority that we maintain a positive and safe community here at Devsplash. We do not tolerate
