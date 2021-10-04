@@ -35,7 +35,7 @@ export default function FaqView(props) {
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
             <div class="card-body">
                 You can join a project by navigating to any project page you like. Once you find a project
-                you want to collaborate on, you can click the "Request to Join Project" button towards the
+                you want to collaborate on, you can click the "Join Project" button towards the
                 bottom of the page.
             </div>
         </div>
